@@ -218,7 +218,7 @@
       
             <!-- Modal body -->
             <div class="modal-body" align="center">
-              <form action="" method="post">
+              <form action="<%=contextPath %>/memdelete.me" method="post">
                     <input type="hidden" name="userId" value="" >
                   <b>탈퇴 후 복구가 불가능 합니다. <br> 정말로 탈퇴하시겠습니까?</b> <br><br>
   

@@ -29,4 +29,19 @@ public class MemberService {
 		return updateMem;
 	}
 	
+	public int deleteMember(String memberId,String memberPwd) {
+		Connection conn = null;
+		int result = new MemberDao().deleteMember(conn,memberId,memberPwd);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+		
+	}
+	
 }
