@@ -216,7 +216,6 @@
                             <tr>
                                 <!-- <td><input type="checkbox"></td> -->
         
-                                <a href="">
                                     <div class="jypic">
                                         
                                         <td width="120" id="jya"><input type="checkbox" name="" id="jycheck_list"><img src="resource/남산.jpeg" alt="" id="jyimg"></td>
@@ -226,13 +225,10 @@
                                         <h2 id="jyh2">남산</h2>
                                         <p id="jyp">가가가가가각가가가ㄹㄹㄹㄹㄹㄹ가가가가가가가가각</p>
                                     </td>
-                                </a>
                                 
                             </tr>
         
                             <tr>
-        
-                                <a href="">
                                     <div class="jypic">
                                         <td width="100" id="jya"><img src="resource/롯데타워 가로.jpeg" alt="" id="jyimg"></td>
                                     </div>
@@ -241,12 +237,10 @@
                                         <h2 id="jyh2">남산</h2>
                                         <p id="jyp">가가가가가각가가가가가가가가가가가가가가가가가가각</p>
                                     </td>
-                                </a>
                                 
                             </tr>
         
                             <tr>
-                                <a href="">
                                     <div class="pic">
                                         <td width="120" id="jya"><img src="resource/2023081712383580188.PNG" alt="" id="jyimg"></td>
                                     </div>
@@ -254,12 +248,10 @@
                                         <h2 id="jyh2">남산</h2>
                                         <p id="jyp">가가가가가각가가가가가가가가가가가가가가가가가가각</p>
                                     </td>
-                                </a>
-                                
                             </tr>
         
                             <tr>
-                                <a href="">
+                                
                                     <div class="pic">
                                         <td width="120" id="jya"><img src="resource/한강.jpeg" alt="" id="jyimg"></td>
                                     </div>
@@ -267,7 +259,7 @@
                                         <h2 id="jyh2">남산</h2>
                                         <p id="jyp">가가가가가각가가가가가가가가가가가가가가가가가가각</p>
                                     </td>
-                                </a>
+                          
                                 
                             </tr>
                         </table>
