@@ -147,7 +147,7 @@
                     
                     <tr>
                         <th>
-                            <a href="">
+                            <a href="/subwhere/mylogout.me">
                                 <input type="button" name="" id="" value="로그아웃">
                             </a>
                         </th>

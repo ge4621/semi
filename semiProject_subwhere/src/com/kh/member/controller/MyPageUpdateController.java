@@ -41,14 +41,13 @@ public class MyPageUpdateController extends HttpServlet {
 		//전달된 파일을 저장 시킬 서버의 물리적은 경로
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/images/");
 		
-		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize,"UTF-8");
+//		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize,"UTF-8");
 		
-		int memberNo = Integer.parseInt(multiRequest.getParameter("memberNo"));
-		String profileimg = multiRequest.getParameter("profileImg");
-		String nickname = multiRequest.getParameter("nickname");
-		String memberPwd = multiRequest.getParameter("memberPwd");
-		String phone = multiRequest.getParameter("phone");
-		String email = multiRequest.getParameter("email");
+		String profileimg = request.getParameter("profileImg");
+		String nickname = request.getParameter("nickname");
+		String memberPwd = request.getParameter("memberPwd");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
 		
 		Member m = new Member(profileimg,nickname,memberPwd,phone,email);
 		

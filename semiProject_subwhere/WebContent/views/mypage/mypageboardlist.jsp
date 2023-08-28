@@ -195,7 +195,7 @@
         <%@ include file="mypageleft.jsp" %>
 	
 	
-	 <div id="rightpro" class="profiler">
+	    <div id="rightpro" class="profiler">
 
             <div class="jylist_title">
                 <h1>ge4621님이 작성하신 글</h1>
@@ -204,8 +204,8 @@
             <div class="jylist_box">
      
                 <div class="jybtn_box" align="center">
-                    <button type="button">여행 코스</button>
-                    <button type="button">후기글</button>
+                    <button type="button" onclick="test1();" id="mycoslist">여행 코스</button>
+                    <button type="button" onclick="test2();" id="myreviewlist">후기글</button>
                     <!-- <button type="button">여행지</button> -->
                 </div>
      
@@ -294,6 +294,28 @@
                 </div>
      
             </div>
+
+
+            <script>
+                function test1(){
+                    $.ajax({
+                        url:"mycoslist.me",
+                        data:{
+                            boardtype:1
+                        },
+                        success:function(list){
+                            console.log("ajax통신 성공");
+
+                        },
+                        error:function(){
+                            console.log("ajax통신 실패");
+                        }
+
+                    })
+                }
+
+            </script>
+
 	
 	</div>
 	

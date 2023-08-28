@@ -56,7 +56,7 @@ public class MemberDao {
 	}
 	
 	public Member selectMember(Connection conn, String memberId) {
-		
+		//select문
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		

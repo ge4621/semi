@@ -16,8 +16,7 @@ public class MemberService {
 		Member updateMem = null; //수정된 회원 정보를 담기 위한 과정??
 		
 		if(result > 0) { //수정 성공시
-			
-			close(conn);
+			commit(conn);
 			
 			//변경된 회원정보로 조회해오기
 			updateMem = new MemberDao().selectMember(conn,m.getMemberId());
