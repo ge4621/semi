@@ -9,7 +9,8 @@ import com.kh.member.model.vo.Member;
 public class MemberService {
 
 	public Member updateMember(Member m) {
-		Connection conn = null;
+		//update문
+		Connection conn = getConnection();
 		
 		int result = new MemberDao().updateMember(conn,m);
 		
@@ -29,7 +30,7 @@ public class MemberService {
 	}
 	
 	public int deleteMember(String memberId,String memberPwd) {
-		Connection conn = null;
+		Connection conn = getConnection();
 		int result = new MemberDao().deleteMember(conn,memberId,memberPwd);
 		
 		if(result>0) {
@@ -42,5 +43,15 @@ public class MemberService {
 		
 		
 	}
+	
+	public Member loginMember(String memberId, String memberPwd) {
+		 Connection conn = getConnection();
+	      Member m = new MemberDao().loginMember(conn, memberId, memberPwd);
+
+	      close(conn);
+	      return m;
+
+	}
+
 	
 }

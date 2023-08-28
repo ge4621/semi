@@ -32,10 +32,28 @@
 <entry key="deleteMember">
 	UPDATE MEMBER
 	   SET 
-	   STATUS ='N'
+	   STATUS ='S'
 	   WHERE 
 	   MEMBER_ID = ?
 	   AND MEMBER_PWD = ?
+</entry>
+
+<entry key="loginMember">
+   SELECT 
+          MEMBER_NO
+        , MEMBER_NAME
+        , MEMBER_ID
+        , MEMBER_PWD
+        , PHONE
+        , EMAIL
+        , NICKNAME
+        , STATUS
+        , ENROLL_DATE
+        , PROFILE_IMG
+     FROM MEMBER
+    WHERE MEMBER_ID = ?
+      AND MEMBER_PWD = ?
+      AND STATUS = 'Y'
 </entry>
 
 

@@ -32,17 +32,17 @@ public class mypageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 전 => 메인페이지 응답 , alert로 로그인 후 사용 
 		//로그인 후 => 마이페이지 응답 , 포워딩 방식으로
-//		HttpSession session =request.getSession();
-//		
-//		if(session.getAttribute("loginMember")==null) {//로그인전
-//			session.setAttribute("alertMsg","로그인후 이용가능한 서비스입니다.");
-//			response.sendRedirect(request.getContextPath());
-//		}else {//로그인 후
+		HttpSession session =request.getSession();
+		
+		if(session.getAttribute("loginMember")==null) {//로그인전
+			session.setAttribute("alertMsg","로그인후 이용가능한 서비스입니다.");
+			response.sendRedirect(request.getContextPath());
+		}else {//로그인 후
 			RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypagechange.jsp");
 			view.forward(request, response);
 		}
 
-//	}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

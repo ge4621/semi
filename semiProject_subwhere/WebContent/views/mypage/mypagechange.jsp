@@ -118,6 +118,20 @@
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
+
+<%
+	String profileimg = (loginMember.getProfileImg()== null)?"":loginMember.getProfileImg();
+	String nickName = loginMember.getNickname();
+	String email = (loginMember.getEmail()==null)?"":loginMember.getEmail();
+	String phone = (loginMember.getPhone()==null)?"":loginMember.getPhone();
+	String memberPwd = loginMember.getMemberPwd();
+	
+
+%>
+
+
+
+
  <div class="warp">
 
         <%@ include file="mypageleft.jsp" %>
@@ -154,13 +168,13 @@
                        
                         <tr>
                             <th height="65" style="text-align: center;">닉네임</th>
-                            <td><input type="text" name="nickName" value="membernickname" required></td>
+                            <td><input type="text" name="nickName" value="<%=nickName %>" required></td>
                             
                         </tr>
     
                         <tr>
                             <th height="65" style="text-align: center;">(변경)비밀번호</th>
-                            <td><input type="password" name="memberPwd" id="memberPwd" value="1111" maxlength="13" minlength="8" placeholder="특수문자(!,@,#,$,%,^,&,*), 영문자, 숫자 포함 8~13자리"></td>
+                            <td><input type="password" name="memberPwd" id="memberPwd" value="<%=memberPwd %>" maxlength="13" minlength="8" placeholder="특수문자(!,@,#,$,%,^,&,*), 영문자, 숫자 포함 8~13자리"></td>
                         </tr>
     
                         <tr>
@@ -174,12 +188,12 @@
     
                         <tr>
                             <th height="65" style="text-align: center;">이메일</th>
-                            <td><input type="email" name="email" value="email@naver.com"></td>
+                            <td><input type="email" name="email" value="<%=email%>"></td>
                         </tr>
     
                         <tr>
                             <th height="65" style="text-align: center;">전화번호</th>
-                            <td><input type="text" name="phone" value="" placeholder="-를 포함해서 입력해주세요."></td>
+                            <td><input type="text" name="phone" value="<%=phone %>" placeholder="-를 포함해서 입력해주세요."></td>
                         </tr>
                         
                         
@@ -190,7 +204,7 @@
                     <div id="btn" align="center">
                         <button type="submit" class="btn btn-sm btn-secondary">변경하기</button>
                         <!-- <input type="submit" name="button" value="정보변경" onclick="return validate();"> -->
-                        <button type="button" class="btn btn-sm btn-secondary" id="deletebtn">탈퇴하기</a>
+                        <button type="button" class="btn btn-sm btn-secondary" id="deletebtn">탈퇴하기</button>
                     </div>
                     
     

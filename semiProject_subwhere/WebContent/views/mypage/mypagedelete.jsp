@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
+
 <style>
 
 /*.warp는 최종적으로 안가져 감*/
@@ -178,7 +180,7 @@
                 <br><br>
 
                 <div id="checkbtn">
-                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteModal();">확인</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">확인</button>
                 </div>
                  <!--data-toggle="modal" data-target="#deleteModal" -->
 
@@ -194,15 +196,15 @@
 
         </div>
 
-        <script>
-            function deleteModal(){
+        <!-- <script>
+            function deleteb(){
                 if(document.getElementById("check_out").checked){
                     $('#deleteModal').modal('show');
                 }else{
                     alert("안내사항을 확인하시고 동의해주세요.")
                 }
             }
-        </script>
+        </script> -->
 
     </div>
 
@@ -219,11 +221,10 @@
             <!-- Modal body -->
             <div class="modal-body" align="center">
               <form action="<%=contextPath %>/memdelete.me" method="post">
-                    <input type="hidden" name="userId" value="" >
+                    <!-- <input type="hidden" name="memberId"  > -->
                   <b>탈퇴 후 복구가 불가능 합니다. <br> 정말로 탈퇴하시겠습니까?</b> <br><br>
-  
-                  비밀번호 : <input type="password" name="userPwd" required> <br><br>
-  
+                  아이디 : <input type="text" name="memberId"> <br><br>
+                  비밀번호 : <input type="password" name="memberPwd" required> <br><br>
                   <button type="submit" class="btn btn-sm btn-danger" id="debtn">탈퇴하기</button>
               </form>
   
