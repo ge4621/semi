@@ -190,7 +190,7 @@
                     <div id="btn" align="center">
                         <button type="submit" class="btn btn-sm btn-secondary">변경하기</button>
                         <!-- <input type="submit" name="button" value="정보변경" onclick="return validate();"> -->
-                        <a href="" class="btn btn-sm btn-secondary">탈퇴하기</a>
+                        <button type="button" class="btn btn-sm btn-secondary" id="deletebtn">탈퇴하기</a>
                     </div>
                     
     
@@ -285,6 +285,11 @@
                             
                         });
 
+                        $(function(){
+                        	$("#deletebtn").click(function(){
+                        		location.href = "<%=contextPath %>/mydeleteform.me";
+                        	})
+                        })
                         
 
     

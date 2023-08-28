@@ -222,44 +222,35 @@
                     <div class="review_box">
                         <table align="center">
                             <tr>
-                                <a href="">
                                     <td width="600" height="110"> 
                                         <h3><input type="checkbox" name="" id="check_box">&nbsp;남산</h3>
                                         <p id="date">2023-03-11 <br>
                                                     좋아보여요!!!</p>
                                     </td>
-                                </a>
-                                
                             </tr>
          
                             <tr>
-                                <a href="">
                                     <td width="450" height="110"> 
                                         <h3><input type="checkbox" name="" id="check_box">&nbsp;한강</h3>
                                         <p id="date">2023-03-11 <br>
                                             좋아보여요!!!</p>
                                     </td>
-                                </a>
                             </tr>
          
                             <tr>
-                                <a href="">
                                     <td width="450" height="110"> 
                                         <h3><input type="checkbox" name="" id="check_box">&nbsp;동대문</h3>
                                         <p id="date">2023-03-11 <br>
                                             좋아보여요!!!</p>
                                     </td>
-                                </a>
                             </tr>
          
                             <tr>
-                                <a href="">
                                     <td width="450" height="110"> 
                                         <h3><input type="checkbox" name="" id="check_box">&nbsp;광화문</h3>
                                         <p id="date">2023-03-11 <br>
                                             좋아보여요!!!</p>
                                     </td>
-                                </a>
                             </tr>
      
                         </table>
@@ -274,7 +265,7 @@
                     </div>
     
                     <div class="page_btn" id="page">
-                        <button>&lt;</button>
+                        <button onclick="location.href='<%=contextPath %>/'">&lt;</button>
                         <button>1</button>
                         <button>2</button>
                         <button>3</button>
