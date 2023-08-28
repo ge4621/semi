@@ -91,11 +91,11 @@
 
                 <table border="0">
                     <tr>
-                        <th id="nicname" width="90%" style="font-size:x-large; text-align: center;">세젤멋은우찡 님</th>
+                        <th id="nicname" width="90%" style="font-size:x-large; text-align: center;"><%=request.getAttribute("memberId")%></th>
                     </tr>
                     
                     <tr>
-                        <td align="center" id="Id" style="font-size:smalle;">wow595959</td>
+                        <td align="center" id="Id" style="font-size:small;"><%= request.getAttribute("nickname") %>님</td>
                     </tr>
                     
                 </table>

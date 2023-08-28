@@ -198,7 +198,7 @@
 	    <div id="rightpro" class="profiler">
 
             <div class="jylist_title">
-                <h1>ge4621님이 작성하신 글</h1>
+                <h1><%=loginMember.getNickname() %>님이 작성하신 글</h1>
             </div>
      
             <div class="jylist_box">

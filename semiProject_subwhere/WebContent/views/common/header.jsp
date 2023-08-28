@@ -549,8 +549,8 @@
                 <div id="usermenu_page_login_success" class="usermenu_page_content">
                     
                     <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
-                        <img src="resources/images/profile_img.png" alt="profile" style="width: 100px; height: 100px;">
-                        <p><b align="center">'유저이름'님</b></p>
+                        <img src="resources/images/profile_img_nocamera.png" alt="profile" style="width: 100px; height: 100px;">
+                        <p><b align="center">'<%=loginMember.getNickname() %>'님</b></p>
                     </div>
                     
                     <table>

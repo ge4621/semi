@@ -147,7 +147,7 @@
 
         <div class="out_body">
             <div class="content">
-                <h4>&#x2714; 사용하고 계신 아이디(<em>아이디</em>)는 탈퇴할 경우 재사용 및 복구가 불가능 합니다.</h4>
+                <h4>&#x2714; 사용하고 계신 아이디(<em><%=loginMember.getMemberId() %></em>)는 탈퇴할 경우 재사용 및 복구가 불가능 합니다.</h4>
                 <p><b>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가</b>하오니 신중하게 선택하시기 바랍니다.</p>
 
                 <br>
@@ -166,7 +166,7 @@
                 <br>
                 <p>
                     <strong>
-                        탈퇴 후에는 <em>아이디()</em>로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다. <br>
+                        탈퇴 후에는 <em><%=loginMember.getMemberId() %></em>로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다. <br>
                         게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.
                     </strong>
                 </p>
@@ -180,7 +180,7 @@
                 <br><br>
 
                 <div id="checkbtn">
-                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">확인</button>
+                    <button type="button" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal">확인</button>
                 </div>
                  <!--data-toggle="modal" data-target="#deleteModal" -->
 
@@ -196,15 +196,18 @@
 
         </div>
 
-        <!-- <script>
-            function deleteb(){
-                if(document.getElementById("check_out").checked){
-                    $('#deleteModal').modal('show');
-                }else{
-                    alert("안내사항을 확인하시고 동의해주세요.")
-                }
-            }
-        </script> -->
+         <script>
+         
+        	 //   $("#delete_jyj").click(function() {
+        	  //      if($("#check_out").prop("checked")) {
+        	 //           $('#deleteModal').modal('show');
+        	  //      } else {
+        	 //           alert("회원 탈퇴 동의후 체크 박스 선택해주세요");
+        	        }
+        	 //   });
+        
+
+        </script> 
 
     </div>
 
