@@ -42,7 +42,7 @@ public class mypagereviewController extends HttpServlet {
 		int endPage;//페이징 바의 끝수
 		
 		//총 게시글 수
-		listCount = new MemberService
+		//listCount = new MemberService
 		
 		
 		
