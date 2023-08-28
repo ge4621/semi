@@ -8,25 +8,25 @@ import com.kh.member.model.vo.Member;
 
 public class MemberService {
 
-	public Member updateMember(Member m) {
+	public int updateMember(Member m) {
 		//update문
 		Connection conn = getConnection();
 		
 		int result = new MemberDao().updateMember(conn,m);
 		
-		Member updateMem = null; //수정된 회원 정보를 담기 위한 과정??
+		//Member updateMem = null; //수정된 회원 정보를 담기 위한 과정??
 		
 		if(result > 0) { //수정 성공시
 			commit(conn);
 			
 			//변경된 회원정보로 조회해오기
-			updateMem = new MemberDao().selectMember(conn,m.getMemberId());
+			//updateMem = new MemberDao().selectMember(conn,m.getMemberId());
 			
 		}else {//수정 실패시
 			rollback(conn);
 		}
 		close(conn);
-		return updateMem;
+		return result;
 	}
 	
 	public int deleteMember(String memberId,String memberPwd) {
@@ -52,6 +52,6 @@ public class MemberService {
 	      return m;
 
 	}
-
 	
-}
+	
+	}

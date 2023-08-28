@@ -40,8 +40,9 @@ public class mypageController extends HttpServlet {
 		}else {//로그인 후
 			RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypagechange.jsp");
 			view.forward(request, response);
+			
 		}
-
+		
 	}
 
 	/**

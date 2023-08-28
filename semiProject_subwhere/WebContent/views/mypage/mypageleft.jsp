@@ -11,7 +11,6 @@
 <title>Insert title here</title>
 
 <style>
-
 .top,.body,.foot{
                 /* border: 1px solid blue; */
                 box-sizing: border-box;
@@ -72,12 +71,14 @@
             }
             
 
+            
+
 </style>
 
 </head>
 <body>
 
- <div id="leftpro" class="profilel">
+  <div id="leftpro" class="profilel">
 
             <div id="picture" class="top" align="center">
                 
@@ -156,11 +157,10 @@
                 </table>
                 
                
-
+</div>
             </div>
             
-        </div>
-
+       
 
 </body>
 </html>

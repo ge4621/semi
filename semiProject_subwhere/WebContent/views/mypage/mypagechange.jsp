@@ -37,6 +37,10 @@
 
        
 	
+	
+	
+	
+	
             
             
             
@@ -132,11 +136,15 @@
 
 
  <div class="warp">
+ 
+  
+             
 
         <%@ include file="mypageleft.jsp" %>
         
         
-        <div id="rightpro" class="profiler">
+        
+         <div id="rightpro" class="profiler">
             <div class="title">
 
                 <p align="center">개인정보 변경</p>
