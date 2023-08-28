@@ -400,7 +400,7 @@
                 <a class="btn btn-primary" href="#">여행 후기</a>
             </li>
             <li class="nav-item">
-                  <a class="btn btn-light" href="<%= contextPath%>/mypageform.me">공지사항</a>
+                  <a class="btn btn-light" href="">공지사항</a>
             </li>
         </ul>
     </div>
