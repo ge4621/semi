@@ -275,7 +275,7 @@
                     </div>
     
                     <div class="page_btn" id="page">
-                        <button onclick="location.href='<%=contextPath %>/'">&lt;</button>
+                        <button onclick="location.href='<%=contextPath %>/mno='?">&lt;</button>
                         <button>1</button>
                         <button>2</button>
                         <button>3</button>
