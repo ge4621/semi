@@ -37,37 +37,56 @@ public class MyPageUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+			String resourePath ="/resources/profile_upfiles/";
+
 			request.setCharacterEncoding("UTF-8");
 			
+			//String memberId = request.getParameter("memberId");
+			
+			String nickname = request.getParameter("nickname");
+			
+			//String memberPwd = request.getParameter("memberPwd");
+			
+			String email = request.getParameter("email");
+			
+			String phone = request.getParameter("phone");
+			
+			//String fileImg = request.getParameter("fileImg");
+			String profileImg = null;
+			
 			if(ServletFileUpload.isMultipartContent(request)) {
+				
 				int maxSize = 10*1024*1024;
 				
-				String savePath = getServletContext().getRealPath("/resources/images/");
+				 // 2_2. 저장시킬 폴더의 물리적인 경로
+		         // application == request.getSession().getServletContext()
+		         String savePath = request.getSession().getServletContext().getRealPath(resourePath); // '/'
+
 				
 				MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize,"UTF-8",new MyFileRenamepolicy());
 				
-				String nickname = multiRequest.getParameter("nickname");
+				nickname = multiRequest.getParameter("nickname");
+				email = multiRequest.getParameter("email");
+				phone = multiRequest.getParameter("phone");
 				
-				String memberPwd = multiRequest.getParameter("memberPwd");
-				
-				String email = multiRequest.getParameter("email");
-				
-				String phone = multiRequest.getParameter("phone");
-				
-				String fileImg = null;
-				
+				String changeFileName = multiRequest.getFilesystemName("profileImg"); // name 키값
+		         profileImg = resourePath + changeFileName;
+		         //           /resources/profile_upfiles/2023082717374710069.png
+		        
+		      }
+
 				
 				
 				Member m = new Member();
+				//m.setMemberId(memberId);
 				m.setNickname(nickname);
-				m.setMemberPwd(memberPwd);
+				//m.setMemberPwd(memberPwd);
 				m.setEmail(email);
 				m.setPhone(phone);
-				m.setProfileImg(fileImg);
+				m.setProfileImg(profileImg);
 				
 				
 				int result =  new MemberService().updateMember(m);
-				
 				
 				if(result > 0) {
 					request.getSession().setAttribute("alertMsg", "정보변경 수정 완료");
@@ -83,12 +102,7 @@ public class MyPageUpdateController extends HttpServlet {
 		
 		
 		
-		
-		
-		
-		
-		
-	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

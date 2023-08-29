@@ -1,6 +1,9 @@
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Member loginMember1 = (Member)session.getAttribute("loginMember");
+%>    
     
  
     
@@ -78,6 +81,7 @@
 </head>
 <body>
 
+
   <div id="leftpro" class="profilel">
 
             <div id="picture" class="top" align="center">
@@ -92,11 +96,11 @@
 
                 <table border="0">
                     <tr>
-                        <th id="nicname" width="90%" style="font-size:x-large; text-align: center;"><%=request.getAttribute("memberId")%></th>
+                        <th id="nicname" width="90%" style="font-size:x-large; text-align: center;"><%=loginMember1.getMemberName()%></th>
                     </tr>
                     
                     <tr>
-                        <td align="center" id="Id" style="font-size:small;"><%= request.getAttribute("nickname") %>님</td>
+                        <td align="center" id="Id" style="font-size:small;"><%=loginMember1.getMemberId() %>님</td>
                     </tr>
                     
                 </table>
@@ -128,7 +132,9 @@
                     
                     <tr>
                          <th>
-                            <a href="/subwhere/myrlist.me">
+                            <a href="/subwhere/myrlist.me?Mno=">
+                            	
+                            	
                                 <input type="button" name="" id="" value="내가 쓴 댓글 보기">
                             </a>
                         </th>

@@ -39,10 +39,9 @@ public class MemberDao {
 			
 			pstmt.setString(1, m.getProfileImg());
 			pstmt.setString(2, m.getNickname());
-			pstmt.setString(3, m.getMemberPwd());
-			pstmt.setString(4, m.getEmail());
-			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getMemberId());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setString(5, m.getMemberId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -127,10 +126,10 @@ public class MemberDao {
 	            PreparedStatement pstmt = null;
 	            ResultSet rset = null;
 	            
+	            String sql = prop.getProperty("loginMember");
+	            
 	            try {
-	               
-	               String sql = prop.getProperty("loginMember");
-	               
+	                  
 	               pstmt = conn.prepareStatement(sql); // 미완성된 쿼리
 	               
 	               pstmt.setString(1, memberId);
@@ -166,4 +165,59 @@ public class MemberDao {
 	   }   
 	
 
+	public int selectcReviewListCount(Connection conn, int memberNo) {
+		int rlistCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectrreviewListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memberNo );
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				rlistCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rlistCount;
+	}
+	
+	public int myupdatePwd(Connection conn,String memberId,String memberPwd,String updatePwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, memberId);
+			pstmt.setString(3, memberPwd);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	
+	
 }

@@ -50,7 +50,7 @@
             height: 9%;
         }
 
-        p{
+        #mychange{
             /* border: 1px solid red; */
             font-weight: 700;
             font-size: xx-large;
@@ -120,25 +120,24 @@
 
 </head>
 <body>
+
 <%@ include file="../common/header.jsp" %>
 
-<%
-	String profileimg = (loginMember.getProfileImg()== null)?"":loginMember.getProfileImg();
-	String nickName = loginMember.getNickname();
-	String email = (loginMember.getEmail()==null)?"":loginMember.getEmail();
+<% 
+	String nickname = loginMember.getNickname();
+	String email = loginMember.getEmail();
 	String phone = (loginMember.getPhone()==null)?"":loginMember.getPhone();
-	String memberPwd = loginMember.getMemberPwd();
+	String profileImg = (loginMember.getProfileImg()==null)?"resources/images/profile_img_nocamera.png":loginMember.getProfileImg();
 	
-
+	
+	
+	
 %>
-
 
 
 
  <div class="warp">
  
-  
-             
 
         <%@ include file="mypageleft.jsp" %>
         
@@ -147,7 +146,7 @@
          <div id="rightpro" class="profiler">
             <div class="title">
 
-                <p align="center">개인정보 변경</p>
+                <p id="mychange" align="center">개인정보 변경</p>
                 
             </div>
     
@@ -160,7 +159,7 @@
                            
                             <th width="130" style="text-align: center;">프로필 사진</th>
                             <td width="360">
-                                <img src="resources/images/profile_img_nocamera.png" alt="" width="140" height="140" id="proimg" onclick="filebtn();">
+                                <img src="resources/images/profile_img_nocamera.png" value="<%=loginMember.getProfileImg() %>" alt="" width="140" height="140" id="proimg" onclick="filebtn();">
                                 <img src="resources/images/camera.png" width="25" alt="" id="changeimg"  onclick="filebtn();">
                                 <input type="file" name="pic" value="pic" style="display: none;" id="changefile" onchange="choosepic(this);"> 
                             </td>
@@ -168,30 +167,18 @@
                             
                         </tr>
     
-                        <!-- <tr>
-                            <th>아이디</th>
-                            <td><input type="text" name="memberId" value="mamberId" id="memberId" required></td>
-                        </tr> -->
+                        <tr>
+                            <th height="65" style="text-align: center;">아이디</th>
+                            <td><input type="text" name="memberId" id="memberId" value="<%= loginMember.getMemberId() %>" readonly></td>
+                        </tr>
                        
                         <tr>
                             <th height="65" style="text-align: center;">닉네임</th>
-                            <td><input type="text" name="nickName" value="<%=nickName %>" required></td>
+                            <td><input type="text" name="nickName" value="<%=nickname %>"  required></td>
                             
                         </tr>
     
-                        <tr>
-                            <th height="65" style="text-align: center;">(변경)비밀번호</th>
-                            <td><input type="password" name="memberPwd" id="memberPwd" value="<%=memberPwd %>" maxlength="13" minlength="8" placeholder="특수문자(!,@,#,$,%,^,&,*), 영문자, 숫자 포함 8~13자리"></td>
-                        </tr>
-    
-                        <tr>
-                            <th height="65" style="text-align: center;">비밀번호 확인</th>
-                            <td colspan="2">
-                                <input type="password" id="checkPwd" maxlength="13"> 
-                                <!-- <button type="button" class="btn btn-sm btn-secondary" onclick="return check();">확인</button> -->
-                                <font id="aa"></font>
-                            </td>
-                        </tr>
+                        
     
                         <tr>
                             <th height="65" style="text-align: center;">이메일</th>
@@ -200,7 +187,7 @@
     
                         <tr>
                             <th height="65" style="text-align: center;">전화번호</th>
-                            <td><input type="text" name="phone" value="<%=phone %>" placeholder="-를 포함해서 입력해주세요."></td>
+                            <td><input type="text" name="phone" <%= phone %> placeholder="-를 포함해서 입력해주세요."></td>
                         </tr>
                         
                         
@@ -209,14 +196,67 @@
                     <br>
     
                     <div id="btn" align="center">
-                        <button type="submit" class="btn btn-sm btn-secondary">변경하기</button>
-                        <!-- <input type="submit" name="button" value="정보변경" onclick="return validate();"> -->
-                        <button type="button" class="btn btn-sm btn-secondary" id="deletebtn">탈퇴하기</button>
+                        <button type="submit" class="btn btn-sm btn-secondary">정보변경</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#updatePwdModal">비밀번호변경</button>
+                        <button type="button" class="btn btn-sm btn-secondary" id="deletebtn">회원탈퇴</button>
                     </div>
                     
     
                 </form>
     
+                 <!-- 비밀번호 변경 용 Modal -->
+	<div class="modal" id="updatePwdModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">비밀번호 변경</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" align="center">
+	        <form action="<%=contextPath %>/mypwdup.me" method="post">
+	        	<!-- 해당 form에서 받는 값은 비밀번호 관련된 값들인데 controller로 넘어가면 아이디 값도 필요 => hidden으로 숨겨서 넘겨야 한다. -->
+	        	<input type="hidden" name="memberId" value="<%=loginMember.getMemberId() %>" >
+	        	
+                <table>
+                    <tr>
+                        <td>현재 비밀번호</td>
+                        <td><input type="password" name="memberPwd" required></td>
+                    </tr>
+                    <tr>
+                        <td>변경할 비밀번호</td>
+                        <td><input type="password" name="updatePwd" required></td>
+                    </tr>
+                    <tr>
+                        <td>변경할 비밀번호 확인</td>
+                        <td><input type="password" name="checkPwd" required></td>
+                    </tr>
+                </table>
+                <br>
+
+                <button type="submit" class="btn btn-sm btn-secondary" onclick="return vaildatePwd();">비밀번호 변경</button>
+
+                <br><br>
+            </form>
+	      </div>
+	
+            <script>
+                function vaildatePwd(){
+                    if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
+                        alert("변경할 비밀번호가 일치하지 않습니다.");
+                        return false; 
+                        //false를 반환화면 form태그 안에 있는 값이 다음으로 넘어가지 않는다.
+                    }
+                }
+            </script>
+
+            </div>
+        </div>
+    </div>
+                
                 
                 
     

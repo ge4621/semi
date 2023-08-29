@@ -53,5 +53,30 @@ public class MemberService {
 
 	}
 	
+	public int selectcReviewListCount(int memberNo) {
+		Connection conn = getConnection();
+		
+		int rlistCount = new MemberDao().selectcReviewListCount(conn,memberNo);
+		
+		close(conn);
+		return rlistCount;
+		
+	}
+	public Member myupdatePwd(String memberId,String memberPwd,String updatePwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().myupdatePwd(conn,memberId,memberPwd,updatePwd);
+		
+		Member updateMem = null;
+		if(result > 0) {//성공
+			commit(conn);
+			
+			updateMem = new MemberDao().selectMember(conn,memberId);
+		}else {//실패
+			rollback(conn);
+		}
+		close(conn);
+		return updateMem;
+	}
 	
 	}

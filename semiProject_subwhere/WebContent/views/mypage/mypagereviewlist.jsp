@@ -206,7 +206,7 @@
 
  		<div id="rightpro" class="profiler">
             <div class="list_title">
-                <h1 id="jy_h1">ge4621님이 작성하신 댓글</h1>
+                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글</h1>
             </div>
      
             <div class="list_box">
@@ -221,6 +221,7 @@
      
                     <div class="review_box">
                         <table align="center">
+                        <thead>
                             <tr>
                                     <td width="600" height="110"> 
                                         <h3><input type="checkbox" name="" id="check_box">&nbsp;남산</h3>
@@ -252,6 +253,15 @@
                                             좋아보여요!!!</p>
                                     </td>
                             </tr>
+                           </thead>
+                           <tbody>
+                           	<!-- cass2. 게시글이 없을 경우 
+                           	<tr>
+                           		<td>작성하신 댓글이 없습니다.</td>
+                           	</tr>
+                           
+                           </tbody>-->
+                            
      
                         </table>
          

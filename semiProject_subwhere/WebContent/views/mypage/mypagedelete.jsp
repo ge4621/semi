@@ -180,7 +180,7 @@
                 <br><br>
 
                 <div id="checkbtn">
-                    <button type="button" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal">확인</button>
+                    <button type="button" class="btn btn-sm btn-danger"  data-toggle="modal" data-target="#deleteModal" id="delete_jyj" onclick="de();">확인</button>
                 </div>
                  <!--data-toggle="modal" data-target="#deleteModal" -->
 
@@ -198,13 +198,21 @@
 
          <script>
          
-        	 //   $("#delete_jyj").click(function() {
-        	  //      if($("#check_out").prop("checked")) {
-        	 //           $('#deleteModal').modal('show');
-        	  //      } else {
-        	 //           alert("회원 탈퇴 동의후 체크 박스 선택해주세요");
-        	        }
-        	 //   });
+    //    	    $("#delete_jyj").click(function() {
+   //    	        if($("#check_out").prop("checked")) {
+   //     	            $('#deleteModal').modal('show');
+   //     	       } else {
+   //     	           alert("회원 탈퇴 동의후 체크 박스 선택해주세요");
+   //     	       }
+   //     	    });
+    
+    		// function de(){
+    		// 	if(document.getElementById("check_out").checked){
+            //         $("#delete_jyj").modal('show');
+            //     }else{
+            //         alert("안내사항을 확인하시고 약관에 동의해주세요");
+            //     }
+    		// }
         
 
         </script> 
@@ -224,9 +232,8 @@
             <!-- Modal body -->
             <div class="modal-body" align="center">
               <form action="<%=contextPath %>/memdelete.me" method="post">
-                    <!-- <input type="hidden" name="memberId"  > -->
+                    <input type="hidden" name="memberId" value=<%=loginMember.getMemberId() %> >
                   <b>탈퇴 후 복구가 불가능 합니다. <br> 정말로 탈퇴하시겠습니까?</b> <br><br>
-                  아이디 : <input type="text" name="memberId"> <br><br>
                   비밀번호 : <input type="password" name="memberPwd" required> <br><br>
                   <button type="submit" class="btn btn-sm btn-danger" id="debtn">탈퇴하기</button>
               </form>

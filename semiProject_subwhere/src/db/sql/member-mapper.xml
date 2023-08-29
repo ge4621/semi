@@ -7,7 +7,6 @@
 	   SET
 	   PROFILE_IMG = ?
 	  , NICKNAME = ?
-	  , MEMBER_PWD = ?
 	  , EMAIL = ?
 	  , PHONE = ?
 	  WHERE MEMBER_ID = ?
@@ -27,6 +26,7 @@
 	 , PROFILE_IMG
 	  FROM MEMBER
 	 WHERE MEMBER_ID = ?
+	 AND STATUS IN('Y','W')
 </entry>
 
 <entry key="deleteMember">
@@ -56,5 +56,17 @@
       AND STATUS = 'Y'
 </entry>
 
+<entry key="selectrreviewListCount">
+SELECT COUNT(*) COUNT
+FROM MEMBER 
+JOIN COMMENTS USING(MEMBER_NO)
+WHERE MEMBER_NO=?
+</entry>
 
+<entry key="updatePwd">
+UPDATE MEMBER
+   SET MEMBER_PWD = ?
+WHERE MEMBER_ID = ?
+AND MEMBER_PWD = ?
+</entry>
 </properties>
