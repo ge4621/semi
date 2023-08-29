@@ -1,6 +1,7 @@
 package com.kh.member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.member.model.dao.MemberDao;
@@ -79,4 +80,14 @@ public class MemberService {
 		return updateMem;
 	}
 	
+	public ArrayList<Member> selectMyRList(int memberNo) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new MemberDao().selectMyRList(conn,memberNo);
+				
+		close(conn);
+		return list;
 	}
+	
+}

@@ -221,46 +221,51 @@
      
                     <div class="review_box">
                         <table align="center">
-                        <thead>
-                            <tr>
-                                    <td width="600" height="110"> 
-                                        <h3><input type="checkbox" name="" id="check_box">&nbsp;남산</h3>
-                                        <p id="date">2023-03-11 <br>
-                                                    좋아보여요!!!</p>
-                                    </td>
-                            </tr>
-         
-                            <tr>
-                                    <td width="450" height="110"> 
-                                        <h3><input type="checkbox" name="" id="check_box">&nbsp;한강</h3>
-                                        <p id="date">2023-03-11 <br>
-                                            좋아보여요!!!</p>
-                                    </td>
-                            </tr>
-         
-                            <tr>
-                                    <td width="450" height="110"> 
-                                        <h3><input type="checkbox" name="" id="check_box">&nbsp;동대문</h3>
-                                        <p id="date">2023-03-11 <br>
-                                            좋아보여요!!!</p>
-                                    </td>
-                            </tr>
-         
-                            <tr>
-                                    <td width="450" height="110"> 
-                                        <h3><input type="checkbox" name="" id="check_box">&nbsp;광화문</h3>
-                                        <p id="date">2023-03-11 <br>
-                                            좋아보여요!!!</p>
-                                    </td>
-                            </tr>
-                           </thead>
-                           <tbody>
-                           	<!-- cass2. 게시글이 없을 경우 
-                           	<tr>
-                           		<td>작성하신 댓글이 없습니다.</td>
-                           	</tr>
-                           
-                           </tbody>-->
+                                <!-- cass2. 게시글이 없을 경우 
+                            <thody>
+                               
+                                <tr>
+                                    <td>작성하신 댓글이 없습니다.</td>
+                                </tr>
+                            
+                            </tbody>-->
+							
+							<!-- case2. 게시글이 있을 경우 -->
+                            <tbead>
+                                <tr>
+                                        <td width="600" height="110"> 
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;남산</h3>
+                                            <p id="date">2023-03-11 <br>
+                                                        좋아보여요!!!</p>
+                                        </td>
+                                </tr>
+            
+                                <tr>
+                                        <td width="450" height="110"> 
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;한강</h3>
+                                            <p id="date">2023-03-11 <br>
+                                                좋아보여요!!!</p>
+                                        </td>
+                                </tr>
+            
+                                <tr>
+                                        <td width="450" height="110"> 
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;동대문</h3>
+                                            <p id="date">2023-03-11 <br>
+                                                좋아보여요!!!</p>
+                                        </td>
+                                </tr>
+            
+                                <tr>
+                                        <td width="450" height="110"> 
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;광화문</h3>
+                                            <p id="date">2023-03-11 <br>
+                                                좋아보여요!!!</p>
+                                        </td>
+                                </tr>
+                           </tbead>
+
+                          
                             
      
                         </table>
@@ -275,7 +280,7 @@
                     </div>
     
                     <div class="page_btn" id="page">
-                        <button onclick="location.href='<%=contextPath %>/mno='?">&lt;</button>
+                        <button onclick="location.href= ">&lt;</button>
                         <button>1</button>
                         <button>2</button>
                         <button>3</button>
