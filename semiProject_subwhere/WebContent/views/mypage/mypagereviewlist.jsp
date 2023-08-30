@@ -204,15 +204,16 @@
 </head>
 <body>
 	<%@ include file="../../views/common/header.jsp" %>
-
+	
 	
 		
 		<div class="warp">
 
          <%@ include file="mypageleft.jsp" %>
 		
-
+		
  		<div id="rightpro" class="profiler">
+ 		
             <div class="list_title">
                 <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글</h1>
             </div>
@@ -226,8 +227,9 @@
                 </div>
      
                 <div class="writer_list">
-     
+                   
                     <div class="review_box">
+                    
                         <table align="center">
                         
                                 <!-- cass2. 게시글이 없을 경우 -->

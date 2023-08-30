@@ -26,12 +26,19 @@ public class Comments {
 	
 	
 	
-	public Comments(int commentNo, String boardNo, String commentConent, String modifyDate) {
+	
+	
+
+	
+	public Comments(int commentNo, int memberNo, String boardNo, String commentConent, String modifyDate,
+			String status) {
 		super();
 		this.commentNo = commentNo;
+		this.memberNo = memberNo;
 		this.boardNo = boardNo;
 		this.commentConent = commentConent;
 		this.modifyDate = modifyDate;
+		this.status = status;
 	}
 
 	public int getCommentNo() {

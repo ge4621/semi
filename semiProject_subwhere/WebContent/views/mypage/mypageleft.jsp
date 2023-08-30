@@ -110,6 +110,7 @@
             <div id="btn" class="foot">
 
                 <table border="0" id="btn_area">
+                    <input type="hidden" value="<%=loginMember1.getMemberNo() %>" id="">
                     <tr>
                          <th>
                          	<a href="/subwhere/mypageform.me">
@@ -132,7 +133,7 @@
                     
                     <tr>
                          <th>
-                            <a href="/subwhere/myrlist.me?Mno=">
+                            <a href="/subwhere/myrlist.me">
                             	
                             	
                                 <input type="button" name="" id="" value="내가 쓴 댓글 보기">

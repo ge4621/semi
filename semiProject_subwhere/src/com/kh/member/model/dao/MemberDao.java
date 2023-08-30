@@ -237,9 +237,11 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				list.add(new Comments(rset.getInt("comment_no"),
+										rset.getInt("momber_no"),
 										rset.getString("title"),
 										rset.getString("contnet"),
-										rset.getString("modify_date")
+										rset.getString("modify_date"),
+										rset.getString("status")
 										));
 			}
 			
