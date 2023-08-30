@@ -1,9 +1,7 @@
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
-   <% 
+<% 
    String contextPath = request.getContextPath(); // /jsp
 
    Member loginMember = (Member)session.getAttribute("loginMember");
@@ -14,18 +12,22 @@
    // 서비스 요청 전 menubar.jsp 로딩시 : null인 상태
    // 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메시지 문구
 %>
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>header</title>
+
+    <!-- 글씨체 css -->
+    <link href="resources/css/subwherefonts.css" rel="stylesheet">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
     <!-- jQuery library -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> 
 
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -35,7 +37,7 @@
     
     <style>
         
-         #header{ /* 헤더 전체 영역 관련 */
+        #header{ /* 헤더 전체 영역 관련 */
             /* border: 2px solid blue; */
             /* background-color: aliceblue; */
             width: 1400px;
@@ -320,11 +322,18 @@
             background-color: rgb(174, 174, 174);
             border-radius: 5px;
         }
-        #home table{ /* ID 찾기 테이블 */
+        /* #home table{ 
             height: 120px;
+            margin-top: 230px;
+            border: 1px solid red;
+        } */
+        #hometable1{ /* ID 찾기 테이블 */
+            height: 160px;
             margin-top: 230px;
         }
         #hometable2{
+            height: 120px;
+            margin-top: 230px;
             text-align: center;
         }
         #hometable2 button{
@@ -385,30 +394,21 @@
         
        
     </style>
-
 </head>
 <body>
-
-
-	<% if(alertMsg != null){ %>
-		<script>
-			alert("<%= alertMsg%>");
-		</script>
-		<% session.removeAttribute("alertMsg"); %>
-	<% } %>
-
+    
     <div id="header">
         
         <div id="header_1">
             <!-- 로고 -->
-            <a href="#"><img src="resources/images/logo_blue_subwhere.png" alt="logo"></a>
+            <a href="<%=contextPath%>"><img src="resources/images/logo_blue_subwhere.png" alt="logo"></a>
         </div>
 
         <div id="header_2">
             <!-- 역 검색창 -->
 
             
-            <form id="search_form">
+            <form id="search_form" >
                 <div id="search_station">
                     
                     <select onchange="categoryChange(this)" style="height: 36px; width: 170px;">
@@ -497,7 +497,7 @@
                
          <%}else { %>
 
-            <!-- case2. 로그인 후 : 프사+닉네임 -->
+               <!-- case2. 로그인 후 : 프사+닉네임 -->
                <div id="after_login">
    
                    <div id="user_info">
@@ -510,10 +510,13 @@
                    </button>
                
                </div>
+               
          <%} %>
+
 
             <div id="overlay"></div>
             
+            <!-- 팝업창 -->
             <div id="usermenu_page" class="usermenu_page">
 
                 <!-- 팝업창 닫힘 버튼 -->
@@ -521,254 +524,63 @@
 
 
             <% if(loginMember == null){ %>
-                <!-- 로그인 -->
-                <div id="usermenu_page_login">
-
-                    <form action="<%= contextPath %>/login.me" method="post">
-
-                        <h3>로그인</h3>
-
-                        <table>
-                        
-                            <tr>
-                                <td><input type="text" name="memberId" class="form-control" placeholder="아이디"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="password" name="memberPwd" class="form-control" placeholder="비밀번호"></td>
-                            </tr>
-                            <tr>
-                                <td><button class="btn btn-primary btn-block" type="submit">로그인</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">ID 찾기 </a> |
-                                    <a href="#">비밀번호 찾기 </a> |
-                                    <a href="#">회원가입</a>
-                                </td>
-                            </tr>
-                            
-                        </table>               
-    
-                    </form>
-                </div>
+                   <!-- 로그인 -->
+                   <div id="usermenu_page_login">
+   
+                       <form action="<%= contextPath %>/login.me" method="post">
+   
+                           <h3>로그인</h3>
+   
+                           <table>
+                           
+                               <tr>
+                                   <td><input type="text" name="memberId" class="form-control" placeholder="아이디" required></td>
+                               </tr>
+                               <tr>
+                                   <td><input type="password" name="memberPwd" class="form-control" placeholder="비밀번호" required></td>
+                               </tr>
+                               <tr>
+                                   <td><button class="btn btn-primary btn-block" type="submit">로그인</button></td>
+                               </tr>
+                               <tr>
+                                   <td>
+                                       <a href="views/common/findIdPage.jsp">ID 찾기 </a> |
+                                       <a href="#">비밀번호 찾기 </a> |
+                                       <a href="#">회원가입</a>
+                                   </td>
+                               </tr>
+                               
+                           </table>               
+       
+                       </form>
+                   </div>
+                
             <%}else { %>
             
-                <!-- 로그인 성공-->
-                <div id="usermenu_page_login_success" class="usermenu_page_content">
-                    
-                    <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
-                        <img src="resources/images/profile_img_nocamera.png" alt="profile" style="width: 100px; height: 100px;">
-                        <p><b align="center">'<%=loginMember.getNickname() %>'님</b></p>
-                    </div>
-                    
-                    <table>
-                    
-                        <tr>
-                            <td><input type="button" class="btn btn-primary btn-block" value="마이페이지" onclick = "location.href='<%=contextPath%>/mypageform.me'"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="button" class="btn btn-secondary btn-block" value="회원정보 변경" onclick ="location.href='<%=contextPath%>/mypageform.me'"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="button" class="btn btn-secondary btn-block" value="로그아웃" onclick = "location.href = '<%=contextPath%>/mylogout.me' "></td>
-                        </tr>
-                        
-                    </table>
-
-                </div>
+                   <!-- 로그인 성공-->
+                   <div id="usermenu_page_login_success" class="usermenu_page_content">
+                       
+                       <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+                           <img src="resources/images/profile_img.png" alt="profile" style="width: 100px; height: 100px;">
+                           <p><b align="center"><%=loginMember.getMemberName() %>님</b></p>
+                       </div>
+                       
+                       <table>
+                       
+                           <tr>
+                               <td><input type="button" class="btn btn-primary btn-block" value="마이페이지" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
+                           </tr>
+                           <tr>
+                               <td><input type="button" class="btn btn-secondary btn-block" value="회원정보 변경" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
+                           </tr>
+                           <tr>
+                               <td><input type="button" class="btn btn-secondary btn-block" value="로그아웃" onclick = "location.href = '<%=contextPath%>/logout.me' "></td>
+                           </tr>
+                           
+                       </table>
+   
+                   </div>
                 <%} %> 
-
-                <!-- ID / 비밀번호 찾기 -->
-                <!-- <div id="usermenu_page_find">
-
-                    <form action="#">
-
-                        <h3>ID / 비밀번호 찾기</h3>
-
-                        <div class="find_id_or_pwd">
-
-                            <ul class="nav nav-pills nav-justified" role="tablist" id="find_id_or_pwd_pills">
-
-                                <li class="nav-item">
-                                    <a class="nav-link active btn btn-secondary" data-toggle="pill" href="#home">ID 찾기</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-secondary" data-toggle="pill" href="#menu1">비밀번호 찾기</a>
-                                </li>
-                                
-                            </ul>
-
-                            <div class="tab-content">
-
-                                <div id="home" class="container tab-pane active"><br>
-
-                                    
-
-                                    <table id="hometable1">
-                                        
-                                        <form action="">
-                                            <tr>
-                                                <td>
-                                                    <b>가입한 이메일로 찾기</b>
-                                                    <input type="text" class="form-control">
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><button class="btn btn-primary btn-block">ID 찾기</button></td>
-                                            </tr>
-                                        </form>
-                                        
-
-                                    </table>
-
-
-                                    
-
-                                    <table id="hometable2" style="margin-top: 270px;">
-
-                                        <tr>
-                                            <p style="font-size: 12px; text-align: center; margin-top: 20px;">입력하신 정보와 일치하는 계정을 발견했습니다.</p>
-                                            <th>
-                                                <input type="radio"> wow59*** 
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <button class="btn btn-secondary">비밀번호 찾기</button>
-                                                <button class="btn btn-secondary">로그인</button>
-                                            </th>
-                                            
-                                        </tr>
-
-                                    </table>
-                                        
-                                        
-                                </div>
-
-
-                                
-                                
-                                <div id="menu1" class="container tab-pane fade"><br>
-
-                                    <form action="">
-                                        <table>
-                                            <tr>
-                                                <td><input type="text" class="form-control" placeholder="이름"></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="form-control" placeholder="이메일"></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="form-control" placeholder="휴대폰 번호"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: x-small;">이름, 이메일, 휴대폰 모두 일치하셔야 합니다.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><button class="btn btn-primary btn-block">비밀번호 찾기</button></td>
-                                            </tr>
-    
-                                        </table>
-                                    </form>
-
-                                </div>
-                                
-                            </div>
-
-                        </div>
-    
-                    </form>
-
-                </div> -->
-                
-                <!-- 비밀번호 변경 -->
-                <!-- <div id="usermenu_page_change_pwd">
-
-                    <h3>비밀번호 변경</h3>
-                    
-                        <form action="#">
-
-                            <table>
-                                <tr>
-                                    <td>
-                                        <b>새로운 비밀번호</b>
-                                        <input type="text" class="form-control" placeholder="영문 대소문자, 숫자, 특수문자 조합 8~15자">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>새로운 비밀번호 확인</b>
-                                        <input type="text" class="form-control" placeholder="한번 더 입력해주세요">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><button class="btn btn-primary btn-block">변경하기</button></td>
-                                </tr>
-    
-                            </table>
-                        </form>
-                        
-                    
-                </div> -->
-
-                <!-- 비밀번호 변경 성공 -->
-                <!-- <div id="usermenu_page_change_pwd_success" >
-
-                    <div class="usermenu_page_plain">
-
-                        <table border="1">
-                            <tr>
-                                <td>
-                                    <p>
-                                        비밀번호 변경이 성공적으로 이루어졌습니다. <br>
-                                        다시 로그인 해주세요!
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="button" class="btn btn-primary" value="확인" href="로그인페이지로 이동">
-                                </td>
-                            </tr>
-                        </table>
-                        
-                        
-                    </div>
-                    
-                </div> -->
-
-                <!-- ID / 비밀번호 찾기 실패 -->
-                <!-- <div id="usermenu_page_find_id_or_pwd_fail">
-                    
-                    <div class="usermenu_page_plain">
-
-                        <table border="1">
-                            <tr>
-                                <td>
-                                    <p>
-                                        입력하신 정보와 일치하는 계정이 없습니다. <br>
-                                        다시 시도해주세요.
-                                    </p>
-                                    <p>
-                                        회원가입을 원하시나요?
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="button" class="btn btn-primary" value="확인" href="회원가입페이지로 이동">
-                                </td>
-                            </tr>
-                        </table>
-
-                        
-                        
-                    </div>
-                    
-                </div> -->
-
 
                 
             </div>
@@ -817,7 +629,7 @@
         <!-- navi -->
         <ul class="nav nav-pills justify-content-center ">
             <li class="nav-item">
-                <a class="btn btn-light" href="#">홈</a>
+                <a class="btn btn-light" href="<%=contextPath%>">홈</a>
             </li>
             <li class="nav-item">
                 <a class="btn btn-primary" href="#">여행지 추천</a>
