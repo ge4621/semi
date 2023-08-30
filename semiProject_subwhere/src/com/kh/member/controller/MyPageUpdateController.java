@@ -125,6 +125,13 @@ public class MyPageUpdateController extends HttpServlet {
 						m.setEmail(email);
 						m.setPhone(phone);
 						m.setProfileImg(profileImg);
+						
+						
+					
+					if(multiRequest.getParameter(profileImg)!= null) {
+						m.setProfileImg("resources/profile_upfiles");
+					}
+						
 
 			
 			      	int result = new MemberService().updateMember(m);

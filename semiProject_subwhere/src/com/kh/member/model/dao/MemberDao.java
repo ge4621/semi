@@ -57,6 +57,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		System.out.println(result + "adfdsf");
+		System.out.println(m.getProfileImg()+" adfadf");
 		return result;
 	}
 	
