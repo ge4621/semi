@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import static com.kh.common.JDBCTemplate.*;
+
+import com.kh.common.model.vo.Comments;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -79,15 +81,14 @@ public class MemberService {
 		close(conn);
 		return updateMem;
 	}
-	
-	public ArrayList<Member> selectMyRList(int memberNo) {
-		
+	public ArrayList<Comments> selectRreviewList(int memberno) {
 		Connection conn = getConnection();
 		
-		ArrayList<Member> list = new MemberDao().selectMyRList(conn,memberNo);
-				
+		ArrayList<Comments> list = new MemberDao().selectRreviewList(conn,memberno);
+		
 		close(conn);
 		return list;
 	}
+	
 	
 }

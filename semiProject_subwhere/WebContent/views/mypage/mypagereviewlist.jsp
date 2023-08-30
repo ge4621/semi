@@ -1,5 +1,13 @@
+<%@page import="com.kh.common.model.vo.Comments"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%
+  ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
+ %>   
+ 
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -221,26 +229,28 @@
      
                     <div class="review_box">
                         <table align="center">
-                                <!-- cass2. 게시글이 없을 경우 
-                            <thody>
-                               
+                        
+                                <!-- cass2. 게시글이 없을 경우 -->
+                           
+                               <%if(list.isEmpty()){ %>
                                 <tr>
                                     <td>작성하신 댓글이 없습니다.</td>
                                 </tr>
+                            <%}else{ %>
                             
-                            </tbody>-->
-							
 							<!-- case2. 게시글이 있을 경우 -->
-                            <tbead>
+                            <%for(Comments c : list){ %>
                                 <tr>
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;남산</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                        좋아보여요!!!</p>
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=c.getBoardNo() %></h3>
+                                            <p id="date"><%=c.getModifyDate() %><br>
+                                                        <%=c.getCommentConent() %></p>
                                         </td>
                                 </tr>
-            
-                                <tr>
+            			<%} %>
+            		<%} %>
+            	
+                             <!--    <tr>
                                         <td width="450" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;한강</h3>
                                             <p id="date">2023-03-11 <br>
@@ -262,12 +272,8 @@
                                             <p id="date">2023-03-11 <br>
                                                 좋아보여요!!!</p>
                                         </td>
-                                </tr>
-                           </tbead>
-
-                          
-                            
-     
+                                </tr>--> 
+                     
                         </table>
          
                     </div>

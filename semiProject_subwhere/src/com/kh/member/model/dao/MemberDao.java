@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.kh.common.JDBCTemplate.*;
+
+import com.kh.common.model.vo.Comments;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -218,31 +220,29 @@ public class MemberDao {
 		return result;
 		
 	}
-	
-	public void selectMyRList(Connection conn,int memberNo) {
-		
-		ArrayList<Member> list = new ArrayList<Member>();
+	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno) {
+		ArrayList<Comments> list = new ArrayList<Comments>();
 		
 		PreparedStatement pstmt = null;
-		
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectRlist");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, memberNo);
+			pstmt.setInt(1, memberno);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Member(rset.getInt("commentNo"),
-									rset.getString("memberName"),
-									rset.getString("title"),
-									rset.getString("content"),
-									rset.getString("modifyDate")));
+				list.add(new Comments(rset.getInt("comment_no"),
+										rset.getString("title"),
+										rset.getString("contnet"),
+										rset.getString("modify_date")
+										));
 			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -253,6 +253,7 @@ public class MemberDao {
 		}
 		return list;
 	}
+	
 	
 	
 	

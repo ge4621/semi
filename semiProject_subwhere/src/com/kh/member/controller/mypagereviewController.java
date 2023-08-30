@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Comments;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
@@ -86,9 +87,9 @@ public class mypagereviewController extends HttpServlet {
 //		
 //		request.getRequestDispatcher("views/mypage/mypagereviewlist.jsp").forward(request, response);
 		
-		int memberNo = Integer.parseInt(request.getParameter("mno"));
-			
-		ArrayList<Member> list = new MemberService().selectMyRList(memberNo);
+		int memberno = Integer.parseInt(request.getParameter("mbo"));
+		
+		ArrayList<Comments> list = new MemberService().selectRreviewList(memberno);
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/mypage/mypagereviewlist.jsp").forward(request, response);
