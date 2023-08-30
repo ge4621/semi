@@ -36,6 +36,8 @@ public class MemberDao {
 		
 		String sql = prop.getProperty("updateMember");
 		
+		System.out.println(m.getMemberId() + "####");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
