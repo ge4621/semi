@@ -1,5 +1,7 @@
 package com.kh.member.model.vo;
 
+import java.sql.Date;
+
 public class Member {
 
 	private int memberNo;
@@ -10,13 +12,13 @@ public class Member {
 	private String email;
 	private String nickname;
 	private String status;
-	private String enrollDate;
+	private Date enrollDate;
 	private String profileImg;
 	
 	public Member() {}
 
 	public Member(int memberNo, String memberName, String memberId, String memberPwd, String phone, String email,
-			String nickname, String status, String enrollDate, String profileImg) {
+			String nickname, String status, Date enrollDate, String profileImg) {
 		super();
 		this.memberNo = memberNo;
 		this.memberName = memberName;
@@ -27,19 +29,6 @@ public class Member {
 		this.nickname = nickname;
 		this.status = status;
 		this.enrollDate = enrollDate;
-		this.profileImg = profileImg;
-	}
-	
-	
-	
-	
-
-	public Member(String memberPwd, String phone, String email, String nickname, String profileImg) {
-		super();
-		this.memberPwd = memberPwd;
-		this.phone = phone;
-		this.email = email;
-		this.nickname = nickname;
 		this.profileImg = profileImg;
 	}
 
@@ -107,11 +96,11 @@ public class Member {
 		this.status = status;
 	}
 
-	public String getEnrollDate() {
+	public Date getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(String enrollDate) {
+	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 
@@ -129,7 +118,7 @@ public class Member {
 				+ memberPwd + ", phone=" + phone + ", email=" + email + ", nickname=" + nickname + ", status=" + status
 				+ ", enrollDate=" + enrollDate + ", profileImg=" + profileImg + "]";
 	}
-	
+
 	
 	
 	

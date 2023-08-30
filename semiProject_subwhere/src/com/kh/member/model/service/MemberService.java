@@ -51,13 +51,19 @@ public class MemberService {
 	}
 	
 	public Member loginMember(String memberId, String memberPwd) {
-		 Connection conn = getConnection();
-	      Member m = new MemberDao().loginMember(conn, memberId, memberPwd);
+         
+         Connection conn = getConnection();
+         Member loginMember = new MemberDao().loginMember(conn, memberId, memberPwd);
 
-	      close(conn);
-	      return m;
+         //------------------------------------------------------------------
+         
+         close(conn);
+         return loginMember;
+         
+      }   
 
-	}
+
+	
 	
 	public int selectcReviewListCount(int memberNo) {
 		Connection conn = getConnection();
@@ -92,6 +98,28 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-	
+	 // ajax 아이디 중복 체크
+	   public int idCheck(String checkId) {
+	      
+	      Connection conn = getConnection();
+	      int count = new MemberDao().idCheck(conn, checkId);
+	      
+	      close(conn);
+	      return count;
+	            
+	   }
+	   public int insertMember(Member m) {
+		      
+		      Connection conn = getConnection();
+		      
+		      int result = new MemberDao().insertMember(conn, m);
+		      
+		      close(conn);
+		      
+		      return result;
+		      
+		   }
+		   
+
 	
 }

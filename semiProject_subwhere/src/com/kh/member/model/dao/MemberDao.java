@@ -86,7 +86,7 @@ public class MemberDao {
 								rset.getString("email"),
 								rset.getString("nickname"),
 								rset.getString("status"),
-								rset.getString("enroll_date"),
+								rset.getDate("enroll_date"),
 								rset.getString("profile_img"));
 					
 			}
@@ -125,51 +125,58 @@ public class MemberDao {
 		return result;
 	}
 	
-	public Member loginMember(Connection conn, String memberId, String memberPwd) {
-	      // select문 => ResultSet객체 필요(한 행) = > Member 객체
-	      
-	            Member m = null;
-	            
-	            PreparedStatement pstmt = null;
-	            ResultSet rset = null;
-	            
-	            String sql = prop.getProperty("loginMember");
-	            
-	            try {
-	                  
-	               pstmt = conn.prepareStatement(sql); // 미완성된 쿼리
-	               
-	               pstmt.setString(1, memberId);
-	               pstmt.setString(2, memberPwd);
-	               
-	               rset = pstmt.executeQuery();
-	               // pstmt 쿼리를 돌려서 rset에 담아라
-	               // 조회된 결과가 있다면 한 행 | 조회결과 없다고 하면 아무것도 안 담김
-	               
-	               if(rset.next()) {
-	                  // new Member(~~) => 매개변수 생성자 생성
-	                  // rset에는 db의 컬럼이 들어감 => get~ 가져올 때는 변수명이 아닌 컬럼명 그대로! 써야 함 => 오타나거나 없는 컬럼 쓰면 "부적절한 인덱스~" 오류 뜸
-	                  m = new Member(rset.getInt("MEMBER_NO"),
-	                              rset.getString("MEMBER_NAME"),
-	                              rset.getString("MEMBER_ID"),
-	                              rset.getString("MEMBER_PWD"),
-	                              rset.getString("PHONE"), 
-	                              rset.getString("EMAIL"), 
-	                              rset.getString("NICKNAME"), 
-	                              rset.getString("STATUS"), 
-	                              rset.getString("ENROLL_DATE"),
-	                              rset.getString("PROFILE_IMG"));
-	               }
-	               
-	            } catch (SQLException e1) {
-	               e1.printStackTrace();
-	            } finally {
-	               close(rset);
-	               close(pstmt);
-	            }
-	            
-	            return m;
-	   }   
+	 /**
+     * 로그인
+     * @param conn
+     * @param memberId
+     * @param memberPwd
+     * @return
+     */
+    public Member loginMember(Connection conn, String memberId, String memberPwd) {
+       // select문 => ResultSet객체 필요(한 행) = > Member 객체
+       
+             Member loginMember = null;
+             
+             PreparedStatement pstmt = null;
+             ResultSet rset = null;
+             
+             try {
+                
+                String sql = prop.getProperty("loginMember");
+                
+                pstmt = conn.prepareStatement(sql); // 미완성된 쿼리
+                
+                pstmt.setString(1, memberId);
+                pstmt.setString(2, memberPwd);
+                
+                rset = pstmt.executeQuery();
+                // 조회된 결과가 있다면 한 행 | 조회결과 없다고 하면 아무것도 안 담김
+                
+                if(rset.next()) {
+                   // rset에는 db의 컬럼이 들어감 => get~ 가져올 때는 변수명이 아닌 컬럼명 그대로! 써야 함 => 오타나거나 없는 컬럼 쓰면 "부적절한 인덱스~" 오류 뜸
+                   loginMember = new Member(rset.getInt("MEMBER_NO"),
+                                       rset.getString("MEMBER_NAME"),
+                                       rset.getString("MEMBER_ID"),
+                                       rset.getString("MEMBER_PWD"),
+                                       rset.getString("PHONE"), 
+                                       rset.getString("EMAIL"), 
+                                       rset.getString("NICKNAME"), 
+                                       rset.getString("STATUS"), 
+                                       rset.getDate("ENROLL_DATE"),
+                                       rset.getString("PROFILE_IMG"));
+                      }
+                
+             } catch (SQLException e1) {
+                e1.printStackTrace();
+             } finally {
+                close(rset);
+                close(pstmt);
+             }
+             
+             return loginMember;
+    }
+
+	  
 	
 
 	public int selectcReviewListCount(Connection conn, int memberNo) {
@@ -259,7 +266,65 @@ public class MemberDao {
 		}
 		return list;
 	}
-	
+	//수진언니
+	// ajax 아이디 중복 체크
+	   public int idCheck(Connection conn, String checkId) {
+	      // select문 => ResultSet => 한개 숫자 => int
+	      
+	      int count = 0;
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      String sql = prop.getProperty("idCheck");
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, checkId);
+	         
+	         rset = pstmt.executeQuery();
+	         if(rset.next()) {
+	            count = rset.getInt("count"); // count(*)을 별칭 count로 줌
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      return count;
+	   }
+	   
+	   
+	   public int insertMember(Connection conn, Member m) {
+	      //insert
+	      int result = 0;
+	      PreparedStatement pstmt = null;
+	      
+	      String sql = prop.getProperty("insertMember");
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, m.getMemberName());
+	         pstmt.setString(2, m.getMemberId());
+	         pstmt.setString(3, m.getMemberPwd());
+	         pstmt.setString(4, m.getPhone());
+	         pstmt.setString(5, m.getEmail());
+	         pstmt.setString(6, m.getNickname());
+	         pstmt.setString(7, m.getProfileImg());
+	         
+	         result = pstmt.executeUpdate();
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+	      
+	      return result;
+	      
+	   }
+
 	
 	
 	

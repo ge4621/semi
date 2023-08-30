@@ -81,4 +81,37 @@ SELECT
     AND C.STATUS = 'Y'
 </entry>
 
+<entry key="idCheck"> <!-- ajax 아이디 중복 체크 -->
+SELECT
+       COUNT(*) "COUNT"
+  FROM MEMBER
+ WHERE MEMBER_ID = ?
+</entry>
+
+<entry key="insertMember">
+   INSERT
+   INTO MEMBER
+       (
+           MEMBER_NO
+         , MEMBER_NAME
+         , MEMBER_ID
+         , MEMBER_PWD
+         , PHONE
+         , EMAIL
+         , NICKNAME
+         , PROFILE_IMG
+       )
+   VALUES
+       (
+           SEQ_MEMBER_NO.NEXTVAL
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+       )
+</entry>
+
 </properties>

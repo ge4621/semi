@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.service.MemberService;
-
 /**
- * Servlet implementation class AjaxIdCheckController
+ * Servlet implementation class TermsFormController
  */
-@WebServlet("/idCheck.me")
-public class AjaxIdCheckController extends HttpServlet {
+@WebServlet("/terms.me")
+public class TermsFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxIdCheckController() {
+    public TermsFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +26,7 @@ public class AjaxIdCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String checkId = request.getParameter("checkId");
-	      
-	      int count = new MemberService().idCheck(checkId);
-	      
-	      if(count > 0) { // 사용 불가능.. 중복 아이디 있음 => "NNNNN"
-	         response.getWriter().print("NNNNN");
-	      }else { // 사용 가능!! 중복 아이디 없음 => "NNNNY"
-	         response.getWriter().print("NNNNY");         
-	      }
+		request.getRequestDispatcher("views/member/termsPage.jsp").forward(request, response);
 
 	}
 

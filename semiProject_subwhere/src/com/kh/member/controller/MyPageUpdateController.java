@@ -37,69 +37,6 @@ public class MyPageUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//			String resourePath ="/resources/profile_upfiles/";
-//
-//			request.setCharacterEncoding("UTF-8");
-//			
-//			//String memberId = request.getParameter("memberId");
-//			
-//			//String nickname = request.getParameter("nickname");
-//			
-//			//String memberPwd = request.getParameter("memberPwd");
-//			
-//			//String email = request.getParameter("email");
-//			
-//			//String phone = request.getParameter("phone");
-//			
-//			//String fileImg = request.getParameter("fileImg");
-//			String profileImg = null;
-//			
-//			if(ServletFileUpload.isMultipartContent(request)) {
-//				
-//				int maxSize = 10*1024*1024;
-//				
-//				 // 2_2. 저장시킬 폴더의 물리적인 경로
-//		         // application == request.getSession().getServletContext()
-//		         String savePath = request.getSession().getServletContext().getRealPath(resourePath); // '/'
-//
-//				
-//				MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize,"UTF-8",new MyFileRenamepolicy());
-//				
-//				String nickname = multiRequest.getParameter("nickname");
-//				String email = multiRequest.getParameter("email");
-//				String phone = multiRequest.getParameter("phone");
-//				
-//				String changeFileName = multiRequest.getFilesystemName("profileImg"); // name 키값
-//		        profileImg = resourePath + changeFileName;
-//		         //           /resources/profile_upfiles/2023082717374710069.png
-//		        
-//		      }
-
-				
-				
-				//Member m = new Member();
-				//m.setMemberId(memberId);
-				//m.setNickname(nickname);
-				//m.setMemberPwd(memberPwd);
-				//m.setEmail(email);
-				//m.setPhone(phone);
-				//m.setProfileImg(profileImg);
-				
-				
-//				int result =  new MemberService().updateMember(m);
-//				
-//				if(result > 0) {
-//					request.getSession().setAttribute("alertMsg", "정보변경 수정 완료");
-//					response.sendRedirect(request.getContextPath()+"/mypageform.me");
-//				}else {
-//					request.setAttribute("errorMsg", "정보변경에 실패했습니다.");
-//					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-//					view.forward(request, response);
-//				}
-				
-				
-				
-				
 				 request.setCharacterEncoding("UTF-8");
 			      
 			      
@@ -117,6 +54,12 @@ public class MyPageUpdateController extends HttpServlet {
 					String email = multiRequest.getParameter("email");
 					String phone = multiRequest.getParameter("phone");
 			        String profileImg = multiRequest.getParameter("profileImg");
+			        
+			        String changeFileName = multiRequest.getFilesystemName("profileImg");
+			        profileImg = savePath + changeFileName;
+			        
+					System.out.println(savePath+"dsaf"); //파일 확인용
+					System.out.println(profileImg+"사진확인하자"); //파일 확인용
 					
 			         Member m = new Member();
 			         
@@ -128,18 +71,26 @@ public class MyPageUpdateController extends HttpServlet {
 						
 						
 					
+						
 					if(multiRequest.getParameter(profileImg)!= null) {
+						
+						
+						
+						multiRequest.getOriginalFileName(profileImg);
+						multiRequest.getOriginalFileName(profileImg);
 						m.setProfileImg("resources/profile_upfiles");
+						
+						
 					}
 						
-
+					System.out.println(savePath+"asd"); //파일 확인용
 			
 			      	int result = new MemberService().updateMember(m);
 			         
 			         if(result > 0) {
 			            HttpSession session = request.getSession();
 			            session.setAttribute("alertMsg", "성공적으로 정보변경이 되었습니다.");
-			            response.sendRedirect(request.getContextPath());
+			            response.sendRedirect(request.getContextPath()+"/mypageform.me");
 			            
 			         }else {
 			            request.setAttribute("errorMsg", "정보변경에 실패했습니다");
