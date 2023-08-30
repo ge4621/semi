@@ -133,7 +133,7 @@
                     
                     <tr>
                          <th>
-                            <a href="/subwhere/myrlist.me">
+                            <a href="/subwhere/myrlist.me?memberno=<%= loginMember1.getMemberNo()%>">
                             	
                             	
                                 <input type="button" name="" id="" value="내가 쓴 댓글 보기">

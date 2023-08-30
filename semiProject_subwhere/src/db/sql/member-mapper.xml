@@ -77,8 +77,8 @@ SELECT
       ,C.MODIFY_DATE 
     FROM COMMENTS C
     JOIN REVIEW USING(BOARD_NO)
-    WHERE MEMBER_NO = 1
-    AND C.STATUS = 'Y';
+    WHERE MEMBER_NO = ?
+    AND C.STATUS = 'Y'
 </entry>
 
 </properties>
