@@ -36,27 +36,32 @@ public class MyPageUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+				String resourePath = "/resources/profile_upfiles/";
 				 request.setCharacterEncoding("UTF-8");
 			      
-			      
+			      String profileImg = null;
 			      
 			      if(ServletFileUpload.isMultipartContent(request)) {
-			         
+			         //용량제한
 			         int maxSize = 10*1024*1024;
-			         
-			         String savePath = request.getSession().getServletContext().getRealPath("resources/profile_upfiles/");
+			         //저장 시킬 폴더의 물리적인 경로
+			         String savePath = request.getSession().getServletContext().getRealPath(resourePath);
 			         
 			         MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamepolicy());
-			        
+			         
+			        //쿼리에 필요한 값
 			        String memberId = multiRequest.getParameter("memberId");
 			        String nickname = multiRequest.getParameter("nickName");
 					String email = multiRequest.getParameter("email");
-					String phone = multiRequest.getParameter("phone");
-			        String profileImg = multiRequest.getParameter("profileImg");
-			        
+					String phone = multiRequest.getParameter("phone");			   
+					
 			        String changeFileName = multiRequest.getFilesystemName("profileImg");
+			        
 			        profileImg = savePath + changeFileName;
+			        
+			        
+			        
+			        System.out.println(changeFileName + " 변경된 파일 명 ");
 			        
 					System.out.println(savePath+"dsaf"); //파일 확인용
 					System.out.println(profileImg+"사진확인하자"); //파일 확인용
@@ -69,23 +74,14 @@ public class MyPageUpdateController extends HttpServlet {
 						m.setPhone(phone);
 						m.setProfileImg(profileImg);
 						
+					
 						
 					
 						
-					if(multiRequest.getParameter(profileImg)!= null) {
-						
-						
-						
-						multiRequest.getOriginalFileName(profileImg);
-						multiRequest.getOriginalFileName(profileImg);
-						m.setProfileImg("resources/profile_upfiles");
-						
-						
-					}
-						
-					System.out.println(savePath+"asd"); //파일 확인용
+					System.out.println(profileImg + "sg"); //파일 확인용
 			
 			      	int result = new MemberService().updateMember(m);
+			      	System.out.println(result + " adf");
 			         
 			         if(result > 0) {
 			            HttpSession session = request.getSession();

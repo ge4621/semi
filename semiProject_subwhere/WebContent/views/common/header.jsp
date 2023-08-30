@@ -546,7 +546,7 @@
                                    <td>
                                        <a href="views/common/findIdPage.jsp">ID 찾기 </a> |
                                        <a href="#">비밀번호 찾기 </a> |
-                                       <a href="#">회원가입</a>
+                                       <a href="<%= contextPath%>/terms.me">회원가입</a>
                                    </td>
                                </tr>
                                
@@ -638,7 +638,7 @@
                 <a class="btn btn-primary" href="#">여행 코스 추천</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-primary" href="#">여행 후기</a>
+                <a class="btn btn-primary" href="<%= contextPath %>/list.re?cpage=1">여행 후기</a>
             </li>
             <li class="nav-item">
                   <a class="btn btn-light" href="#">공지사항</a>

@@ -20,7 +20,7 @@ public class MemberService {
 		//Member updateMem = null; //수정된 회원 정보를 담기 위한 과정??
 		
 		System.out.println(result + "dsfsdf");
-		System.out.println(m+"dskjl");
+		System.out.println(m.getProfileImg()+"dskjl");
 		
 		if(result > 0) { //수정 성공시
 			commit(conn);
