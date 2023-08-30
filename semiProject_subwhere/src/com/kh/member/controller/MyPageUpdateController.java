@@ -113,7 +113,7 @@ public class MyPageUpdateController extends HttpServlet {
 			         MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamepolicy());
 			        
 			        String memberId = multiRequest.getParameter("memberId");
-			        String nickname = multiRequest.getParameter("nickname");
+			        String nickname = multiRequest.getParameter("nickName");
 					String email = multiRequest.getParameter("email");
 					String phone = multiRequest.getParameter("phone");
 			        String profileImg = multiRequest.getParameter("profileImg");
