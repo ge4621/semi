@@ -111,21 +111,22 @@ public class MyPageUpdateController extends HttpServlet {
 			         String savePath = request.getSession().getServletContext().getRealPath("resources/profile_upfiles/");
 			         
 			         MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamepolicy());
-			         
+			        
+			        String memberId = multiRequest.getParameter("memberId");
 			        String nickname = multiRequest.getParameter("nickname");
 					String email = multiRequest.getParameter("email");
 					String phone = multiRequest.getParameter("phone");
-			         
+			        String profileImg = multiRequest.getParameter("profileImg");
+					
 			         Member m = new Member();
 			         
-			         	//m.setMemberId(memberId);
+			         	m.setMemberId(memberId);
 						m.setNickname(nickname);
-						//m.setMemberPwd(memberPwd);
 						m.setEmail(email);
 						m.setPhone(phone);
-						//m.setProfileImg(profileImg);
+						m.setProfileImg(profileImg);
 
-			//}
+			
 			      	int result = new MemberService().updateMember(m);
 			         
 			         if(result > 0) {

@@ -123,16 +123,8 @@
 
 <%@ include file="../common/header.jsp" %>
 
-<% 
-	String nickname = loginMember.getNickname();
-	String email = loginMember.getEmail();
-	String phone = (loginMember.getPhone()==null)?"":loginMember.getPhone();
-	String profileImg = (loginMember.getProfileImg()==null)?"resources/images/profile_img_nocamera.png":loginMember.getProfileImg();
-	
-	
-	
-	
-%>
+  
+
 
 
 
@@ -159,7 +151,7 @@
                            
                             <th width="130" style="text-align: center;">프로필 사진</th>
                             <td width="360">
-                                <img src="resources/images/profile_img_nocamera.png" value="<%=loginMember.getProfileImg() %>" alt="" width="140" height="140" id="proimg" onclick="filebtn();">
+                                <img src="resources/images/profile_img_nocamera.png" name="profileImg" value="<%=loginMember.getProfileImg() %>" alt="" width="140" height="140" id="proimg" onclick="filebtn();">
                                 <img src="resources/images/camera.png" width="25" alt="" id="changeimg"  onclick="filebtn();">
                                 <input type="file" name="pic" value="pic" style="display: none;" id="changefile" onchange="choosepic(this);"> 
                             </td>
@@ -174,7 +166,7 @@
                        
                         <tr>
                             <th height="65" style="text-align: center;">닉네임</th>
-                            <td><input type="text" name="nickName" value="<%=nickname %>"  required></td>
+                            <td><input type="text" name="nickName" value="<%=loginMember.getNickname() %>"  required></td>
                             
                         </tr>
     
@@ -182,12 +174,12 @@
     
                         <tr>
                             <th height="65" style="text-align: center;">이메일</th>
-                            <td><input type="email" name="email" value="<%=email%>"></td>
+                            <td><input type="email" name="email" value="<%=loginMember.getEmail()%>"></td>
                         </tr>
     
                         <tr>
                             <th height="65" style="text-align: center;">전화번호</th>
-                            <td><input type="text" name="phone" <%= phone %> placeholder="-를 포함해서 입력해주세요."></td>
+                            <td><input type="text" name="phone" value="<%= loginMember.getPhone() %>" placeholder="-를 포함해서 입력해주세요."></td>
                         </tr>
                         
                         

@@ -54,6 +54,7 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}
+		System.out.println(result + "adfdsf");
 		return result;
 	}
 	
