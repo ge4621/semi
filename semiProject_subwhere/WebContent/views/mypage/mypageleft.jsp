@@ -110,7 +110,7 @@
             <div id="btn" class="foot">
 
                 <table border="0" id="btn_area">
-                    <input type="hidden" value="<%=loginMember1.getMemberNo() %>" id="">
+                    
                     <tr>
                          <th>
                          	<a href="/subwhere/mypageform.me">
@@ -133,9 +133,8 @@
                     
                     <tr>
                          <th>
-                            <a href="/subwhere/myrlist.me?memberno=<%= loginMember1.getMemberNo()%>">
-                            	
-                            	
+                            <a href="/subwhere/myrlist.me?memno=<%= loginMember1.getMemberNo()%>">
+
                                 <input type="button" name="" id="" value="내가 쓴 댓글 보기">
                             </a>
                         </th>

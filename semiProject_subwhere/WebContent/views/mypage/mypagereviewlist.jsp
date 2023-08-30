@@ -5,6 +5,8 @@
     
  <%
   ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
+ //댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(후기글 댓글)
+ 
  %>   
  
     
@@ -236,7 +238,7 @@
                            
                                <%if(list.isEmpty()){ %>
                                 <tr>
-                                    <td>작성하신 댓글이 없습니다.</td>
+                                    <P align="center">작성하신 댓글이 없습니다.</P>
                                 </tr>
                             <%}else{ %>
                             

@@ -87,7 +87,7 @@ public class mypagereviewController extends HttpServlet {
 //		
 //		request.getRequestDispatcher("views/mypage/mypagereviewlist.jsp").forward(request, response);
 		
-		int memberno = Integer.parseInt(request.getParameter("memberno"));
+		String memberno = request.getParameter("memno");
 		
 		ArrayList<Comments> list = new MemberService().selectRreviewList(memberno);
 		

@@ -81,7 +81,7 @@ public class MemberService {
 		close(conn);
 		return updateMem;
 	}
-	public ArrayList<Comments> selectRreviewList(int memberno) {
+	public ArrayList<Comments> selectRreviewList(String memberno) {
 		Connection conn = getConnection();
 		
 		ArrayList<Comments> list = new MemberDao().selectRreviewList(conn,memberno);

@@ -220,7 +220,7 @@ public class MemberDao {
 		return result;
 		
 	}
-	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno) {
+	public ArrayList<Comments> selectRreviewList(Connection conn,String memberno) {
 		ArrayList<Comments> list = new ArrayList<Comments>();
 		
 		PreparedStatement pstmt = null;
@@ -231,13 +231,13 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, memberno);
+			pstmt.setString(1, memberno);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new Comments(rset.getInt("comment_no"),
-										rset.getInt("momber_no"),
+										rset.getString("member_no"),
 										rset.getString("title"),
 										rset.getString("contnet"),
 										rset.getString("modify_date"),
