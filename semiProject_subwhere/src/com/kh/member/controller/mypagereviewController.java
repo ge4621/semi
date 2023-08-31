@@ -31,6 +31,7 @@ public class mypagereviewController extends HttpServlet {
     }
 
 	/**
+	 * 댓글 조회=> 여행 후기 게시판용
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

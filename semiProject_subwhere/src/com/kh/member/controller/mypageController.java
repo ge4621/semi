@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 마이페이지 응답
  * Servlet implementation class mypageController
  */
 @WebServlet("/mypageform.me")

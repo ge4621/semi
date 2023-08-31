@@ -29,6 +29,7 @@ public class LoginController extends HttpServlet {
     }
 
 	/**
+	 * 로그인
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

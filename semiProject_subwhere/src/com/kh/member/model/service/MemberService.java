@@ -11,6 +11,7 @@ import com.kh.member.model.vo.Member;
 
 public class MemberService {
 
+	//마이페이지 정보변경
 	public int updateMember(Member m) {
 		//update문
 		Connection conn = getConnection();
@@ -34,7 +35,7 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
-	
+	//회원 탈퇴
 	public int deleteMember(String memberId,String memberPwd) {
 		Connection conn = getConnection();
 		int result = new MemberDao().deleteMember(conn,memberId,memberPwd);
@@ -50,6 +51,7 @@ public class MemberService {
 		
 	}
 	
+	//로그인
 	public Member loginMember(String memberId, String memberPwd) {
          
          Connection conn = getConnection();
@@ -74,6 +76,7 @@ public class MemberService {
 		return rlistCount;
 		
 	}
+	//비밀번호 변경
 	public Member myupdatePwd(String memberId,String memberPwd,String updatePwd) {
 		Connection conn = getConnection();
 		
@@ -90,6 +93,8 @@ public class MemberService {
 		close(conn);
 		return updateMem;
 	}
+	
+	//댓글 조회=> 여행 후기 게시판용
 	public ArrayList<Comments> selectRreviewList(int memberno) {
 		Connection conn = getConnection();
 		
@@ -110,6 +115,8 @@ public class MemberService {
 	      return count;
 	            
 	   }
+	   
+	   //회원가입
 	   public int insertMember(Member m) {
 		      
 		      Connection conn = getConnection();
@@ -125,13 +132,14 @@ public class MemberService {
 	  public ArrayList<Comments> selectmyCreview(int memberNo){
 		  Connection conn = getConnection();
 		  
-		  ArrayList<Comments> list = new MemberDao().selectmyCreview(conn,memberNo);
+		  ArrayList<Comments> clist = new MemberDao().selectmyCreview(conn,memberNo);
 		  
 		  close(conn);
-		  return list;
-		  
+		  return clist;
 		  
 	  }
+	  
+	 } 
 	  
 //	  public ArrayList<Comments> selectbcosList(int memberno) {
 //		  Connection conn = getConnection();
@@ -142,5 +150,6 @@ public class MemberService {
 //		  return blist;
 //	  }
 
+	  
+	  
 	
-}

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 회원 가입 폼
  * Servlet implementation class MemberEnrollFormController
  */
 @WebServlet("/enrollForm.me")

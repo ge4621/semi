@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 마이페이지로그아웃
  * Servlet implementation class MypageLogoutController
  */
 @WebServlet("/mylogout.me")

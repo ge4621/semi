@@ -138,7 +138,7 @@
 
            <%@ include file="mypageleft.jsp" %>
 
-           
+           <!-- 회원 탈퇴 약관 -->
            
 		<div id="rightpro" class="profiler"><div class="out" id="memberout">
             <h2>탈퇴 안내</h2>

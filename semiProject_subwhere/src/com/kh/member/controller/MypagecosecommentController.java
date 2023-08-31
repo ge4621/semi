@@ -8,23 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.stream.events.Comment;
 
-import com.google.gson.Gson;
 import com.kh.common.model.vo.Comments;
 import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class MyCosReview
+ * 마이페이지 코스 게시판 댓글
+ * Servlet implementation class MypagecosecommentController
  */
-@WebServlet("/myClist.my")
-public class MyCosReview extends HttpServlet {
+@WebServlet("/mycosreview")
+public class MypagecosecommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyCosReview() {
+    public MypagecosecommentController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +33,16 @@ public class MyCosReview extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memberNo = Integer.parseInt(request.getParameter("mno"));
 		
-		ArrayList<Comments> list = new MemberService().selectmyCreview(memberNo);
+		int memberNo = Integer.parseInt(request.getParameter("Cno"));
 		
-		response.setContentType("application/json; charset=UTF-8");
+		ArrayList<Comments> clist = new MemberService().selectmyCreview(memberNo);
 		
-		new Gson().toJson(list, response.getWriter());
+		request.setAttribute("clist",clist);
 		
+		request.getRequestDispatcher("views/mypage/mypagecosreviewList.jsp").forward(request, response);
+		
+
 	}
 
 	/**

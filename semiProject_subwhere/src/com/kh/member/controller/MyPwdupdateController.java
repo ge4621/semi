@@ -12,6 +12,7 @@ import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
+ * 비밀번호 변경
  * Servlet implementation class MyPwdupdateController
  */
 @WebServlet("/mypwdup.me")

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 약관페이지 
  * Servlet implementation class TermsFormController
  */
 @WebServlet("/terms.me")

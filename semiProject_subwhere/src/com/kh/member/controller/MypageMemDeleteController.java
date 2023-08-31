@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.member.model.service.MemberService;
 
 /**
+ * 마이페이지 회원 탈퇴
  * Servlet implementation class MypageMemDeleteController
  */
 @WebServlet("/memdelete.me")

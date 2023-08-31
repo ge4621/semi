@@ -33,6 +33,7 @@ public class MyPageUpdateController extends HttpServlet {
     }
 
 	/**
+	 * 마이페이지 정보변경
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

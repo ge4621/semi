@@ -30,6 +30,7 @@ public class MemberDao {
 		}
 	}
 	
+	//마이페이지 개인정보 변경
 	public int updateMember(Connection conn,Member m) {
 		
 		PreparedStatement pstmt = null;
@@ -64,6 +65,7 @@ public class MemberDao {
 		return result;
 	}
 	
+	//회원 조회
 	public Member selectMember(Connection conn, String memberId) {
 		//select문
 		PreparedStatement pstmt = null;
@@ -104,6 +106,7 @@ public class MemberDao {
 		
 	}
 	
+	//탈퇴
 	public int deleteMember(Connection conn,String memberId,String memberPwd) {
 		
 		PreparedStatement pstmt = null;
@@ -181,7 +184,7 @@ public class MemberDao {
 
 	  
 	
-
+    //댓글 전체 리스트(페이징 용?)
 	public int selectcReviewListCount(Connection conn, int memberNo) {
 		int rlistCount = 0;
 		
@@ -209,6 +212,7 @@ public class MemberDao {
 		return rlistCount;
 	}
 	
+	//비밀번호 변경
 	public int myupdatePwd(Connection conn,String memberId,String memberPwd,String updatePwd) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -234,6 +238,8 @@ public class MemberDao {
 		return result;
 		
 	}
+	
+	//후기글 댓글 리스트
 	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno) {
 		ArrayList<Comments> list = new ArrayList<Comments>();
 		
@@ -268,7 +274,8 @@ public class MemberDao {
 		System.out.println(list+"adfadf");
 		return list;
 	}
-	//수진언니
+	
+	
 	// ajax 아이디 중복 체크
 	   public int idCheck(Connection conn, String checkId) {
 	      // select문 => ResultSet => 한개 숫자 => int
@@ -297,7 +304,7 @@ public class MemberDao {
 	      return count;
 	   }
 	   
-	   
+	   //회원 가입
 	   public int insertMember(Connection conn, Member m) {
 	      //insert
 	      int result = 0;
@@ -327,8 +334,9 @@ public class MemberDao {
 	      
 	   }
 
+	   //마이페이지 코스글 댓글
 	public ArrayList<Comments> selectmyCreview(Connection conn,int memberNo){
-		ArrayList<Comments> list = new ArrayList<Comments>();
+		ArrayList<Comments> clist = new ArrayList<Comments>();
 		
 		PreparedStatement pstmt = null;
 		
@@ -341,14 +349,15 @@ public class MemberDao {
 			
 			pstmt.setInt(1, memberNo);
 			
-			list.add(new Comments(rset.getInt("memberNo"),
-									rset.getString("boardNo"),
-									rset.getString("commentConent"),
-									rset.getString("modifyDate"),
-									rset.getString("status")));
+			rset=pstmt.executeQuery();
 			
-			
-			
+			while(rset.next()) {
+				clist.add(new Comments(rset.getString("MODIFY_DATE"),
+										rset.getString("TITLE"),
+										rset.getString("COMMENT")
+										));
+			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -356,7 +365,7 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		return list;
+		return clist;
 		
 	}
 	

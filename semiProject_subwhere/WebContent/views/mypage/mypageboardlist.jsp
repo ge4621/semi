@@ -186,6 +186,7 @@
 
 </head>
 <body>
+  <!-- 내가 쓴 여행 코스 게시글  -->
 
 	<%@ include file="../common/header.jsp" %>
 
@@ -288,27 +289,6 @@
             </div>
 
 
-            <script>
-                function test1(){
-                    $.ajax({
-                        url:"mycoslist.me",
-                        data:{
-                            boardtype:1
-                        },
-                        success:function(list){
-                            console.log("ajax통신 성공");
-
-                        },
-                        error:function(){
-                            console.log("ajax통신 실패");
-                        }
-
-                    })
-                }
-
-            </script>
-
-	
 	</div>
 	
 <br>

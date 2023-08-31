@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 회원탈퇴 폼
  * Servlet implementation class MypagedeleteformController
  */
 @WebServlet("/mydeleteform.me")

@@ -25,6 +25,8 @@ public class AjaxIdCheckController extends HttpServlet {
     }
 
 	/**
+	 * 
+	 * 회원가입시 아이디 중복 체크
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -17,6 +17,7 @@ public class mypagelikelistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * 좋아요 보관함
      * @see HttpServlet#HttpServlet()
      */
     public mypagelikelistController() {

@@ -7,6 +7,8 @@
   ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
  //댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(후기글 댓글)
  
+ ArrayList<Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
+ 
  %>   
  
     
@@ -217,7 +219,7 @@
  		<div id="rightpro" class="profiler">
  		
             <div class="list_title">
-                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글</h1>
+                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글(후기글)</h1>
             </div>
      
             <div class="list_box">
@@ -225,15 +227,21 @@
                 <div class="btn_box" align="center">
                     <button onclick="mytrcomment()">여행지</button>
                     <button onclick="mycoscomment()">여행 코스</button>
-                    <button>후기글</button>
+                    <button onclick="myrcomment()">후기글</button>
                 </div>
                 
                 
                 <script>
+                
+                //여행코스 버튼 클릭
                 	function mycoscomment(){
-                		location.href = "<%= contextPath%>/mycoscom.me=<%=loginMember.getMemberNo()%>";
+                		location.href = "<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>";
                 	}
                 
+                //여행지 버튼 클릭
+                	function mytrcomment(){
+                		location.href="<%= contextPath%>/mydreview?Dno=<%=loginMember.getMemberNo()%>";
+                	}
                 
                 
                 </script>
@@ -257,12 +265,12 @@
                             <%}else{ %>
                             
 							<!-- case2. 게시글이 있을 경우 -->
-                            <%for(Comments c : list){ %>
+                            <%for(Comments a : clist){ %>
                                 <tr>
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=c.getTitle() %></h3>
-                                            <p id="date"><%=c.getModifyDate() %><br>
-                                                        <%=c.getComment() %></p>
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
+                                            <p id="date"><%=a.getModifyDate() %><br>
+                                                        <%=a.getComment() %></p>
                                         </td>
                                 </tr>
             			<%} %>

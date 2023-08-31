@@ -206,7 +206,7 @@
  		<div id="rightpro" class="profiler">
  		
             <div class="list_title">
-                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글</h1>
+                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글(코스)</h1>
             </div>
      
             <div class="list_box">
@@ -255,10 +255,10 @@
                         
                         <script>
 				        	$(function(){
-				        		$(".btn_box>#myc").click(function(){
+				        		$(".btn_box>#myc").click(function(){ //코스
 				        			//const num = $(this).children().eq(0).text()
 				        			
-				        			location.href='<%=contextPath%>/mydestreview.me?meno='<%=loginMember.getMemberNo()%>;
+				        			location.href='<%=contextPath%>/mycosreview.me?meno='<%=loginMember.getMemberNo()%>;
 				        			
 				        			
 				        		})

@@ -16,6 +16,7 @@ public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * 로그아웃(메인)
      * @see HttpServlet#HttpServlet()
      */
     public LogoutController() {

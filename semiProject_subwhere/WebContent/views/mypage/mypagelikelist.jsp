@@ -181,7 +181,7 @@
 <body>
   <%@ include file="../../views/common/header.jsp" %>
 
-	
+	<!-- 좋아요 보관함 -->
 		
 		<div class="warp">
 

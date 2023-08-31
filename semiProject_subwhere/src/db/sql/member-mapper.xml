@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-<entry key="updateMember">
+<entry key="updateMember"> <!-- 마이페이지 개인정보 -->
 	UPDATE MEMBER
 	   SET
 	   PROFILE_IMG = ?
@@ -29,7 +29,7 @@
 	 AND STATUS IN('Y','W')
 </entry>
 
-<entry key="deleteMember">
+<entry key="deleteMember"><!-- 회원 탈퇴 -->
 	UPDATE MEMBER
 	   SET 
 	   STATUS ='S'
@@ -38,7 +38,7 @@
 	   AND MEMBER_PWD = ?
 </entry>
 
-<entry key="loginMember">
+<entry key="loginMember"> <!-- 로그인 -->
    SELECT 
           MEMBER_NO
         , MEMBER_NAME
@@ -63,7 +63,14 @@ JOIN COMMENTS USING(MEMBER_NO)
 WHERE MEMBER_NO=?
 </entry>
 
-<entry key="selectRlist">
+<entry key="updatePwd"> <!-- 비밀번호 변경 -->
+UPDATE MEMBER
+   SET MEMBER_PWD = ?
+WHERE MEMBER_ID = ?
+AND MEMBER_PWD = ?
+</entry>
+
+<entry key="selectRlist"><!-- 후기글 댓글 리스트 -->
 SELECT 
         TITLE
       , COMMENT_CONTENT "COMMENT"
@@ -75,36 +82,17 @@ SELECT
     AND BOARD_NO BETWEEN 2000 AND 2500
 </entry>
 
-<entry key="updatePwd">
-UPDATE MEMBER
-   SET MEMBER_PWD = ?
-WHERE MEMBER_ID = ?
-AND MEMBER_PWD = ?
-</entry>
 
-
-
-<!-- 후기글 댓글 -->
-<entry key="selectmyRreview">
-SELECT 
-        TITLE
-      , COMMENT_CONTENT "COMMENT"
-      ,C.MODIFY_DATE 
-    FROM COMMENTS C
-    JOIN REVIEW USING(BOARD_NO)
-    WHERE MEMBER_NO = ?
-    AND C.STATUS = 'Y'
-</entry>
-<!-- 코스댓글 -->
-<entry key="selectmyCreview">
+<entry key="selectmyCreview"><!-- 코스댓글 -->
 SELECT 
         TITLE
       , COMMENT_CONTENT "COMMENT"
       ,C.MODIFY_DATE 
     FROM COMMENTS C
     JOIN COURSE USING(BOARD_NO)
-    WHERE MEMBER_NO = ?
+    WHERE C.MEMBER_NO = ?
     AND C.STATUS = 'Y'
+    AND BOARD_NO BETWEEN 1000 AND 1500
 </entry>
 <!-- 여행지 댓글 -->
 <entry key="selectmyRreview">
@@ -126,7 +114,7 @@ SELECT
  WHERE MEMBER_ID = ?
 </entry>
 
-<entry key="insertMember">
+<entry key="insertMember"> <!-- 회원가입 -->
    INSERT
    INTO MEMBER
        (
