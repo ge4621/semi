@@ -39,32 +39,35 @@ public class MyPageUpdateController extends HttpServlet {
 				String resourePath = "/resources/profile_upfiles/";
 				 request.setCharacterEncoding("UTF-8");
 			      
-			      String profileImg = null;
 			      
-			      if(ServletFileUpload.isMultipartContent(request)) {
+			      
+			      if(ServletFileUpload.isMultipartContent(request)) {//form 태그 안에 있는 enctype이 잘 써져 있어야 잘 실행 됨(약간 오타 감별부분)
 			         //용량제한
 			         int maxSize = 10*1024*1024;
+			         
 			         //저장 시킬 폴더의 물리적인 경로
 			         String savePath = request.getSession().getServletContext().getRealPath(resourePath);
 			         
+			         
+			         //아래 코드에 들어가면 사진파일은 폴더에 자동 저장이 된다. 
 			         MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamepolicy());
 			         
 			        //쿼리에 필요한 값
 			        String memberId = multiRequest.getParameter("memberId");
 			        String nickname = multiRequest.getParameter("nickName");
 					String email = multiRequest.getParameter("email");
-					String phone = multiRequest.getParameter("phone");			   
+					String phone = multiRequest.getParameter("phone");			  
+					String profileImg = multiRequest.getFilesystemName("profileImg");
 					
-			        String changeFileName = multiRequest.getFilesystemName("profileImg");
-			        
-			        profileImg = savePath + changeFileName;
-			        
-			        
-			        
-			        System.out.println(changeFileName + " 변경된 파일 명 ");
-			        
-					System.out.println(savePath+"dsaf"); //파일 확인용
+					//String originName = multiRequest.getOriginalFileName("profileImg");
+					//String changeName = multiRequest.getFilesystemName("profileImg");
+					
+					
+					
+					System.out.println(resourePath+"dsaf"); //파일 확인용
 					System.out.println(profileImg+"사진확인하자"); //파일 확인용
+					//System.out.println(changeName + "변경 명");
+					
 					
 			         Member m = new Member();
 			         
@@ -72,9 +75,23 @@ public class MyPageUpdateController extends HttpServlet {
 						m.setNickname(nickname);
 						m.setEmail(email);
 						m.setPhone(phone);
-						m.setProfileImg(profileImg);
+						m.setProfileImg(multiRequest.getParameter("profileImg"));
+						
+					System.out.println(m.getProfileImg());
+						
+//					if(multiRequest.getOriginalFileName("profileImg") !=null) {
+//						String originName = multiRequest.getOriginalFileName("profileImg");
+//						String changeName = multiRequest.getFilesystemName("profileImg");
+//						String profile = savePath + changeName;
+//						
+//						System.out.println(changeName+"dfa");
+//					}
+					
+						
+					//System.out.println( " 변경된 파일 명 "); //파일 확인용
 						
 					
+						
 						
 					
 						

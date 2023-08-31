@@ -37,6 +37,7 @@ public class MemberDao {
 		String sql = prop.getProperty("updateMember");
 		
 		System.out.println(m.getMemberId() + "####");
+		System.out.println(m.getProfileImg()+"가나다");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
