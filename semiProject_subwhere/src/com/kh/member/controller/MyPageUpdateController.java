@@ -62,6 +62,7 @@ public class MyPageUpdateController extends HttpServlet {
 					//String originName = multiRequest.getOriginalFileName("profileImg");
 					//String changeName = multiRequest.getFilesystemName("profileImg");
 					
+					//String changeName = multiRequest.
 					
 					
 					System.out.println(resourePath+"dsaf"); //파일 확인용
@@ -79,14 +80,18 @@ public class MyPageUpdateController extends HttpServlet {
 						
 					System.out.println(m.getProfileImg());
 						
-//					if(multiRequest.getOriginalFileName("profileImg") !=null) {
-//						String originName = multiRequest.getOriginalFileName("profileImg");
-//						String changeName = multiRequest.getFilesystemName("profileImg");
-//						String profile = savePath + changeName;
-//						
-//						System.out.println(changeName+"dfa");
-//					}
+					if(multiRequest.getOriginalFileName("profileImg") !=null) {
+						//String originName = multiRequest.getOriginalFileName("profileImg");
+						//String changeName = multiRequest.getFilesystemName("profileImg");
+						//String profile = savePath + changeName;
+						
+						m.setProfileImg(resourePath+multiRequest.getFilesystemName(profileImg));
+						
+						
+						
+					}
 					
+					System.out.println(m.getProfileImg()+"dfa");
 						
 					//System.out.println( " 변경된 파일 명 "); //파일 확인용
 						

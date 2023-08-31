@@ -250,21 +250,7 @@
                                         </td>
                                 </tr>
             
-                                <tr>
-                                        <td width="450" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;동대문</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                좋아보여요!!!</p>
-                                        </td>
-                                </tr>
-            
-                                <tr>
-                                        <td width="450" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;광화문</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                좋아보여요!!!</p>
-                                        </td>
-                                </tr>
+                                
                         </table>
                         
                         <script>
@@ -272,7 +258,7 @@
 				        		$(".btn_box>#myc").click(function(){
 				        			//const num = $(this).children().eq(0).text()
 				        			
-				        			location.href='<%=contextPath%>/mydestreview.me';
+				        			location.href='<%=contextPath%>/mydestreview.me?meno='<%=loginMember.getMemberNo()%>;
 				        			
 				        			
 				        		})

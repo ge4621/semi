@@ -223,10 +223,24 @@
             <div class="list_box">
      
                 <div class="btn_box" align="center">
-                    <button id ="1">여행지</button>
-                    <button id="2">여행 코스</button>
+                    <button onclick="mytrcomment()">여행지</button>
+                    <button onclick="mycoscomment()">여행 코스</button>
                     <button>후기글</button>
                 </div>
+                
+                
+                <script>
+                	function mycoscomment(){
+                		location.href = "<%= contextPath%>/mycoscom.me=<%=loginMember.getMemberNo()%>";
+                	}
+                
+                
+                
+                </script>
+                
+                
+                
+                
                 
                 <div class="writer_list">
                    
@@ -234,7 +248,7 @@
                     
                         <table align="center" id="reviewr">
                         
-                                <!-- cass2. 게시글이 없을 경우 -->
+                                <!-- cass1. 게시글이 없을 경우 -->
                            
                                <%if(list.isEmpty()){ %>
                                 <tr>
@@ -259,68 +273,7 @@
          
                     </div>
      		 </div>
-     		 
-     	 	  <script>
-     	 	  //여행지 댓글
-     	 	  $(function(){
-     	 		  
-     	 		  $.ajax({
-     	 			  url:
-     	 				  
-     	 		  })
-     	 		  
-     	 		  
-     	 	  })
-     	 	  
-     	 	  
-     	 	  
-     	 	  
-     	 	  
-     	 	  
-     	 	  
-            
-            function selectmyCreview(){
-            	$.ajax({
-            		url:"myClist.my",
-            		data:{memno:<%=loginMember.getMemberNo()%>},
-            		success:function(list){
-            			console.log(list);
-            			
-            			
-            			let result="";
-            			for(let i=0;i<list.length;i++){
-            				result += "<tr>"
-	            						+ "<td>" + + "</td>"
-	            						+ "<td>" +  + "</td>"
-	            						+ "<td>" +  + "</td>"
-            						+ "</tr>"
-            			}
-            				$("#reviewr").html(result);
-            			
-            		},
-            		error:function(){
-            			consol.log("리뷰 댓글 조회 ajax실패")
-            		}
-            		
-            	})
-
-            }
-            
-            
-            
-            
-            
-            
-            
-            </script>
-     		 
-     		 
-     		 
-     		 
-     		 
-     		 
-     		 
-     		 
+     	
 
                 <div class="btnall">
      
