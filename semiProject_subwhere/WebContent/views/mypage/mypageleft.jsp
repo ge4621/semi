@@ -125,7 +125,7 @@
                     
                     <tr>
                          <th>
-                         	<a href="/subwhere/myblist.me">
+                         	<a href="/subwhere/myblist.me?memno=<%= loginMember1.getMemberNo()%>">
                          		<input type="button" value="내가 쓴 글 보기">
                          	</a>
                          </th>
@@ -140,9 +140,10 @@
                         </th>
                     </tr>
                     
+                    
                     <tr> 
                          <th>
-                            <a href="/subwhere/mylikelist.me">
+                            <a href="/subwhere/mylikelist.me?memno=<%=loginMember1.getMemberNo()%>">
                                 <input type="button" name="" id="" value="좋아요 보관함">
                              </a>
                         </th>
@@ -163,10 +164,10 @@
                 </table>
                 
                
-</div>
+				</div>
             </div>
             
-       
+ 
 
 </body>
 </html>

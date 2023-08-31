@@ -63,13 +63,6 @@ JOIN COMMENTS USING(MEMBER_NO)
 WHERE MEMBER_NO=?
 </entry>
 
-<entry key="updatePwd">
-UPDATE MEMBER
-   SET MEMBER_PWD = ?
-WHERE MEMBER_ID = ?
-AND MEMBER_PWD = ?
-</entry>
-
 <entry key="selectRlist">
 SELECT 
         TITLE
@@ -79,7 +72,52 @@ SELECT
     JOIN REVIEW USING(BOARD_NO)
     WHERE MEMBER_NO = ?
     AND C.STATUS = 'Y'
+    AND BOARD_NO BETWEEN 2000 AND 2500
 </entry>
+
+<entry key="updatePwd">
+UPDATE MEMBER
+   SET MEMBER_PWD = ?
+WHERE MEMBER_ID = ?
+AND MEMBER_PWD = ?
+</entry>
+
+
+
+<!-- 후기글 댓글 -->
+<entry key="selectmyRreview">
+SELECT 
+        TITLE
+      , COMMENT_CONTENT "COMMENT"
+      ,C.MODIFY_DATE 
+    FROM COMMENTS C
+    JOIN REVIEW USING(BOARD_NO)
+    WHERE MEMBER_NO = ?
+    AND C.STATUS = 'Y'
+</entry>
+<!-- 코스댓글 -->
+<entry key="selectmyCreview">
+SELECT 
+        TITLE
+      , COMMENT_CONTENT "COMMENT"
+      ,C.MODIFY_DATE 
+    FROM COMMENTS C
+    JOIN COURSE USING(BOARD_NO)
+    WHERE MEMBER_NO = ?
+    AND C.STATUS = 'Y'
+</entry>
+<!-- 여행지 댓글 -->
+<entry key="selectmyRreview">
+SELECT 
+        TITLE
+      , COMMENT_CONTENT "COMMENT"
+      ,C.MODIFY_DATE 
+    FROM COMMENTS C
+    JOIN DESTINATION USING(BOARD_NO)
+    WHERE MEMBER_NO = ?
+    AND C.STATUS = 'Y'
+</entry>
+
 
 <entry key="idCheck"> <!-- ajax 아이디 중복 체크 -->
 SELECT

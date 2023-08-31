@@ -90,10 +90,12 @@ public class MemberService {
 		close(conn);
 		return updateMem;
 	}
-	public ArrayList<Comments> selectRreviewList(String memberno) {
+	public ArrayList<Comments> selectRreviewList(int memberno) {
 		Connection conn = getConnection();
 		
 		ArrayList<Comments> list = new MemberDao().selectRreviewList(conn,memberno);
+		
+		System.out.println(list+"dfafadf");
 		
 		close(conn);
 		return list;
@@ -120,6 +122,25 @@ public class MemberService {
 		      
 		   }
 		   
+	  public ArrayList<Comments> selectmyCreview(int memberNo){
+		  Connection conn = getConnection();
+		  
+		  ArrayList<Comments> list = new MemberDao().selectmyCreview(conn,memberNo);
+		  
+		  close(conn);
+		  return list;
+		  
+		  
+	  }
+	  
+//	  public ArrayList<Comments> selectbcosList(int memberno) {
+//		  Connection conn = getConnection();
+//		  
+//		  ArrayList<Comments> blist = new MemberDao().selectbcosList(conn, memberno);
+//		  
+//		  close(conn);
+//		  return blist;
+//	  }
 
 	
 }

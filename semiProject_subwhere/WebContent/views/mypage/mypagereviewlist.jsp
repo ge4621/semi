@@ -223,16 +223,16 @@
             <div class="list_box">
      
                 <div class="btn_box" align="center">
-                    <button>여행지</button>
-                    <button>여행 코스</button>
+                    <button id ="1">여행지</button>
+                    <button id="2">여행 코스</button>
                     <button>후기글</button>
                 </div>
-     
+                
                 <div class="writer_list">
                    
                     <div class="review_box">
                     
-                        <table align="center">
+                        <table align="center" id="reviewr">
                         
                                 <!-- cass2. 게시글이 없을 경우 -->
                            
@@ -246,42 +246,81 @@
                             <%for(Comments c : list){ %>
                                 <tr>
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=c.getBoardNo() %></h3>
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=c.getTitle() %></h3>
                                             <p id="date"><%=c.getModifyDate() %><br>
-                                                        <%=c.getCommentConent() %></p>
+                                                        <%=c.getComment() %></p>
                                         </td>
                                 </tr>
             			<%} %>
             		<%} %>
             	
-                             <!--    <tr>
-                                        <td width="450" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;한강</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                좋아보여요!!!</p>
-                                        </td>
-                                </tr>
-            
-                                <tr>
-                                        <td width="450" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;동대문</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                좋아보여요!!!</p>
-                                        </td>
-                                </tr>
-            
-                                <tr>
-                                        <td width="450" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;광화문</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                좋아보여요!!!</p>
-                                        </td>
-                                </tr>--> 
-                     
+                             
                         </table>
          
                     </div>
      		 </div>
+     		 
+     	 	  <script>
+     	 	  //여행지 댓글
+     	 	  $(function(){
+     	 		  
+     	 		  $.ajax({
+     	 			  url:
+     	 				  
+     	 		  })
+     	 		  
+     	 		  
+     	 	  })
+     	 	  
+     	 	  
+     	 	  
+     	 	  
+     	 	  
+     	 	  
+     	 	  
+            
+            function selectmyCreview(){
+            	$.ajax({
+            		url:"myClist.my",
+            		data:{memno:<%=loginMember.getMemberNo()%>},
+            		success:function(list){
+            			console.log(list);
+            			
+            			
+            			let result="";
+            			for(let i=0;i<list.length;i++){
+            				result += "<tr>"
+	            						+ "<td>" + + "</td>"
+	            						+ "<td>" +  + "</td>"
+	            						+ "<td>" +  + "</td>"
+            						+ "</tr>"
+            			}
+            				$("#reviewr").html(result);
+            			
+            		},
+            		error:function(){
+            			consol.log("리뷰 댓글 조회 ajax실패")
+            		}
+            		
+            	})
+
+            }
+            
+            
+            
+            
+            
+            
+            
+            </script>
+     		 
+     		 
+     		 
+     		 
+     		 
+     		 
+     		 
+     		 
 
                 <div class="btnall">
      

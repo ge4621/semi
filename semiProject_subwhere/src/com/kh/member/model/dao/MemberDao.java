@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.xml.stream.events.Comment;
+
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.common.model.vo.Comments;
@@ -232,7 +234,7 @@ public class MemberDao {
 		return result;
 		
 	}
-	public ArrayList<Comments> selectRreviewList(Connection conn,String memberno) {
+	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno) {
 		ArrayList<Comments> list = new ArrayList<Comments>();
 		
 		PreparedStatement pstmt = null;
@@ -243,19 +245,17 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setString(1, memberno);
+			pstmt.setInt(1, memberno);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Comments(rset.getInt("comment_no"),
-										rset.getString("member_no"),
-										rset.getString("title"),
-										rset.getString("contnet"),
-										rset.getString("modify_date"),
-										rset.getString("status")
+				list.add(new Comments(rset.getString("MODIFY_DATE"),
+										rset.getString("TITLE"),
+										rset.getString("COMMENT")
 										));
 			}
+			
 			
 			
 		} catch (SQLException e) {
@@ -265,6 +265,7 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println(list+"adfadf");
 		return list;
 	}
 	//수진언니
@@ -326,7 +327,60 @@ public class MemberDao {
 	      
 	   }
 
+	public ArrayList<Comments> selectmyCreview(Connection conn,int memberNo){
+		ArrayList<Comments> list = new ArrayList<Comments>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectmyCreview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			
+			list.add(new Comments(rset.getInt("memberNo"),
+									rset.getString("boardNo"),
+									rset.getString("commentConent"),
+									rset.getString("modifyDate"),
+									rset.getString("status")));
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
 	
+//	public ArrayList<Comments> selectbcosList(Connection conn,int memberno){
+//		ArrayList<Comments> blist = new ArrayList<Comments>();
+//		
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		
+//	}
 	
 	
 }

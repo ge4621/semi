@@ -2,23 +2,40 @@ package com.kh.common.model.vo;
 
 public class Comments {
 	private int commentNo;
-	private String memberNo;
+	private int memberNo;
 	private String boardNo;
 	private String commentConent;
 	private String emrollDate;
 	private String modifyDate;
 	private String status;
+	private String memberName;
+	
+	private String title;
+	private String comment;
 	
 	public Comments() {}
 
-	public Comments(int commentNo, String memberNo, String boardNo, String commentConent, String emrollDate,
-			String modifyDate, String status) {
+	public Comments(int commentNo, int memberNo, String boardNo, String commentConent, String emrollDate,
+			String modifyDate, String status, String memberName) {
 		super();
 		this.commentNo = commentNo;
 		this.memberNo = memberNo;
 		this.boardNo = boardNo;
 		this.commentConent = commentConent;
 		this.emrollDate = emrollDate;
+		this.modifyDate = modifyDate;
+		this.status = status;
+		this.memberName = memberName;
+	}
+	
+
+	public Comments(int commentNo, int memberNo, String boardNo, String commentConent, String modifyDate,
+			String status) {
+		super();
+		this.commentNo = commentNo;
+		this.memberNo = memberNo;
+		this.boardNo = boardNo;
+		this.commentConent = commentConent;
 		this.modifyDate = modifyDate;
 		this.status = status;
 	}
@@ -28,18 +45,39 @@ public class Comments {
 	
 	
 	
-	
-	
 
-	public Comments(int commentNo, String memberNo, String boardNo, String commentConent, String modifyDate,
-			String status) {
+	public Comments(String modifyDate, String title, String comment) {
 		super();
-		this.commentNo = commentNo;
+		this.modifyDate = modifyDate;
+		this.title = title;
+		this.comment = comment;
+	}
+
+	public Comments(int memberNo, String boardNo, String commentConent, String modifyDate, String status) {
+		super();
 		this.memberNo = memberNo;
 		this.boardNo = boardNo;
 		this.commentConent = commentConent;
 		this.modifyDate = modifyDate;
 		this.status = status;
+	}
+	
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public int getCommentNo() {
@@ -50,11 +88,11 @@ public class Comments {
 		this.commentNo = commentNo;
 	}
 
-	public String getMemberNo() {
+	public int getMemberNo() {
 		return memberNo;
 	}
 
-	public void setMemberNo(String memberNo) {
+	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
 
@@ -98,13 +136,22 @@ public class Comments {
 		this.status = status;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
 		return "Comments [commentNo=" + commentNo + ", memberNo=" + memberNo + ", boardNo=" + boardNo
 				+ ", commentConent=" + commentConent + ", emrollDate=" + emrollDate + ", modifyDate=" + modifyDate
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", memberName=" + memberName + ", title=" + title + ", comment=" + comment
+				+ "]";
 	}
-	
+
 	
 	
 }
