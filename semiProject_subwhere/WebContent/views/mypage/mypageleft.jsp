@@ -143,7 +143,7 @@
                     
                     <tr> 
                          <th>
-                            <a href="/subwhere/mylikelist.me?memno=<%=loginMember1.getMemberNo()%>">
+                            <a href="/subwhere/mylikelist.me?mylno=<%=loginMember1.getMemberNo()%>">
                                 <input type="button" name="" id="" value="좋아요 보관함">
                              </a>
                         </th>

@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ public class mypagelikelistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * 좋아요 보관함
+     * 좋아요 보관함(미완료)
      * @see HttpServlet#HttpServlet()
      */
     public mypagelikelistController() {
@@ -30,8 +31,16 @@ public class mypagelikelistController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypagelikelist.jsp");
-		view.forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypagelikelist.jsp");
+		//view.forward(request, response);
+		
+		int memberno = Integer.parseInt(request.getParameter("mylno"));
+		
+		
+		
+		
+		
+		
 	}
 
 	/**

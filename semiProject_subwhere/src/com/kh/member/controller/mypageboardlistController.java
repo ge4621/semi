@@ -14,7 +14,7 @@ import com.kh.common.model.vo.Comments;
 import com.kh.member.model.service.MemberService;
 
 /**
- * 여행지 추천 게시글 리스트
+ * 여행지 코스 게시글 리스트
  * Servlet implementation class mypageboardlistController
  */
 @WebServlet("/myblist.me")
