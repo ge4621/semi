@@ -129,6 +129,7 @@ public class MemberService {
 		      
 		   }
 		   
+	   //코스 게시판 댓글
 	  public ArrayList<Comments> selectmyCreview(int memberNo){
 		  Connection conn = getConnection();
 		  
@@ -138,8 +139,18 @@ public class MemberService {
 		  return clist;
 		  
 	  }
+	  //여행지 게시판 댓글
+	  public ArrayList<Comments> selectmyDreview(int memberno){
+		  Connection conn = getConnection();
+		  
+		  ArrayList<Comments> dlist = new MemberDao().selectmyDreview(conn, memberno);
+		  close(conn);
+		  return dlist;
+	  }
 	  
 	 } 
+
+
 	  
 //	  public ArrayList<Comments> selectbcosList(int memberno) {
 //		  Connection conn = getConnection();

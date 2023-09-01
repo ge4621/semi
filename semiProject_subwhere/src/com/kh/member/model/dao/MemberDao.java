@@ -261,8 +261,7 @@ public class MemberDao {
 										rset.getString("COMMENT")
 										));
 			}
-			
-			
+
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -368,6 +367,42 @@ public class MemberDao {
 		return clist;
 		
 	}
+	
+	public ArrayList<Comments> selectmyDreview(Connection conn,int memberno){
+		
+		ArrayList<Comments> dlist = new ArrayList<Comments>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectmyRreview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberno);
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				dlist.add(new Comments(rset.getString("MODIFY_DATE"),
+										rset.getString("TITLE"),
+										rset.getString("COMMENT")
+										));
+			}
+					
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return dlist;
+		
+	}
+	
 	
 //	public ArrayList<Comments> selectbcosList(Connection conn,int memberno){
 //		ArrayList<Comments> blist = new ArrayList<Comments>();

@@ -239,13 +239,15 @@
                 	function mycoscomment(){
                 		location.href = "<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>";
                 	}
-                
                 //여행지 버튼 클릭
                 	function mytrcomment(){
-                		location.href="<%= contextPath%>/mydreview?Dno=<%=loginMember.getMemberNo()%>";
+                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>";
                 	}
-                
-                
+                //후기글 버튼 클릭
+                	function myrcomment(){
+                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>";
+                }
+              
                 </script>
                 
                 
