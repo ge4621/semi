@@ -7,11 +7,8 @@
   ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
  //댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(후기글 댓글)
  
-<<<<<<< HEAD
 
-=======
->>>>>>> aad7f236cb3d4ff0ede73a384f63f258370fbf75
- %>   
+%>
  
     
 <!DOCTYPE html>
@@ -266,17 +263,16 @@
                                 </tr>
                             <%}else{ %>
                             
-							<!-- case2. 게시글이 있을 경우 -->
-<<<<<<< HEAD
-                            <%for(Comments c : list){ %>
-=======
+						<!-- case2. 게시글이 있을 경우 -->
+                	
+
                             <%for(Comments a : list){ %>
->>>>>>> aad7f236cb3d4ff0ede73a384f63f258370fbf75
+
                                 <tr>
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=c.getTitle() %></h3>
-                                            <p id="date"><%=c.getModifyDate() %><br>
-                                                        <%=c.getComment() %></p>
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
+                                            <p id="date"><%=a.getModifyDate() %><br>
+                                                        <%=a.getComment() %></p>
                                         </td>
                                 </tr>
             			<%} %>

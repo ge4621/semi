@@ -72,16 +72,6 @@ AND MEMBER_PWD = ?
 
 <entry key="selectRlist"><!-- 후기글 댓글 리스트 -->
 SELECT 
-<<<<<<< HEAD
-        TITLE
-      , COMMENT_CONTENT "COMMENT"
-      ,C.MODIFY_DATE 
-    FROM COMMENTS C
-    JOIN REVIEW USING(BOARD_NO)
-    WHERE c.MEMBER_NO = ?
-    AND C.STATUS = 'Y'
-    AND BOARD_NO BETWEEN 2000 AND 2500
-=======
     TITLE
   , COMMENT_CONTENT "COMMENT"
   , C.MODIFY_DATE
@@ -91,7 +81,6 @@ WHERE C.STATUS = 'Y'
 AND R.STATUS = 'Y'
 AND MEMBER_NO = ?
 AND BOARD_NO BETWEEN 2000 AND 2600
->>>>>>> aad7f236cb3d4ff0ede73a384f63f258370fbf75
 </entry>
 
 
@@ -104,7 +93,7 @@ SELECT
     JOIN COURSE USING(BOARD_NO)
     WHERE C.MEMBER_NO = ?
     AND C.STATUS = 'Y'
-    AND BOARD_NO BETWEEN 1000 AND 1500
+    AND BOARD_NO BETWEEN 1000 AND 1501
 </entry>
 <!-- 여행지 댓글 -->
 <entry key="selectmyRreview">
