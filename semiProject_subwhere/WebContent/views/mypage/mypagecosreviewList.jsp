@@ -3,20 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<<<<<<< Updated upstream
+
     <%
     	 ArrayList<Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
     	//댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(코스글 댓글)
     %>
-    
-    
-    
-=======
- <%
- 	ArrayList <Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
- %>   
- 
->>>>>>> Stashed changes
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -240,12 +232,9 @@
                     
                         <table align="center">
                         
-<<<<<<< Updated upstream
-                               <!-- cass1. 게시글이 없을 경우 -->
-=======
-                                <!-- cass2. 게시글이 없을 경우 -->
->>>>>>> Stashed changes
-                           
+
+                                <!-- cass1. 게시글이 없을 경우 -->
+
                                <%if(clist.isEmpty()){ %>
                                 <tr>
                                     <P align="center">작성하신 댓글이 없습니다.</P>
@@ -258,21 +247,14 @@
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
-<<<<<<< Updated upstream
+
                                                         <%=a.getComment() %></p>
                                         </td>
                                 </tr>
             			<%} %>
             		<%} %>
             	
-=======
-                                                      <%=a.getComment() %>  </p>
-                                        </td>
-                                </tr>
-            					<%} %>
-            				<%} %>
-            				
->>>>>>> Stashed changes
+
                         </table>
                         
                          <script>
