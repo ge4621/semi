@@ -7,8 +7,6 @@
   ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
  //댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(후기글 댓글)
  
- ArrayList<Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
- 
  %>   
  
     
@@ -265,7 +263,7 @@
                             <%}else{ %>
                             
 							<!-- case2. 게시글이 있을 경우 -->
-                            <%for(Comments a : clist){ %>
+                            <%for(Comments a : list){ %>
                                 <tr>
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
