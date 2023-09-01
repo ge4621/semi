@@ -1,5 +1,15 @@
+<%@page import="com.kh.common.model.vo.Comments"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	 ArrayList<Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
+    	//댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(코스글 댓글)
+    %>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,34 +233,26 @@
                     
                         <table align="center">
                         
-                                <!-- cass2. 게시글이 없을 경우 
+                               <!-- cass1. 게시글이 없을 경우 -->
                            
-                               
+                               <%if(clist.isEmpty()){ %>
                                 <tr>
                                     <P align="center">작성하신 댓글이 없습니다.</P>
                                 </tr>
-                            
+                            <%}else{ %>
                             
 							<!-- case2. 게시글이 있을 경우 -->
-                            
+                            <%for(Comments a : clist){ %>
                                 <tr>
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;</h3>
-                                            <p id="date"><br>
-                                                        </p>
+                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
+                                            <p id="date"><%=a.getModifyDate() %><br>
+                                                        <%=a.getComment() %></p>
                                         </td>
                                 </tr>
-            			
+            			<%} %>
+            		<%} %>
             	
-                             <tr>
-                                        <td width="450" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;한강</h3>
-                                            <p id="date">2023-03-11 <br>
-                                                좋아보여요!!!</p>
-                                        </td>
-                                </tr>
-            
-                                
                         </table>
                         
                         <script>
