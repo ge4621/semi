@@ -35,7 +35,7 @@ public class MemberEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String resourePath = "/resources/profile_upfiles/";
+		String resourePath = "resources/profile_upfiles/";
 
 	      request.setCharacterEncoding("utf-8");
 
@@ -89,7 +89,6 @@ public class MemberEnrollController extends HttpServlet {
 
 	         HttpSession session = request.getSession();
 	         session.setAttribute("alertMsg", "subwhere 회원이 되신걸 축하드립니다!"); 
-
 	         response.sendRedirect(request.getContextPath());
 
 	      } else {

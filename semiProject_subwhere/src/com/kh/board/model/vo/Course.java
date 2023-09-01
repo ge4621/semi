@@ -2,8 +2,6 @@ package com.kh.board.model.vo;
 
 import java.sql.Date;
 
-
-
 public class Course {
    private String boardNo;
    

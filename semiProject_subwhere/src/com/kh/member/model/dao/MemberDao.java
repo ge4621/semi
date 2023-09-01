@@ -13,6 +13,7 @@ import javax.xml.stream.events.Comment;
 
 import static com.kh.common.JDBCTemplate.*;
 
+import com.kh.board.model.vo.Course;
 import com.kh.common.model.vo.Comments;
 import com.kh.member.model.vo.Member;
 
@@ -32,14 +33,13 @@ public class MemberDao {
 	
 	//마이페이지 개인정보 변경
 	public int updateMember(Connection conn,Member m) {
-		
+		//update문
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
 		
 		String sql = prop.getProperty("updateMember");
 		
-		System.out.println(m.getMemberId() + "####");
 		System.out.println(m.getProfileImg()+"가나다");
 		
 		try {
@@ -55,12 +55,12 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 			
 			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		System.out.println(result + "adfdsf");
 		System.out.println(m.getProfileImg()+" adfadf");
 		return result;
 	}
@@ -367,7 +367,7 @@ public class MemberDao {
 		return clist;
 		
 	}
-	
+	//마이페이지 여행지 게시판 댓글
 	public ArrayList<Comments> selectmyDreview(Connection conn,int memberno){
 		
 		ArrayList<Comments> dlist = new ArrayList<Comments>();
@@ -402,6 +402,32 @@ public class MemberDao {
 		return dlist;
 		
 	}
+	
+	//마이페이지 여행코스 게시글
+	public ArrayList<Course> selectbcosList(Connection conn,int memberno){
+		
+		ArrayList<Course> blist = new ArrayList<Course>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty(null);
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		return blist;
+		
+	}
+	
 	
 	
 //	public ArrayList<Comments> selectbcosList(Connection conn,int memberno){

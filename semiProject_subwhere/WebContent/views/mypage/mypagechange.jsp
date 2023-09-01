@@ -151,7 +151,7 @@
                            
                             <th width="130" style="text-align: center;">프로필 사진</th>
                             <td width="360">
-                                <img src="resources/images/profile_img_nocamera.png" name="profileImg" value="" alt="" width="140" height="140" id="proimg" onclick="filebtn();">
+                                <img src="<%=loginMember.getProfileImg() %>" name="profileImg" value="" alt="" width="140" height="140" id="proimg" onclick="filebtn();">
                                 <img src="resources/images/camera.png" width="25" alt="" id="changeimg"  onclick="filebtn();">
                                 <input type="file" name="pic" value="pic" style="display: none;" id="changefile" onchange="choosepic(this);"> 
                             </td>

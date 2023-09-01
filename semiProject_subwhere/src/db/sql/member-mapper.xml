@@ -86,16 +86,6 @@ AND BOARD_NO BETWEEN 2000 AND 2600
 
 <entry key="selectmyCreview"><!-- 코스댓글 -->
 SELECT 
-<<<<<<< HEAD
-        TITLE
-      , COMMENT_CONTENT "COMMENT"
-      ,C.MODIFY_DATE 
-    FROM COMMENTS C
-    JOIN COURSE USING(BOARD_NO)
-    WHERE C.MEMBER_NO = ?
-    AND C.STATUS = 'Y'
-    AND BOARD_NO BETWEEN 1000 AND 1501
-=======
     TITLE
   , COMMENT_CONTENT "COMMENT"
   , C.MODIFY_DATE
@@ -105,8 +95,7 @@ WHERE C.STATUS = 'Y'
 AND E.STATUS = 'Y'
 AND C.MEMBER_NO = ?
 AND BOARD_NO BETWEEN 1000 AND 1600
-    
->>>>>>> 3ccea25dfd4dcb0c9e8d037b8fbd232a76846ef2
+
 </entry>
 <!-- 여행지 댓글 -->
 <entry key="selectmyRreview">

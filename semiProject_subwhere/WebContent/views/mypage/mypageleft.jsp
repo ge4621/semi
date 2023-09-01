@@ -59,9 +59,8 @@
                 color: white;
             }
     
-            .propicture img{
+            .propicturejy img{
                 /* border: 1px solid red; */
-                width: 74%;
                 margin-top: 15%;
                 border-radius: 50%;
                 padding: 7%;
@@ -86,8 +85,8 @@
 
             <div id="picture" class="top" align="center">
                 
-                <div class="propicture" id="pro">
-                   <img src="resources/images/profile_img_nocamera.png" alt="파일에서 업로한 사진으로">
+                <div class="propicturejy" id="pro">
+                   <img src="<%=loginMember1.getProfileImg() %>" width="280" height="280" alt="파일에서 업로한 사진으로">
                 </div>
 
             </div>

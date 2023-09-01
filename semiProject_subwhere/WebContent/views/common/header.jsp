@@ -176,10 +176,10 @@
             left:15px;
 
         }
-        #user_info img{ /*프사*/
-            /* border: 1px solid; */
-            width: 65px;
+        #user_info image{ /*프사*/
+            width: 50px;
             margin-top: 5px;
+            border-radius: 10px;
         }
         #user_info b{ /*닉네임*/
             /* border: 1px solid; */
@@ -389,13 +389,27 @@
             background-color: #fffefe;
             border: 1px #ededed;
         }
-        
+
+
+        .pro {
+            margin-top: 50px;
+            width: 70px;
+            border-radius: 50px;
+        }
         
         
        
     </style>
 </head>
 <body>
+
+<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg%>");
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+
     
     <div id="header">
         
@@ -486,7 +500,7 @@
 
         <div id="header_4">
         
-           <% if(loginMember == null){ %>
+          <% if(loginMember == null){ %>
         
                <!-- case1. 로그인 전 : 로그인 -->
                <div id="before_login">
@@ -498,12 +512,17 @@
          <%}else { %>
 
                <!-- case2. 로그인 후 : 프사+닉네임 -->
-               <div id="after_login">
+               <div id="after_login" >
    
-                   <div id="user_info">
-                       <img src="resources/images/profile_img_nocamera.png" alt="profile">
-                       <b><%= loginMember.getNickname()%></b>
-                   </div>
+                    <%if(loginMember.getProfileImg() == null){ %>
+                 	  <div id="user_info">
+                          <img class="pro" src="resources/images/profile_img_nocamera.png" alt="profile">
+                          <b><%= loginMember.getNickname()%></b>
+                      </div>
+	               <%}else{ %>
+	                      <img class="pro" src="<%= loginMember.getProfileImg() %>">
+	               <%} %>
+
                    
                    <button id="usermenu" onclick="openUserMenu()">
                        <img src="resources/images/hamburger_btn.png">
@@ -512,6 +531,9 @@
                </div>
                
          <%} %>
+               
+               
+        
 
 
             <div id="overlay"></div>
@@ -638,7 +660,7 @@
                 <a class="btn btn-primary" href="#">여행 코스 추천</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-primary" href="<%= contextPath %>/list.re?cpage=1">여행 후기</a>
+                <a class="btn btn-primary" href="<%=contextPath%>/list.re?cpage=1">여행 후기</a>
             </li>
             <li class="nav-item">
                   <a class="btn btn-light" href="#">공지사항</a>
