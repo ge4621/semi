@@ -3,12 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-
-    <%
-    	 ArrayList<Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
-    	//댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(코스글 댓글)
-    %>
-
+<%
+ 	ArrayList <Comments> dlist = (ArrayList<Comments>)request.getAttribute("dlist");
+ %>   
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,13 +213,13 @@
  		<div id="rightpro" class="profiler">
  		
             <div class="list_title">
-                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글(코스)</h1>
+                <h1 id="jy_h1"><%=loginMember.getMemberId() %>님이 작성하신 댓글(여행지)</h1>
             </div>
      
             <div class="list_box">
      
                 <div class="btn_box" align="center">
-                   <button onclick="mytrcomment()">여행지</button>
+                    <button onclick="mytrcomment()">여행지</button>
                     <button onclick="mycoscomment()">여행 코스</button>
                     <button onclick="myrcomment()">후기글</button>
                 </div>
@@ -232,50 +230,47 @@
                     
                         <table align="center">
                         
-
-                                <!-- cass1. 게시글이 없을 경우 -->
-
-                               <%if(clist.isEmpty()){ %>
+                                <!-- cass2. 게시글이 없을 경우 -->
+                           
+                               <%if(dlist.isEmpty()){ %>
                                 <tr>
                                     <P align="center">작성하신 댓글이 없습니다.</P>
                                 </tr>
                             <%}else{ %>
                             
 							<!-- case2. 게시글이 있을 경우 -->
-                            <%for(Comments a : clist){ %>
+                            <%for(Comments a : dlist){ %>
                                 <tr>
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
-
-                                                        <%=a.getComment() %></p>
+                                                      <%=a.getComment() %>  </p>
                                         </td>
                                 </tr>
-            			<%} %>
-            		<%} %>
-            	
-
+            					<%} %>
+            				<%} %>
+            				
                         </table>
                         
-                         <script>
+                        <script>
                 
-			                //여행코스 버튼 클릭
-			                	function mycoscomment(){
-			                		location.href = "<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>";
-			                	}
-			                //여행지 버튼 클릭
-			                	function mytrcomment(){
-			                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>";
-			                	}
-			                //후기글 버튼 클릭
-			                	function myrcomment(){
-			                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>";
-			                }
-			              
-			              </script>
+		                //여행코스 버튼 클릭
+		                	function mycoscomment(){
+		                		location.href = "<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>";
+		                	}
+		                //여행지 버튼 클릭
+		                	function mytrcomment(){
+		                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>";
+		                	}
+		                //후기글 버튼 클릭
+		                	function myrcomment(){
+		                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>";
+		                }
+		              
+		                </script>
+                
                         
-                        
-         
+                       
                     </div>
      		 </div>
 
@@ -313,11 +308,4 @@
 
 <br>
 <%@ include file="../../views/common/footer.jsp" %>
-
-
-
-
-
-
-</body>
 </html>
