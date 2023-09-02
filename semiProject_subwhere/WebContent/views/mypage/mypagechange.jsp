@@ -155,8 +155,7 @@
                                 <img src="resources/images/camera.png" width="25" alt="" id="changeimg"  onclick="filebtn();">
                                 <input type="file" name="pic" value="pic" style="display: none;" id="changefile" onchange="choosepic(this);"> 
                             </td>
-                           
-                            
+  
                         </tr>
     
                         <tr>

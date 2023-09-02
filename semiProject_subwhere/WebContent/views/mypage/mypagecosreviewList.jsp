@@ -269,7 +269,7 @@
 			                	}
 			                //후기글 버튼 클릭
 			                	function myrcomment(){
-			                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>";
+			                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=1";
 			                }
 			              
 			              </script>

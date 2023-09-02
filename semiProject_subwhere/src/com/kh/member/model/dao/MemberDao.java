@@ -14,7 +14,9 @@ import javax.xml.stream.events.Comment;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.board.model.vo.Course;
+import com.kh.board.model.vo.Review;
 import com.kh.common.model.vo.Comments;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -184,7 +186,7 @@ public class MemberDao {
 
 	  
 	
-    //댓글 전체 리스트(페이징 용?)
+    //여행 후기 게시판 댓글 전체 리스트(페이징 용)
 	public int selectcReviewListCount(Connection conn, int memberNo) {
 		int rlistCount = 0;
 		
@@ -240,7 +242,43 @@ public class MemberDao {
 	}
 	
 	//후기글 댓글 리스트
-	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno) {
+//	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno) {
+//		ArrayList<Comments> list = new ArrayList<Comments>();
+//		
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("selectRlist");
+//		
+//		try {
+//			pstmt=conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, memberno);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				list.add(new Comments(rset.getString("MODIFY_DATE"),
+//										rset.getString("TITLE"),
+//										rset.getString("COMMENT")
+//										));
+//			}
+//
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		System.out.println(list+"adfadf");
+//		return list;
+//	}
+	
+	//마이페이지 후기글 댓글 리스트 + 페이징 바
+	public ArrayList<Comments> selectRreviewList(Connection conn,int memberno,PageInfo pi){
+		
 		ArrayList<Comments> list = new ArrayList<Comments>();
 		
 		PreparedStatement pstmt = null;
@@ -248,12 +286,17 @@ public class MemberDao {
 		
 		String sql = prop.getProperty("selectRlist");
 		
+		int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1; //페이징 바 시작 번호
+		int endRow = startRow + pi.getBoardLimit()-1; //페이징 바 마지막 번호
+		
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt= conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, memberno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
-			rset = pstmt.executeQuery();
+			rset= pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new Comments(rset.getString("MODIFY_DATE"),
@@ -261,8 +304,6 @@ public class MemberDao {
 										rset.getString("COMMENT")
 										));
 			}
-
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -270,9 +311,13 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(list+"adfadf");
 		return list;
+		
+		
 	}
+	
+	
+	
 	
 	
 	// ajax 아이디 중복 체크
@@ -411,10 +456,24 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty(null);
+		String sql = prop.getProperty("selectbcosList");
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberno);
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				blist.add(new Course(rset.getString("TITLE"),
+										rset.getString("CONTENT"),
+										rset.getInt("COUNT"),
+										rset.getString("CREATE_DATE"),
+										rset.getString("TITLE_IMG")
+										)); 
+				
+			}
 			
 			
 		} catch (SQLException e) {
@@ -426,6 +485,41 @@ public class MemberDao {
 		}
 		return blist;
 		
+	}
+	
+	public ArrayList<Review> selectReview(Connection conn,int memberno){
+		ArrayList<Review> list = new ArrayList<Review>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberno);
+			
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Review(rset.getString("TITLE"),
+									rset.getString("CONTENT"),
+									rset.getInt("COUNT"),
+									rset.getString("CREATE_DATE"),
+									rset.getString("TITLE_IMG")
+									));
+				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 	

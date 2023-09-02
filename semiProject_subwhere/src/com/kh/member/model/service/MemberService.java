@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.board.model.vo.Course;
+import com.kh.board.model.vo.Review;
 import com.kh.common.model.vo.Comments;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -93,27 +95,40 @@ public class MemberService {
 	}
 	
 	//댓글 조회=> 여행 후기 게시판용
-	public ArrayList<Comments> selectRreviewList(int memberno) {
+//	public ArrayList<Comments> selectRreviewList(int memberno) {
+//		Connection conn = getConnection();
+//		
+//		ArrayList<Comments> list = new MemberDao().selectRreviewList(conn,memberno);
+//		
+//		System.out.println(list+"dfafadf");
+//		
+//		close(conn);
+//		return list;
+//	}
+//	 // ajax 아이디 중복 체크
+//	   public int idCheck(String checkId) {
+//	      
+//	      Connection conn = getConnection();
+//	      int count = new MemberDao().idCheck(conn, checkId);
+//	      
+//	      close(conn);
+//	      return count;
+//	            
+//	   }
+	   
+	//여행 후기 댓글 조회용 +페이징 바 포함
+	public ArrayList<Comments> selectRreviewList(int memberno,PageInfo pi){
 		Connection conn = getConnection();
 		
-		ArrayList<Comments> list = new MemberDao().selectRreviewList(conn,memberno);
-		
-		System.out.println(list+"dfafadf");
+		ArrayList<Comments> list = new MemberDao().selectRreviewList(conn,memberno,pi);
 		
 		close(conn);
 		return list;
 	}
-	 // ajax 아이디 중복 체크
-	   public int idCheck(String checkId) {
-	      
-	      Connection conn = getConnection();
-	      int count = new MemberDao().idCheck(conn, checkId);
-	      
-	      close(conn);
-	      return count;
-	            
-	   }
-	   
+	
+	
+	
+	
 	   //회원가입
 	   public int insertMember(Member m) {
 		      
@@ -154,6 +169,15 @@ public class MemberService {
 		  
 		  close(conn);
 		  return blist;
+	  }
+	  
+	  public ArrayList<Review> selectReview(int memberno){
+		  Connection conn = getConnection();
+		  
+		  ArrayList<Review> list = new MemberDao().selectReview(conn, memberno);
+		  
+		  close(conn);
+		  return list;
 	  }
 	  
 	  

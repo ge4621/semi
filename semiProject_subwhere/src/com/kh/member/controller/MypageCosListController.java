@@ -3,29 +3,27 @@ package com.kh.member.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.model.vo.Course;
-import com.kh.common.model.vo.Comments;
+import com.kh.board.model.vo.Review;
 import com.kh.member.model.service.MemberService;
 
 /**
- * 여행지 코스 게시글 리스트
- * Servlet implementation class mypageboardlistController
+ * 마이페이지 내가 쓴 후기글 게시물
+ * Servlet implementation class MypageCosListController
  */
-@WebServlet("/myblist.me")
-public class mypageboardlistController extends HttpServlet {
+@WebServlet("/mycomlist.me")
+public class MypageCosListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypageboardlistController() {
+    public MypageCosListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +33,13 @@ public class mypageboardlistController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypageboardlist.jsp");
-		//view.forward(request, response);
-		
 		int memberno = Integer.parseInt(request.getParameter("Mno"));
 		
-		ArrayList<Course> blist = new MemberService().selectbcosList(memberno);
+		ArrayList<Review> list = new MemberService().selectReview(memberno);
 		
-		request.setAttribute("blist", blist);
-		request.getRequestDispatcher("views/mypage/mypageboardlist.jsp").forward(request, response);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/mypage/mypageboardreview.jsp").forward(request, response);
 		
-	
 	}
 
 	/**

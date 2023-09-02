@@ -1,14 +1,20 @@
+<%@page import="com.kh.common.model.vo.PageInfo"%>
 <%@page import="com.kh.common.model.vo.Comments"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
  <%
-  ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
-
- //댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(후기글 댓글)
+	  ArrayList<Comments> list = (ArrayList<Comments>)request.getAttribute("list");
+	 //댓글 번호, 작성자 번호, 제목, 내용, 수정일, 상태(후기글 댓글)
  
-
+	  PageInfo pi = (PageInfo)request.getAttribute("pi");
+	 
+	 int currentPage = pi.getCurrentPage();
+	 int startPage = pi.getStartPage();
+	 int endPage = pi.getEndPage();
+	 int maxPage = pi.getMaxPage();
+	 
 %>
 
 
@@ -243,7 +249,7 @@
                 	}
                 //후기글 버튼 클릭
                 	function myrcomment(){
-                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>";
+                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=1";
                 }
               
                 </script>
@@ -297,14 +303,25 @@
                     </div>
     
                     <div class="page_btn" id="page">
-                        <button onclick="location.href= ">&lt;</button>
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>&gt;</button>
-    
+                    
+                    	<%if(currentPage != 1){ %>
+                        <button onclick="location.href='<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage -1%>' ">&lt;</button>
+						<%} %>
+						
+						<%for(int p = startPage; p<=endPage ; p++){ %>
+					
+						<%if(p==currentPage){ %>	
+                        <button disabled><%=p %></button>
+                        
+                        <%}else{ %>
+                        <button onclick="location.href='<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=<%=p %>'"><%=p %></button>
+                        <%} %>
+                        
+                      <%} %>
+                      
+                      <%if(currentPage != maxPage){ %>
+                        <button onclick="location.href='<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage + 1%>' ">&gt;</button>
+    				<%} %>
                     </div>
     
             

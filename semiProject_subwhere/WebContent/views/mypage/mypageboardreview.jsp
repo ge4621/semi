@@ -1,11 +1,12 @@
-<%@page import="com.kh.board.model.vo.Course"%>
+<%@page import="com.kh.board.model.vo.Review"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-	ArrayList<Course> blist = (ArrayList<Course>)request.getAttribute("blist");
-%>    
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+%>
+    
     
 <!DOCTYPE html>
 <html>
@@ -193,7 +194,8 @@
 
 </head>
 <body>
-  <!-- 내가 쓴 여행 코스 게시글  -->
+
+<!-- 내가 쓴 후기글 게시글  -->
 
 	<%@ include file="../common/header.jsp" %>
 
@@ -223,22 +225,22 @@
                         <table align="center" id="jylist_table">
                         	
                         	<!-- case1. 작성한 글이 없을 경우 -->
-                        	<%if(blist.isEmpty()){ %>
+                        	<%if(list.isEmpty()){ %>
                             <tr>
-                                <P align="center">작성하신 여행코스 게시글이 없습니다.</P>
+                                <P align="center">작성하신 후기 게시글이 없습니다.</P>
                             </tr>
                             <%}else{ %>
                             <!-- case2. 작성한 글이 있을 경우 -->
-        					<%for(Course c : blist){ %>
+        					<%for(Review r : list){ %>
                             <tr>
                                     <div class="jypic">
-                                        <td width="100" id="jya"><img src="<%=c.getTITLEIMG() %>" alt="" id="jyimg"></td>
+                                        <td width="100" id="jya"><img src="<%=r.getTitleImg() %>" alt="" id="jyimg"></td>
                                     </div>
         
                                     <td width="450" height="130" id="jya"> 
-                                        <h2 id="jyh2"><%=c.getCourseTitle() %></h2>
-                                        <p id="jyp"><%=c.getCourseContent() %></p>
-                                        <span>날짜:<%=c.getCreateDate() %>  조회수:<%=c.getCount() %></span>
+                                        <h2 id="jyh2"><%=r.getTitle() %></h2>
+                                        <p id="jyp"><%=r.getContent() %></p>
+                                        <span>날짜:<%=r.getCreateDate() %>  조회수:<%=r.getCount() %></span>
                                     </td>
                                 
                             </tr>
@@ -294,6 +296,8 @@
 
 
  
+
+
 
 </body>
 </html>

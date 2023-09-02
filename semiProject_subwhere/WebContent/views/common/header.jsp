@@ -1,3 +1,4 @@
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -514,13 +515,16 @@
                <!-- case2. 로그인 후 : 프사+닉네임 -->
                <div id="after_login" >
    
-                    <%if(loginMember.getProfileImg() == null){ %>
+                    <%if(loginMember.getProfileImg()== null){ %>
                  	  <div id="user_info">
                           <img class="pro" src="resources/images/profile_img_nocamera.png" alt="profile">
                           <b><%= loginMember.getNickname()%></b>
                       </div>
 	               <%}else{ %>
+	               		<div id="user_info">
 	                      <img class="pro" src="<%= loginMember.getProfileImg() %>">
+	                       <b><%= loginMember.getNickname()%></b>
+	                    </div>
 	               <%} %>
 
                    
@@ -583,7 +587,7 @@
                    <div id="usermenu_page_login_success" class="usermenu_page_content">
                        
                        <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
-                           <img src="resources/images/profile_img.png" alt="profile" style="width: 100px; height: 100px;">
+                           <img src="<%=loginMember.getProfileImg() %>" alt="profile" style="width: 100px; height: 100px;">
                            <p><b align="center"><%=loginMember.getMemberName() %>님</b></p>
                        </div>
                        

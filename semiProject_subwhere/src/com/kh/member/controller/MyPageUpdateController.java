@@ -69,6 +69,9 @@ public class MyPageUpdateController extends HttpServlet {
 					System.out.println(m.getProfileImg());//파일 확인
 					System.out.println(m+"안녕하세요");
 
+					System.out.println(profileImg + "이름???");
+					System.out.println(multiRequest.getFilesystemName("pic"));
+					
 			      Member updateMem = new MemberService().updateMember(m);
 			      
 			      

@@ -99,8 +99,22 @@ public class Review {
       this.stationName = stationName;
       this.line = line;
    }
+   
+   
+   
+   
+   //마이페이지(내가쓴 후기글 조회용)
+   public Review(String title, String content, int count, String createDate, String titleImg) {
+	super();
+	this.title = title;
+	this.content = content;
+	this.count = count;
+	this.createDate = createDate;
+	this.titleImg = titleImg;
+}
 
-   public String getBoardNo() {
+
+public String getBoardNo() {
       return boardNo;
    }
 
