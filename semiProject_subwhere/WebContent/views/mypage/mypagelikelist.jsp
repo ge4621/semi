@@ -207,7 +207,8 @@
 	             		<p align="center">좋아요 한 게시글이 없습니다.</p>
 	             <%}else{ %>
 	             	<%for(Liked l : list){ %>
-	                 <div id="area">
+	                 <div id="area" class="llike-area">
+	                 	<input type="hidden" value="<%=l.getBoardNo()%>">
 	                     <li id="jyli">
 	                         <div class="pic">
 	                             <img src="resources/images/heart2.png" id="heart" alt="" class="toggle-heart" onclick="likeToggle(this);">
@@ -266,6 +267,12 @@
 	                         heartImage.src = "resources/images/heart2.png";
 	                     }
 	                 }
+	                 
+	                 $(function(){
+                 		$(".llike-area").click(function(){
+                 			location.href="<%=contextPath%>/"+$(this).children("input").val();
+                 		})
+                 	})
 	 
 	             </script>
 	 

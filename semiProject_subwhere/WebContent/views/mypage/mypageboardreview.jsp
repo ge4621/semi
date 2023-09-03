@@ -240,7 +240,8 @@
                             <%}else{ %>
                             <!-- case2. 작성한 글이 있을 경우 -->
         					<%for(Review r : list){ %>
-                            <tr>
+                            <tr class="blist-area">
+                            	<input type="hidden" value="<%=r.getBoardNo()%>">
                                     <div class="jypic">
                                         <td width="100" id="jya"><img src="<%=r.getTitleImg() %>" alt="" id="jyimg"></td>
                                     </div>
@@ -268,6 +269,12 @@
                     		location.href="<%=contextPath%>/mycomlist.me?Mno=<%=loginMember1.getMemberNo()%>";
                     	}
                     
+                    	$(function(){
+                    		$(".blist-area").click(function(){
+                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+                    		})
+                    	})
+                    	
                     </script>
                     
 

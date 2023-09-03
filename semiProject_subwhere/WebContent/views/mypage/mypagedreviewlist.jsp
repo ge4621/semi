@@ -250,7 +250,8 @@
                             
 							<!-- case2. 게시글이 있을 경우 -->
                             <%for(Comments a : dlist){ %>
-                                <tr>
+                                <tr class="dlist-darea">
+                                	<input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
@@ -277,6 +278,12 @@
 		                		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=1";
 		                }
 		              
+		                
+		                	$(function(){
+	                    		$(".dlist-darea").click(function(){
+	                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+	                    		})
+	                    	})
 		                </script>
                 
                         

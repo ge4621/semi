@@ -239,7 +239,8 @@
                             <%}else{ %>
                             <!-- case2. 작성한 글이 있을 경우 -->
         					<%for(Course c : blist){ %>
-                            <tr>
+                            <tr class="clist_area">
+                            	<input type="hidden" value="<%=c.getBoardNo()%>">
                                     <div class="jypic">
                                         <td width="100" id="jya"><img src="<%=c.getTITLEIMG() %>" alt="" id="jyimg"></td>
                                     </div>
@@ -266,6 +267,13 @@
                     	function rtest2(){
                     		location.href="<%=contextPath%>/mycomlist.me?Mno=<%=loginMember1.getMemberNo()%>&cpage=1";
                     	}
+                    	
+                    	$(function(){
+                    		$(".clist_area").click(function(){
+                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+                    		})
+                    	})
+                    	
                     
                     </script>
                     

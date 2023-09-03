@@ -252,6 +252,7 @@
                 		location.href = "<%= contextPath%>/myrlist.me?memno=<%=loginMember.getMemberNo()%>&cpage=1";
                 }
               
+              
                 </script>
                 
                 
@@ -276,8 +277,8 @@
                 	
 
                             <%for(Comments a : list){ %>
-                                <tr>
-                                	
+                                <tr class="rreview-area">
+                                	<input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
@@ -293,15 +294,11 @@
      		 </div>
      		 
      		 <script>
-     		 	$(function(){
-     		 		$("#reviewr>tr>td").click(function(){
-     		 			const num = $(this).
-     		 			
-     		 			
-     		 		})
-     		 		
-     		 	})
-     		 
+	     		$(function(){
+	         		$(".rreview-area").click(function(){
+	         			location.href="<%=contextPath%>/"+$(this).children("input").val();
+	         		})
+	         	})
      		 
      		 </script>
      	
