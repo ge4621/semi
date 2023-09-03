@@ -168,23 +168,23 @@ public class Course {
    
    
    //마이페이지 내가 쓴 여행코스 조회용
-   public Course(String courseTitle, String courseContent, int count, String createDate, String tITLEIMG) {
+ 
+   public Course(String boardNo, String courseTitle, String courseContent, int count, String createDate, String tITLEIMG) {
 	super();
+	this.boardNo = boardNo;
 	this.courseTitle = courseTitle;
 	this.courseContent = courseContent;
 	this.count = count;
 	this.createDate = createDate;
 	TITLEIMG = tITLEIMG;
 }
-
-
-
-
-public void setBoardNo(String boardNo) {
-      this.boardNo = boardNo;
+   
+   
+   public void setBoardNo(String boardNo) {
+	   this.boardNo = boardNo;
    }
 
-   public String getMemberNo() {
+public String getMemberNo() {
       return memberNo;
    }
 

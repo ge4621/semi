@@ -276,24 +276,34 @@
                 	
 
                             <%for(Comments a : list){ %>
-
-							
-
                                 <tr>
+                                	
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
-                                                        <%=a.getComment() %></p>
+                                                        <%=a.getCommentConent() %></p>
                                         </td>
                                 </tr>
             			<%} %>
             		<%} %>
-            	
-                             
+   
                         </table>
          
                     </div>
      		 </div>
+     		 
+     		 <script>
+     		 	$(function(){
+     		 		$("#reviewr>tr>td").click(function(){
+     		 			const num = $(this).
+     		 			
+     		 			
+     		 		})
+     		 		
+     		 	})
+     		 
+     		 
+     		 </script>
      	
 
                 <div class="btnall">

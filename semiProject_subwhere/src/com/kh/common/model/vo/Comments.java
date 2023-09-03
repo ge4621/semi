@@ -40,17 +40,30 @@ public class Comments {
 		this.status = status;
 	}
 	
-	
-	
-	
+
+//	public Comments(String modifyDate, String title, String comment) {
+//		super();
+//		this.modifyDate = modifyDate;
+//		this.title = title;
+//		this.comment = comment;
+//	}
 	
 	
 
-	public Comments(String modifyDate, String title, String comment) {
+
+	public Comments(String boardNo, String commentConent, String modifyDate, String title) {
 		super();
+		this.boardNo = boardNo;
+		this.commentConent = commentConent;
 		this.modifyDate = modifyDate;
 		this.title = title;
-		this.comment = comment;
+	}
+
+	public Comments(String commentConent, String modifyDate, String title) {
+		super();
+		this.commentConent = commentConent;
+		this.modifyDate = modifyDate;
+		this.title = title;
 	}
 
 	public Comments(int memberNo, String boardNo, String commentConent, String modifyDate, String status) {

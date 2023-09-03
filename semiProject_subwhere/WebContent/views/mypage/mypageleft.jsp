@@ -130,7 +130,7 @@
                     
                     <tr>
                          <th>
-                         	<a href="/subwhere/myblist.me?Mno=<%= loginMember1.getMemberNo()%>">
+                         	<a href="/subwhere/myblist.me?Mno=<%= loginMember1.getMemberNo()%>&cpage=1">
                          		<input type="button" value="내가 쓴 글 보기">
                          	</a>
                          </th>

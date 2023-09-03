@@ -257,7 +257,7 @@
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
 
-                                                        <%=a.getComment() %></p>
+                                                        <%=a.getCommentConent() %></p>
                                         </td>
                                 </tr>
             			<%} %>
@@ -274,7 +274,7 @@
 			                	}
 			                //여행지 버튼 클릭
 			                	function mytrcomment(){
-			                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>";
+			                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>&cpage=1";
 			                	}
 			                //후기글 버튼 클릭
 			                	function myrcomment(){

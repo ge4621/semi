@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Liked;
+import com.kh.member.model.service.MemberService;
+
 /**
  * Servlet implementation class mypagelikelistController
  */
@@ -18,7 +21,7 @@ public class mypagelikelistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * 좋아요 보관함(미완료)
+     * 좋아요 보관함
      * @see HttpServlet#HttpServlet()
      */
     public mypagelikelistController() {
@@ -36,11 +39,11 @@ public class mypagelikelistController extends HttpServlet {
 		
 		int memberno = Integer.parseInt(request.getParameter("mylno"));
 		
+		ArrayList<Liked> list = new MemberService().mylikelist(memberno);
 		
-		
-		
-		
-		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/mypage/mypagelikelist.jsp").forward(request, response);
+	
 	}
 
 	/**

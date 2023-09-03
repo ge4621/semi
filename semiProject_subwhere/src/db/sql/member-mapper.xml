@@ -74,7 +74,8 @@ AND MEMBER_PWD = ?
 	SELECT * 
 	  FROM(SELECT ROWNUM RNUM,R.*
 	    FROM(SELECT 
-	            TITLE
+	    		BOARD_NO
+	          , TITLE
 	          , COMMENT_CONTENT "COMMENT"
 	          , C.MODIFY_DATE
 	        FROM COMMENTS C
@@ -101,7 +102,8 @@ AND BOARD_NO BETWEEN 1000 AND 1600
 SELECT * 
   FROM(SELECT ROWNUM RNUM,C.*
     FROM(SELECT 
-            TITLE
+    		BOARD_NO
+          , TITLE
           , COMMENT_CONTENT "COMMENT"
           , C.MODIFY_DATE
         FROM COMMENTS C
@@ -128,7 +130,8 @@ AND BOARD_NO BETWEEN 100 AND 160
 SELECT * 
   FROM(SELECT ROWNUM RNUM,K.*
     FROM(SELECT 
-            TITLE
+    		BOARD_NO
+          , TITLE
           , COMMENT_CONTENT "COMMENT"
           , C.MODIFY_DATE
         FROM COMMENTS C
@@ -178,29 +181,69 @@ SELECT
        )
 </entry>
 
-<entry key="selectbcosList"> <!-- 마이페이지 내가 쓴 코스글 조회 -->
-SELECT
-      FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
-     ,TITLE 
-     ,CONTENT
-     ,MODIFY_DATE
+<entry key="selectCboardCount"> <!-- 내가 쓴 코스글 개수 -->
+SELECT COUNT (*) COUNT
 FROM COURSE
-JOIN UPLOADFILE ON (REFD_BNO = BOARD_NO)
-WHERE MEMBER_NO = ? 
-AND FILE_LEVEL = 1
+WHERE MEMBER_NO = ?
+AND STATUS = 'Y'
 </entry>
 
-<entry key="selectReview"> <!-- 마이페이지 내가 쓴 후기글 조회 -->
-SELECT
-     FILE_PATH  || '/' || CHANGE_NAME "TITLE_IMG"
-   , TITLE
-   , CONTENT
-   , MODIFY_DATE
-FROM REVIEW
-LEFT JOIN UPLOADFILE ON (REFD_BNO = BOARD_NO)
-WHERE BOARD_WRITER = ?
-AND FILE_LEVEL = 1
+<entry key="selectbcosList"> <!-- 마이페이지 내가 쓴 코스글 조회 + 페이징 -->
+SELECT *
+	    FROM(SELECT ROWNUM RNUM,A.*
+	         FROM(SELECT
+	         			 BOARD_NO	
+                         ,FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
+                         ,TITLE 
+                         ,CONTENT
+                         ,CREATE_DATE
+                    FROM COURSE
+                    JOIN UPLOADFILE ON (REFD_BNO = BOARD_NO)
+                    WHERE MEMBER_NO = ? 
+                    AND FILE_LEVEL = 1
+	                ORDER 
+	                    BY BOARD_NO DESC
+	                ) A
+	        )
+	WHERE RNUM BETWEEN ? AND ?
+</entry>
 
+<entry key="selectReBoardCount"> <!-- 마이페이지 내가 쓴 후기글 개수 -->
+SELECT COUNT (*) COUNT
+    FROM REVIEW
+    WHERE BOARD_WRITER = ?
+    AND STATUS = 'Y'
+</entry>
+
+
+<entry key="selectReview"> <!-- 마이페이지 내가 쓴 후기글 조회 -->
+SELECT *
+	    FROM(SELECT ROWNUM RNUM,A.*
+	         FROM(SELECT
+	         		 BOARD_NO
+                   , FILE_PATH  || '/' || CHANGE_NAME "TITLE_IMG"
+                   , TITLE
+                   , CONTENT
+                   , CREATE_DATE
+                FROM REVIEW R
+                JOIN UPLOADFILE ON (REFD_BNO = BOARD_NO)
+                WHERE BOARD_WRITER = ?
+                AND R.STATUS = 'Y'
+                AND FILE_LEVEL = 1
+	                ORDER 
+	                    BY BOARD_NO DESC
+	                ) A
+	        )
+	WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="mylikelist"> <!-- 좋아요 보관함 -->
+SELECT
+    BOARD_NO
+  , FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
+  FROM LIKED 
+  JOIN UPLOADFILE ON (BOARD_NO = REFD_BNO)
+  WHERE MEMBER_NO = ?
 </entry>
 
 

@@ -57,7 +57,7 @@ public class mypagereviewController extends HttpServlet {
 		pageLimit = 5;
 		
 		//한번에 볼 수 있는 게시물 개수
-		boardLimit = 5;
+		boardLimit = 4;
 		
 		//제일 마지막 페이지수
 		maxPage = (int)Math.ceil((double)rlistCount / boardLimit);

@@ -104,8 +104,16 @@ public class Review {
    
    
    //마이페이지(내가쓴 후기글 조회용)
-   public Review(String title, String content, int count, String createDate, String titleImg) {
+  
+
+
+public String getBoardNo() {
+      return boardNo;
+   }
+
+   public Review(String boardNo, String title, String content, int count, String createDate, String titleImg) {
 	super();
+	this.boardNo = boardNo;
 	this.title = title;
 	this.content = content;
 	this.count = count;
@@ -114,11 +122,7 @@ public class Review {
 }
 
 
-public String getBoardNo() {
-      return boardNo;
-   }
-
-   public void setBoardNo(String boardNo) {
+public void setBoardNo(String boardNo) {
       this.boardNo = boardNo;
    }
 

@@ -1,5 +1,12 @@
+<%@page import="com.kh.common.model.vo.Liked"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	ArrayList<Liked> list = (ArrayList<Liked>)request.getAttribute("list");
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -190,21 +197,24 @@
 		
 	 <div id="rightpro" class="profiler"> 
 	 		<div class="title">
-	            <h1> ge4621님의 찜 보관함</h1>
+	            <h1> <%=loginMember.getMemberId() %>님의 "좋아요" 보관함</h1>
 	         </div>
 	 
 	         <div class="outer">
 	             
 	             <ul class="list-area">
-	             
+	             <%if(list.isEmpty()){ %>
+	             		<p align="center">좋아요 한 게시글이 없습니다.</p>
+	             <%}else{ %>
+	             	<%for(Liked l : list){ %>
 	                 <div id="area">
 	                     <li id="jyli">
 	                         <div class="pic">
 	                             <img src="resources/images/heart2.png" id="heart" alt="" class="toggle-heart" onclick="likeToggle(this);">
 	                             <a href="">
-	                                 <img src="resources/images/경복궁.jpg" alt="" id="pic">
+	                                 <img src="<%=l.getTitleImg() %>" alt="" id="pic">
 	 
-	                                 <h4>남산</h4>
+	                                 <h4><%=l.getBoardNo() %></h4>
 	                                 <p id="font">설명은 한줄</p>
 	                             </a>
 	                             
@@ -213,7 +223,9 @@
 	                     </li>
 	 
 	                 </div>
-	 
+	 					<%} %>
+	 				<%} %>
+	 				<!-- 
 	                 <div id="area">
 	                     <li id="jyli">
 	                         <div class="pic">
@@ -227,35 +239,8 @@
 	                         </div>
 	                     </li>
 	                 </div>
-	                 
-	                 <div id="area">
-	                     <li id="jyli">
-	                         <div class="pic">
-	                             <img src="resources/images/heart2.png" id="heart" alt="" class="toggle-heart" onclick="likeToggle(this);">
-	                             <a href="">
-	                                 <img src="resources/images/청계천.png" alt="">
-	                                 <h4>남산</h4>
-	                                 <p id="font">한강에서 ........</p>
-	                             </a>
-	                             
-	                         </div>
-	                     </li>
-	                 </div>
-	 
-	                 <div id="area">
-	                     <li id="jyli">
-	                         <div class="pic">
-	                             <img src="resources/images/heart2.png" id="heart" alt="" class="toggle-heart" onclick="likeToggle(this);">
-	                             <a href="">
-	                                 <img src="resources/images/익선동.png" alt="">
-	                                 <h4>남산</h4>
-	                                 <p id="font">남산타워는명.........</p>
-	                             </a>
-	                             
-	                         </div>
-	                     </li>
-	                 </div>
-	 
+	                  -->
+	                
 	             </ul>
 	 
 	             <script>

@@ -8,6 +8,7 @@ import static com.kh.common.JDBCTemplate.*;
 import com.kh.board.model.vo.Course;
 import com.kh.board.model.vo.Review;
 import com.kh.common.model.vo.Comments;
+import com.kh.common.model.vo.Liked;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -202,23 +203,73 @@ public class MemberService {
 	   }
 	   
 	   
-	  
+	   //내가 쓴 여행 코스 게시글 개수
+	   public int selectCboardCount(int memberno) {
+		   
+		   Connection conn = getConnection();
+		   
+		   int listCount = new MemberDao().selectCboardCount(conn, memberno);
+		   
+		   close(conn);
+		   return listCount;
+		   
+	   }
+
 	  //마이페이지 내가 쓴 여행 코스 게시판
-	  public ArrayList<Course> selectbcosList(int memberno){
+//	  public ArrayList<Course> selectbcosList(int memberno){
+//		  Connection conn = getConnection();
+//		  
+//		  ArrayList<Course> blist = new MemberDao().selectbcosList(conn, memberno);
+//		  
+//		  close(conn);
+//		  return blist;
+//	  }
+	   //마이페이지 내가 쓴 여행 코스 게시판
+	  public ArrayList<Course> selectbcosList(PageInfo pi,int memberno){
+		  
 		  Connection conn = getConnection();
 		  
-		  ArrayList<Course> blist = new MemberDao().selectbcosList(conn, memberno);
-		  
+		  ArrayList<Course> blist = new MemberDao().selectbcosList(conn,pi,memberno);
 		  close(conn);
 		  return blist;
+		  
 	  }
-	  
-	  //마이페이지 내가쓴 후기글 게시판
-	  public ArrayList<Review> selectReview(int memberno){
+	   
+	  //내가 쓴 후기글 개수
+	  public int selectReBoardCount(int memberno) {
+		  
 		  Connection conn = getConnection();
 		  
-		  ArrayList<Review> list = new MemberDao().selectReview(conn, memberno);
+		  int klistCount = new MemberDao().selectReBoardCount(conn,memberno);
 		  
+		  close(conn);
+		  return klistCount;
+	  }
+	  public ArrayList<Review> selectReview(PageInfo pi,int memberno){
+		  Connection conn = getConnection();
+		  
+		  ArrayList<Review> list = new MemberDao().selectReview(conn,pi,memberno);
+		  close(conn);
+		  return list;
+		  
+	  }
+	   
+	   
+	  
+	  //마이페이지 내가쓴 후기글 게시판
+//	  public ArrayList<Review> selectReview(int memberno){
+//		  Connection conn = getConnection();
+//		  
+//		  ArrayList<Review> list = new MemberDao().selectReview(conn, memberno);
+//		  
+//		  close(conn);
+//		  return list;
+//	  }
+	  //좋아요 보관함
+	  public ArrayList<Liked> mylikelist(int memberno){
+		  
+		  Connection conn = getConnection();
+		  ArrayList<Liked> list = new MemberDao().mylikelist(conn, memberno);
 		  close(conn);
 		  return list;
 	  }

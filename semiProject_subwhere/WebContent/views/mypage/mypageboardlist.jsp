@@ -1,3 +1,4 @@
+<%@page import="com.kh.common.model.vo.PageInfo"%>
 <%@page import="com.kh.board.model.vo.Course"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,14 @@
     
 <%
 	ArrayList<Course> blist = (ArrayList<Course>)request.getAttribute("blist");
+
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage(); 
+
 %>    
     
 <!DOCTYPE html>
@@ -251,11 +260,11 @@
                     
                     <script>
                     	function ctest1(){
-                    		location.href="<%=contextPath%>/myblist.me?Mno=<%= loginMember1.getMemberNo()%>";
+                    		location.href="<%=contextPath%>/myblist.me?Mno=<%= loginMember1.getMemberNo()%>&cpage=1";
                     	}
                     	
                     	function rtest2(){
-                    		location.href="<%=contextPath%>/mycomlist.me?Mno=<%=loginMember1.getMemberNo()%>";
+                    		location.href="<%=contextPath%>/mycomlist.me?Mno=<%=loginMember1.getMemberNo()%>&cpage=1";
                     	}
                     
                     </script>
@@ -269,13 +278,24 @@
                             <button id="de_board">삭제하기</button>
                         </div>
 
-                        <button>&lt;</button>
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>&gt;</button>
+                        <%if(currentPage != 1){ %>
+                        <button onclick="location.href='<%= contextPath%>/myblist.me?Mno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage -1%>'">&lt;</button>
+						<%} %>
+						
+						<%for(int p = startPage; p<=endPage ; p++){ %>
+					
+						<%if(p==currentPage){ %>	
+                        <button disabled><%=p %></button>
+                        
+                        <%}else{ %>
+                        <button onclick="location.href='<%= contextPath%>/myblist.me?Mno=<%=loginMember.getMemberNo()%>&cpage=<%=p %>'"><%=p %></button>
+                        <%} %>
+                        
+                      <%} %>
+                      
+                      <%if(currentPage != maxPage){ %>
+                        <button onclick="location.href='<%= contextPath%>/myblist.me?Mno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage + 1%>'">&gt;</button>
+    					<%} %>
 
                     </div>
         

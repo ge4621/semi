@@ -64,7 +64,11 @@ public class MyPageUpdateController extends HttpServlet {
 						m.setNickname(nickname);
 						m.setEmail(email);
 						m.setPhone(phone);
-						m.setProfileImg(profileImg); 
+						if(multiRequest.getFilesystemName("pic") == null) {
+							m.setProfileImg(((Member)request.getSession().getAttribute("loginMember")).getProfileImg());
+						}else {
+							m.setProfileImg(profileImg); 							
+						}
 
 					System.out.println(m.getProfileImg());//파일 확인
 					System.out.println(m+"안녕하세요");
