@@ -138,7 +138,7 @@
                     
                     <tr>
                          <th>
-                            <a href="/subwhere/mydreview.me?deno=<%= loginMember1.getMemberNo()%>">
+                            <a href="/subwhere/mydreview.me?deno=<%= loginMember1.getMemberNo()%>&cpage=1">
 
                                 <input type="button" name="" id="" value="내가 쓴 댓글 보기">
                             </a>

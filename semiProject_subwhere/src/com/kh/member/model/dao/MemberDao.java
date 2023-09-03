@@ -187,7 +187,7 @@ public class MemberDao {
 	  
 	
     //여행 후기 게시판 댓글 전체 리스트(페이징 용)
-	public int selectcReviewListCount(Connection conn, int memberNo) {
+	public int selectcReviewListCount(Connection conn, int memberno) {
 		int rlistCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -197,7 +197,7 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,memberNo );
+			pstmt.setInt(1,memberno );
 			
 			rset = pstmt.executeQuery();
 			
@@ -377,31 +377,29 @@ public class MemberDao {
 	      return result;
 	      
 	   }
-
-	   //마이페이지 코스글 댓글
-	public ArrayList<Comments> selectmyCreview(Connection conn,int memberNo){
-		ArrayList<Comments> clist = new ArrayList<Comments>();
-		
-		PreparedStatement pstmt = null;
-		
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectmyCreview");
-		
-		try {
-			pstmt=conn.prepareStatement(sql);
+	   
+	   //코스 게시판 댓글 전체 리스트 (페이징)
+	  public int selectCosListCount(Connection conn,int memberNo){
+		  
+		  int clistCount = 0;
+		  
+		  PreparedStatement pstmt = null;
+		  ResultSet rset = null;
+		  String sql = prop.getProperty("selectCosListCount");
+		  
+		  
+		  try {
+			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, memberNo);
 			
-			rset=pstmt.executeQuery();
+			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
-				clist.add(new Comments(rset.getString("MODIFY_DATE"),
-										rset.getString("TITLE"),
-										rset.getString("COMMENT")
-										));
+			if(rset.next()) {
+				clistCount = rset.getInt("count");
 			}
-
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -409,24 +407,140 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		return clist;
-		
+		return clistCount;
+			
+
 	}
+
+	   //마이페이지 코스글 댓글
+//	public ArrayList<Comments> selectmyCreview(Connection conn,int memberNo){
+//		ArrayList<Comments> clist = new ArrayList<Comments>();
+//		
+//		PreparedStatement pstmt = null;
+//		
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("selectmyCreview");
+//		
+//		try {
+//			pstmt=conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, memberNo);
+//			
+//			rset=pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				clist.add(new Comments(rset.getString("MODIFY_DATE"),
+//										rset.getString("TITLE"),
+//										rset.getString("COMMENT")
+//										));
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return clist;
+//		
+//	}
+	
+	//마이페이지 코스글 댓글
+	  public ArrayList<Comments> selectmyCreview(Connection conn,int memberNo,PageInfo pi){
+		  ArrayList<Comments> clist = new ArrayList<Comments>();
+		  
+		  PreparedStatement pstmt = null;
+		  
+		  ResultSet rset = null;
+		  
+		  String sql = prop.getProperty("selectmyCreview");
+		  int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1; //페이징 시작번호 미완성 쿼리 앞"?"
+		  int endRow = startRow + pi.getBoardLimit() - 1; //페이징 마지막 번호 미완성 쿼리뒤 "?"
+		  
+		  try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset= pstmt.executeQuery();
+			
+			while(rset.next()) {
+				clist.add(new Comments(rset.getString("MODIFY_DATE"),
+										rset.getString("TITLE"),
+										rset.getString("COMMENT")
+										));
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		  return clist;
+	  }
+
 	//마이페이지 여행지 게시판 댓글
-	public ArrayList<Comments> selectmyDreview(Connection conn,int memberno){
-		
-		ArrayList<Comments> dlist = new ArrayList<Comments>();
-		
-		PreparedStatement pstmt = null;
-		
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectmyRreview");
-		
-		try {
+//	public ArrayList<Comments> selectmyDreview(Connection conn,int memberno){
+//		
+//		ArrayList<Comments> dlist = new ArrayList<Comments>();
+//		
+//		PreparedStatement pstmt = null;
+//		
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("selectmyRreview");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, memberno);
+//			rset=pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				dlist.add(new Comments(rset.getString("MODIFY_DATE"),
+//										rset.getString("TITLE"),
+//										rset.getString("COMMENT")
+//										));
+//			}
+//					
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return dlist;
+//		
+//	}
+	  
+	  //여행지 댓글 조회 + 페이징
+	  public ArrayList<Comments> selectmyDreview(Connection conn,int memberno,PageInfo pi){
+		  ArrayList<Comments> dlist = new ArrayList<Comments>();
+		  
+		  PreparedStatement pstmt = null;
+		  ResultSet rset = null;
+		  
+		  String sql = prop.getProperty("selectmyRreview");
+		  int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1; //페이징 시작번호 미완성 쿼리 앞"?"
+		  int endRow = startRow + pi.getBoardLimit() - 1; //페이징 마지막 번호 미완성 쿼리뒤 "?"
+		  
+		  try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, memberno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rset=pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -435,7 +549,35 @@ public class MemberDao {
 										rset.getString("COMMENT")
 										));
 			}
-					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		  return dlist;
+	  }
+	  
+	
+	//여행지 댓글 전체
+	public int selectDListCount(Connection conn,int memberno) {
+		
+		int dlistCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectDListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberno);
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				dlistCount=rset.getInt("count");
+			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -444,8 +586,7 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		return dlist;
-		
+			return dlistCount;
 	}
 	
 	//마이페이지 여행코스 게시글
@@ -486,7 +627,7 @@ public class MemberDao {
 		return blist;
 		
 	}
-	
+	//마이페이지 후기글 게시글
 	public ArrayList<Review> selectReview(Connection conn,int memberno){
 		ArrayList<Review> list = new ArrayList<Review>();
 		
@@ -522,29 +663,6 @@ public class MemberDao {
 		return list;
 	}
 	
-	
-	
-//	public ArrayList<Comments> selectbcosList(Connection conn,int memberno){
-//		ArrayList<Comments> blist = new ArrayList<Comments>();
-//		
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		
-//		String sql = prop.getProperty("");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		
-//	}
-	
+
 	
 }

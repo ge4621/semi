@@ -58,8 +58,7 @@
 
 <entry key="selectrreviewListCount"> <!--여행 후기 게시판 댓글 개수 -->
 SELECT COUNT(*) COUNT
-FROM MEMBER 
-JOIN COMMENTS USING(MEMBER_NO)
+FROM COMMENTS 
 WHERE MEMBER_NO=?
 AND BOARD_NO BETWEEN 2000 AND 2600
 </entry>
@@ -91,34 +90,58 @@ AND MEMBER_PWD = ?
 	    WHERE RNUM BETWEEN ? AND ?
 </entry>
 
-
-
-
-<entry key="selectmyCreview"><!-- 코스댓글 -->
-SELECT 
-    TITLE
-  , COMMENT_CONTENT "COMMENT"
-  , C.MODIFY_DATE
-FROM COMMENTS C
-JOIN COURSE E USING(BOARD_NO)
-WHERE C.STATUS = 'Y'
-AND E.STATUS = 'Y'
-AND C.MEMBER_NO = ?
+<entry key="selectCosListCount"> <!-- 코스게시판 댓글 개수 -->
+SELECT COUNT(*) COUNT
+FROM COMMENTS
+WHERE MEMBER_NO=?
 AND BOARD_NO BETWEEN 1000 AND 1600
-
 </entry>
 
-<entry key="selectmyRreview"><!-- 여행지 댓글 -->
-SELECT
-     TITLE
-   , COMMENT_CONTENT "COMMENT"
-   , C.MODIFY_DATE 
-FROM COMMENTS C
-JOIN DESTINATION D USING(BOARD_NO)
-WHERE C.STATUS = 'Y'
-AND D.STATUS = 'Y'
-AND MEMBER_NO = ?
-AND BOARD_NO BETWEEN 100 AND 501
+<entry key="selectmyCreview"><!-- 코스댓글 + 페이징 -->
+SELECT * 
+  FROM(SELECT ROWNUM RNUM,C.*
+    FROM(SELECT 
+            TITLE
+          , COMMENT_CONTENT "COMMENT"
+          , C.MODIFY_DATE
+        FROM COMMENTS C
+        JOIN COURSE R USING(BOARD_NO)
+        WHERE C.STATUS = 'Y'
+        AND R.STATUS = 'Y'
+        AND C.MEMBER_NO = ?
+        AND BOARD_NO BETWEEN 1000 AND 1600
+        ORDER
+            BY BOARD_NO DESC
+            ) C
+        )
+    WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="selectDListCount"><!-- 여행지 댓글 개수 -->
+SELECT COUNT(*) COUNT
+FROM COMMENTS
+WHERE MEMBER_NO=?
+AND BOARD_NO BETWEEN 100 AND 160
+</entry>
+
+<entry key="selectmyRreview"><!-- 여행지 댓글 + 페이징 -->
+SELECT * 
+  FROM(SELECT ROWNUM RNUM,K.*
+    FROM(SELECT 
+            TITLE
+          , COMMENT_CONTENT "COMMENT"
+          , C.MODIFY_DATE
+        FROM COMMENTS C
+        JOIN DESTINATION D USING(BOARD_NO)
+        WHERE C.STATUS = 'Y'
+        AND D.STATUS = 'Y'
+        AND C.MEMBER_NO = ?
+        AND BOARD_NO BETWEEN 100 AND 160
+        ORDER
+            BY BOARD_NO DESC
+            ) K
+        )
+    WHERE RNUM BETWEEN ? AND ?
 </entry>
 
 

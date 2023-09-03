@@ -66,16 +66,6 @@ public class MemberService {
 
 
 	
-	
-	public int selectcReviewListCount(int memberNo) {
-		Connection conn = getConnection();
-		
-		int rlistCount = new MemberDao().selectcReviewListCount(conn,memberNo);
-		
-		close(conn);
-		return rlistCount;
-		
-	}
 	//비밀번호 변경
 	public Member myupdatePwd(String memberId,String memberPwd,String updatePwd) {
 		Connection conn = getConnection();
@@ -105,17 +95,29 @@ public class MemberService {
 //		close(conn);
 //		return list;
 //	}
-//	 // ajax 아이디 중복 체크
-//	   public int idCheck(String checkId) {
-//	      
-//	      Connection conn = getConnection();
-//	      int count = new MemberDao().idCheck(conn, checkId);
-//	      
-//	      close(conn);
-//	      return count;
-//	            
-//	   }
+	
+	 // ajax 아이디 중복 체크
+	   public int idCheck(String checkId) {
+	      
+	      Connection conn = getConnection();
+	      int count = new MemberDao().idCheck(conn, checkId);
+	      
+	      close(conn);
+	      return count;
+	            
+	   }
 	   
+	//후기 게시글 댓글 총개수
+	public int selectcReviewListCount(int memberno) {
+		Connection conn = getConnection();
+		
+		int rlistCount = new MemberDao().selectcReviewListCount(conn,memberno);
+		
+		close(conn);
+		return rlistCount;
+		
+	}
+	
 	//여행 후기 댓글 조회용 +페이징 바 포함
 	public ArrayList<Comments> selectRreviewList(int memberno,PageInfo pi){
 		Connection conn = getConnection();
@@ -125,8 +127,6 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-	
-	
 	
 	
 	   //회원가입
@@ -143,25 +143,67 @@ public class MemberService {
 		   }
 		   
 	   //코스 게시판 댓글
-	  public ArrayList<Comments> selectmyCreview(int memberNo){
-		  Connection conn = getConnection();
-		  
-		  ArrayList<Comments> clist = new MemberDao().selectmyCreview(conn,memberNo);
-		  
-		  close(conn);
-		  return clist;
-		  
-	  }
+//	  public ArrayList<Comments> selectmyCreview(int memberNo){
+//		  Connection conn = getConnection();
+//		  
+//		  ArrayList<Comments> clist = new MemberDao().selectmyCreview(conn,memberNo);
+//		  
+//		  close(conn);
+//		  return clist;
+//		  
+//	  }
+	   
+	   //코스 게시판 댓글 총개수
+	   public int selectCosListCount(int memberNo) {
+		   Connection conn = getConnection();
+		   
+		   int clistCount = new MemberDao().selectCosListCount(conn,memberNo);
+		   
+		   close(conn);
+		   return clistCount;
+	   }
+	   //코스게시판 댓글 조회+페이징
+	   public ArrayList<Comments> selectmyCreview(int memberNo,PageInfo pi){
+		   Connection conn = getConnection();
+		   
+		   ArrayList<Comments> clist = new MemberDao().selectmyCreview(conn,memberNo,pi);
+		   
+		   close(conn);
+		   return clist;
+	   }
+	
+	   //여행지 게시글 댓글 개수
+	   public int selectDListCount(int memberno) {
+		   Connection conn = getConnection();
+		   
+		   int dlistCount = new MemberDao().selectDListCount(conn,memberno);
+		   
+		   close(conn);
+		   return dlistCount;
+	   
+	   
+	}
 	  //여행지 게시판 댓글
-	  public ArrayList<Comments> selectmyDreview(int memberno){
-		  Connection conn = getConnection();
-		  
-		  ArrayList<Comments> dlist = new MemberDao().selectmyDreview(conn, memberno);
-		  close(conn);
-		  return dlist;
-	  }
+//	  public ArrayList<Comments> selectmyDreview(int memberno){
+//		  Connection conn = getConnection();
+//		  
+//		  ArrayList<Comments> dlist = new MemberDao().selectmyDreview(conn, memberno);
+//		  close(conn);
+//		  return dlist;
+//	  }
+	   
+	   //여행지 게시판 댓글조회 + 페이징
+	   public ArrayList<Comments> selectmyDreview(int memberno,PageInfo pi){
+		   Connection conn = getConnection();
+		   
+		   ArrayList<Comments> dlist = new MemberDao().selectmyDreview(conn,memberno,pi);
+		   close(conn);
+		   return dlist;
+	   }
+	   
+	   
 	  
-	  //내가 쓴 여행 코스 게시판
+	  //마이페이지 내가 쓴 여행 코스 게시판
 	  public ArrayList<Course> selectbcosList(int memberno){
 		  Connection conn = getConnection();
 		  
@@ -171,6 +213,7 @@ public class MemberService {
 		  return blist;
 	  }
 	  
+	  //마이페이지 내가쓴 후기글 게시판
 	  public ArrayList<Review> selectReview(int memberno){
 		  Connection conn = getConnection();
 		  
@@ -185,14 +228,6 @@ public class MemberService {
 
 
 	  
-//	  public ArrayList<Comments> selectbcosList(int memberno) {
-//		  Connection conn = getConnection();
-//		  
-//		  ArrayList<Comments> blist = new MemberDao().selectbcosList(conn, memberno);
-//		  
-//		  close(conn);
-//		  return blist;
-//	  }
 
 	  
 	  

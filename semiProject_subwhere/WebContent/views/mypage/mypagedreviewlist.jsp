@@ -1,3 +1,4 @@
+<%@page import="com.kh.common.model.vo.PageInfo"%>
 <%@page import="com.kh.common.model.vo.Comments"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,15 @@
     
 <%
  	ArrayList <Comments> dlist = (ArrayList<Comments>)request.getAttribute("dlist");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+
  %>   
  
 <!DOCTYPE html>
@@ -234,7 +244,7 @@
                            
                                <%if(dlist.isEmpty()){ %>
                                 <tr>
-                                    <P align="center">작성하신 댓글이 없습니다.</P>
+                                    <p align="center">작성하신 댓글이 없습니다.</p>
                                 </tr>
                             <%}else{ %>
                             
@@ -256,11 +266,11 @@
                 
 		                //여행코스 버튼 클릭
 		                	function mycoscomment(){
-		                		location.href = "<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>";
+		                		location.href = "<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>&cpage=1";
 		                	}
 		                //여행지 버튼 클릭
 		                	function mytrcomment(){
-		                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>";
+		                		location.href = "<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>&cpage=1";
 		                	}
 		                //후기글 버튼 클릭
 		                	function myrcomment(){
@@ -279,26 +289,34 @@
                     <div class="btnjy">
                         <button id="d_btn">삭제하기</button>
                     </div>
-    
-                    <div class="page_btn" id="page">
-                        <button onclick="location.href= ">&lt;</button>
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>&gt;</button>
-    
-                    </div>
+                    
+     				<div class="page_btn" id="page">
+                    
+                    	<%if(currentPage != 1){ %>
+                        <button onclick="location.href='<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage -1%>'">&lt;</button>
+						<%} %>
+						
+						<%for(int p = startPage; p<=endPage ; p++){ %>
+					
+						<%if(p==currentPage){ %>	
+                        <button disabled><%=p %></button>
+                        
+                        <%}else{ %>
+                        <button onclick="location.href='<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>&cpage=<%=p %>'"><%=p %></button>
+                        <%} %>
+                        
+                      <%} %>
+                      
+                      <%if(currentPage != maxPage){ %>
+                        <button onclick="location.href='<%= contextPath%>/mydreview.me?deno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage + 1%>'">&gt;</button>
+    				<%} %>
+                   </div>
     
             
                 </div>
      
      
             </div>
-
-
-
 
         </div>
 
