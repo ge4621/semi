@@ -270,6 +270,7 @@
 	                 
 	                 $(function(){
                  		$(".llike-area").click(function(){
+                 			
                  			location.href="<%=contextPath%>/"+$(this).children("input").val();
                  		})
                  	})

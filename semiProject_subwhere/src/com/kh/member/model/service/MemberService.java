@@ -274,7 +274,9 @@ public class MemberService {
 		  return list;
 	  }
 	  
+	  //삭제
 	  
+
 	 } 
 
 

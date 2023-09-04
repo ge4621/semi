@@ -245,7 +245,12 @@ SELECT
   JOIN UPLOADFILE ON (BOARD_NO = REFD_BNO)
   WHERE MEMBER_NO = ?
 </entry>
-
+<entry key="deletecosreview"><!-- 코스 게시판 댓글 삭제 -->
+UPDATE COMMENTS
+     SET
+     STATUS = 'N'
+WHERE COMMENT_NO = ? 
+</entry>
 
 
 </properties>

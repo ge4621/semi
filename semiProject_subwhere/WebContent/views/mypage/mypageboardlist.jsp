@@ -270,7 +270,7 @@
                     	
                     	$(function(){
                     		$(".clist_area").click(function(){
-                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+                    			location.href="<%=contextPath%>/detail.co?cno="+$(this).children("input").val();
                     		})
                     	})
                     	

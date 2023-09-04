@@ -253,7 +253,7 @@
                                 <tr class="dlist-darea">
                                 	<input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
+                                            <h3><input type="checkbox" name="commentNo" value="<%=a.getCommentNo() %>" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
                                                       <%=a.getCommentConent() %>  </p>
                                         </td>
@@ -281,7 +281,7 @@
 		                
 		                	$(function(){
 	                    		$(".dlist-darea").click(function(){
-	                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+	                    			location.href="<%=contextPath%>/read.si?bno="+$(this).children("input").val();
 	                    		})
 	                    	})
 		                </script>

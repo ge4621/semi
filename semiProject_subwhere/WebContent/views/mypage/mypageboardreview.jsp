@@ -271,7 +271,7 @@
                     
                     	$(function(){
                     		$(".blist-area").click(function(){
-                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+                    			location.href="<%=contextPath%>/detail.re?bno="+$(this).children("input").val();
                     		})
                     	})
                     	

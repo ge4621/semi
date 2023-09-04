@@ -255,7 +255,7 @@
                                 <tr class="review-carea">
                                 	<input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
+                                            <h3><input type="checkbox" name="deletebox" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
 
                                                         <%=a.getCommentConent() %></p>
@@ -285,8 +285,19 @@
 			                
 			                	$(function(){
 		                    		$(".review-carea").click(function(){
-		                    			location.href="<%=contextPath%>/"+$(this).children("input").val();
+		                    			location.href="<%=contextPath%>/detail.co?cno="+$(this).children("input").val();
 		                    		})
+		                    		
+		                    	})
+		                    	
+		                    	$(function(){
+		                    		
+		                    		$("input[type=checkbox]").each(function(){
+		                    			
+		                    				$(this).attr("checked",true);
+		                    			
+		                    		})
+		                    		
 		                    	})
 			                
 			              </script>
@@ -299,8 +310,14 @@
                 <div class="btnall">
      
                     <div class="btnjy">
-                        <button id="d_btn">삭제하기</button>
+                        <button id="d_btn" onclikc="deletebtn();" >삭제하기</button>
                     </div>
+                    
+                    <script>
+                    	function deletebtn(){
+                    		location.href = "<%=contextPath%>/cdelete.my";
+                    	}
+                    </script>
     
                     <div class="page_btn" id="page">
                     
