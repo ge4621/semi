@@ -252,14 +252,15 @@
                             
 							<!-- case2. 게시글이 있을 경우 -->
                             <%for(Comments a : clist){ %>
-                                <tr class="review-carea">
+                                <tr >
                                 	<input type="hidden" value="<%=a.getBoardNo()%>">
-                                        <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="deletebox" id="check_box">&nbsp;<%=a.getTitle() %></h3>
+                                        <td width="600" height="110" class="review-carea"> 
+                                            <h3>&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
 
                                                         <%=a.getCommentConent() %></p>
                                         </td>
+                                        <td><input type="checkbox" name="deletebox" id="check_box"></td>
                                 </tr>
             			<%} %>
             		<%} %>
@@ -294,7 +295,7 @@
 		                    		
 		                    		$("input[type=checkbox]").each(function(){
 		                    			
-		                    				$(this).attr("checked",true);
+		                    				$(this).prop("checked",false);
 		                    			
 		                    		})
 		                    		

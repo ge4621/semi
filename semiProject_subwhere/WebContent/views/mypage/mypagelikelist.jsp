@@ -270,8 +270,14 @@
 	                 
 	                 $(function(){
                  		$(".llike-area").click(function(){
+                 			if(100<= $(this).children("input").val() && 500>=$(this).children("input").val()){
+                 				location.href="<%=contextPath%>/read.si?bno="+$(this).children("input").val();                 				
+                 			}else if(1000<= $(this).children("input").val() && 1500>=$(this).children("input").val()){
+                 				location.href="<%=contextPath%>/detail.co?cno"+$(this).children("input").val()";
+                 			}else if(2000<= $(this).children("input").val() && 2500>=$(this).children("input").val()){
+                 				location.href="<%=contextPath%>/detail.re?bno"+$(this).children("input").val()";
+                 			}
                  			
-                 			location.href="<%=contextPath%>/"+$(this).children("input").val();
                  		})
                  	})
 	 

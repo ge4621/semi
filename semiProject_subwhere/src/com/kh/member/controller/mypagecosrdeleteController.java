@@ -37,6 +37,7 @@ public class mypagecosrdeleteController extends HttpServlet {
 		
 		for(int i=0; i<commentArr.length;i++) {
 			int connentNo = Integer.parseInt(commentArr[i]);
+			
 		}
 		
 		
