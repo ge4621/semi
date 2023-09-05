@@ -180,6 +180,8 @@ public class Course {
 }
    
    
+   
+   
    public void setBoardNo(String boardNo) {
 	   this.boardNo = boardNo;
    }

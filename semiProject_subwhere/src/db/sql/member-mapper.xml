@@ -74,8 +74,7 @@ AND MEMBER_PWD = ?
 	SELECT * 
 	  FROM(SELECT ROWNUM RNUM,R.*
 	    FROM(SELECT 
-	    		BOARD_NO
-	          , TITLE
+	    		TITLE
 	          , COMMENT_CONTENT "COMMENT"
 	          , C.MODIFY_DATE
 	        FROM COMMENTS C
@@ -102,8 +101,7 @@ AND BOARD_NO BETWEEN 1000 AND 1600
 SELECT * 
   FROM(SELECT ROWNUM RNUM,C.*
     FROM(SELECT 
-    		BOARD_NO
-          , TITLE
+    		TITLE
           , COMMENT_CONTENT "COMMENT"
           , C.MODIFY_DATE
         FROM COMMENTS C
@@ -130,8 +128,7 @@ AND BOARD_NO BETWEEN 100 AND 160
 SELECT * 
   FROM(SELECT ROWNUM RNUM,K.*
     FROM(SELECT 
-    		BOARD_NO
-          , TITLE
+    		TITLE
           , COMMENT_CONTENT "COMMENT"
           , C.MODIFY_DATE
         FROM COMMENTS C
@@ -192,8 +189,7 @@ AND STATUS = 'Y'
 SELECT *
 	    FROM(SELECT ROWNUM RNUM,A.*
 	         FROM(SELECT
-	         			 BOARD_NO	
-                         ,FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
+	         			 FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
                          ,TITLE 
                          ,CONTENT
                          ,CREATE_DATE
@@ -220,8 +216,7 @@ SELECT COUNT (*) COUNT
 SELECT *
 	    FROM(SELECT ROWNUM RNUM,A.*
 	         FROM(SELECT
-	         		 BOARD_NO
-                   , FILE_PATH  || '/' || CHANGE_NAME "TITLE_IMG"
+	         		 FILE_PATH  || '/' || CHANGE_NAME "TITLE_IMG"
                    , TITLE
                    , CONTENT
                    , CREATE_DATE
@@ -239,8 +234,7 @@ SELECT *
 
 <entry key="mylikelist"> <!-- 좋아요 보관함 -->
 SELECT
-    BOARD_NO
-  , FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
+    FILE_PATH || '/' || CHANGE_NAME "TITLE_IMG"
   FROM LIKED 
   JOIN UPLOADFILE ON (BOARD_NO = REFD_BNO)
   WHERE MEMBER_NO = ?

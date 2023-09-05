@@ -1,4 +1,5 @@
-<%@page import="com.kh.common.model.vo.Liked"%>
+
+<%@page import="com.kh.board.model.vo.Liked"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

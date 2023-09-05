@@ -282,7 +282,7 @@
                                         <td width="600" height="110"> 
                                             <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
                                             <p id="date"><%=a.getModifyDate() %><br>
-                                                        <%=a.getCommentConent() %></p>
+                                                        <%=a.getCommentContent() %></p>
                                         </td>
                                 </tr>
             			<%} %>
