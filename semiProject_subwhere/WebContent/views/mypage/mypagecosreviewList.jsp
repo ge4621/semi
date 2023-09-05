@@ -260,7 +260,7 @@
 
                                                         <%=a.getCommentConent() %></p>
                                         </td>
-                                        <td><input type="checkbox" name="deletebox" id="check_box"></td>
+                                        <!-- <td><input type="checkbox" name="deletebox" id="check_box"></td> -->
                                 </tr>
             			<%} %>
             		<%} %>
@@ -309,16 +309,18 @@
      		 </div>
 
                 <div class="btnall">
-     
+     				<!-- 
                     <div class="btnjy">
                         <button id="d_btn" onclikc="deletebtn();" >삭제하기</button>
-                    </div>
+                    </div> -->
                     
+                    <!--  
                     <script>
                     	function deletebtn(){
                     		location.href = "<%=contextPath%>/cdelete.my";
                     	}
                     </script>
+    -->
     
                     <div class="page_btn" id="page">
                     

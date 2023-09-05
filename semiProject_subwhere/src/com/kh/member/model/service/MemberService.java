@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.board.model.vo.Course;
+import com.kh.board.model.vo.Liked;
 import com.kh.board.model.vo.Review;
 import com.kh.common.model.vo.Comments;
-import com.kh.common.model.vo.Liked;
+
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -274,9 +275,7 @@ public class MemberService {
 		  return list;
 	  }
 	  
-	  //삭제
-	  
-
+	
 	 } 
 
 
