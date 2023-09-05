@@ -292,11 +292,11 @@
      		 </div>
 
                 <div class="btnall">
-     
+     <!--  
                     <div class="btnjy">
                         <button id="d_btn">삭제하기</button>
                     </div>
-                    
+                    -->
      				<div class="page_btn" id="page">
                     
                     	<%if(currentPage != 1){ %>

@@ -281,11 +281,11 @@
                    </div>
                     
                     <div class="jypage_btn" align="center">
-
+						<!--  
                         <div>
                             <button id="de_board">삭제하기</button>
                         </div>
-
+-->
                         <%if(currentPage != 1){ %>
                         <button onclick="location.href='<%= contextPath%>/myblist.me?Mno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage -1%>'">&lt;</button>
 						<%} %>

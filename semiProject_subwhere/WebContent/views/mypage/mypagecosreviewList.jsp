@@ -260,8 +260,12 @@
 
                                                         <%=a.getCommentConent() %></p>
                                         </td>
+<<<<<<< HEAD
                                         <td><input type="checkbox" name="deletebox" id="check_box" value="<%=a.getBoardNo()%>"></td>
                                         
+=======
+                                        <!-- <td><input type="checkbox" name="deletebox" id="check_box"></td> -->
+>>>>>>> 3fedd32a6d19502b25f4e0fa4840e3a320ad546e
                                 </tr>
             			<%} %>
             		<%} %>
@@ -311,11 +315,17 @@
      		 </div>
 
                 <div class="btnall">
-     
+     				<!-- 
                     <div class="btnjy">
+<<<<<<< HEAD
                         <button id="d-btn" onclikc="deletebtn();" >삭제하기</button>
                     </div>
+=======
+                        <button id="d_btn" onclikc="deletebtn();" >삭제하기</button>
+                    </div> -->
+>>>>>>> 3fedd32a6d19502b25f4e0fa4840e3a320ad546e
                     
+                    <!--  
                     <script>
                     	function deletebtn(){
                     		location.href = "<%=contextPath%>/cdelete.my";
@@ -323,6 +333,7 @@
 
                     	
                     </script>
+    -->
     
                     <div class="page_btn" id="page">
                     
