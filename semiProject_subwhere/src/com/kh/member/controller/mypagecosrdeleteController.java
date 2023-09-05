@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.vo.Course;
 import com.kh.common.model.vo.Comments;
 import com.kh.member.model.service.MemberService;
 
@@ -33,13 +34,14 @@ public class mypagecosrdeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] commentArr = request.getParameterValues("commentNo");
+		//ArrayList<Course> list = new ArrayList<Course>();
 		
-		for(int i=0; i<commentArr.length;i++) {
-			int connentNo = Integer.parseInt(commentArr[i]);
-			
+		String[] commentsArr = request.getParameterValues("deletebox");
+		
+		String comments = "";
+		if(commentsArr != null) {
+			comments = String.join(",", commentsArr);
 		}
-		
 		
 		
 	}

@@ -260,7 +260,8 @@
 
                                                         <%=a.getCommentConent() %></p>
                                         </td>
-                                        <td><input type="checkbox" name="deletebox" id="check_box"></td>
+                                        <td><input type="checkbox" name="deletebox" id="check_box" value="<%=a.getBoardNo()%>"></td>
+                                        
                                 </tr>
             			<%} %>
             		<%} %>
@@ -296,10 +297,11 @@
 		                    		$("input[type=checkbox]").each(function(){
 		                    			
 		                    				$(this).prop("checked",false);
-		                    			
+		                    				
 		                    		})
 		                    		
 		                    	})
+		                    	
 			                
 			              </script>
                         
@@ -311,13 +313,15 @@
                 <div class="btnall">
      
                     <div class="btnjy">
-                        <button id="d_btn" onclikc="deletebtn();" >삭제하기</button>
+                        <button id="d-btn" onclikc="deletebtn();" >삭제하기</button>
                     </div>
                     
                     <script>
                     	function deletebtn(){
                     		location.href = "<%=contextPath%>/cdelete.my";
                     	}
+
+                    	
                     </script>
     
                     <div class="page_btn" id="page">
