@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.common.model.vo.Liked;
+import com.kh.board.model.vo.Liked;
 import com.kh.member.model.service.MemberService;
 
 /**
