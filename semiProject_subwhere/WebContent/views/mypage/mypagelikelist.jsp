@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <%@page import="com.kh.board.model.vo.Liked"%>
 
+=======
+
+<%@page import="com.kh.board.model.vo.Liked"%>
+>>>>>>> d49180ceb9d6ee98d6fbf9c5b0bfedf2c5536f9b
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
