@@ -37,8 +37,9 @@ public class mypagelikelistController extends HttpServlet {
 		//RequestDispatcher view = request.getRequestDispatcher("views/mypage/mypagelikelist.jsp");
 		//view.forward(request, response);
 		
-		int memberno = Integer.parseInt(request.getParameter("mylno"));
 		
+		
+		int memberno = Integer.parseInt(request.getParameter("mylno"));
 		ArrayList<Liked> list = new MemberService().mylikelist(memberno);
 		
 		request.setAttribute("list", list);

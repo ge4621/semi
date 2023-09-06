@@ -1,4 +1,5 @@
-<%@page import="com.kh.common.model.vo.Liked"%>
+<%@page import="com.kh.board.model.vo.Liked"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -208,17 +209,15 @@
 	             <%}else{ %>
 	             	<%for(Liked l : list){ %>
 	                 <div id="area" class="llike-area">
-	                 	<input type="hidden" value="<%=l.getBoardNo()%>">
+	                 	
 	                     <li id="jyli">
 	                         <div class="pic">
+	                         	<input type="hidden" value="<%=l.getBoardNo()%>">
 	                             <img src="resources/images/heart2.png" id="heart" alt="" class="toggle-heart" onclick="likeToggle(this);">
-	                             <a href="">
+	                             
 	                                 <img src="<%=l.getTitleImg() %>" alt="" id="pic">
-	 
 	                                 <h4><%=l.getBoardNo() %></h4>
 	                                 <p id="font">설명은 한줄</p>
-	                             </a>
-	                             
 	                         </div>
 	 
 	                     </li>
@@ -269,17 +268,18 @@
 	                 }
 	                 
 	                 $(function(){
-                 		$(".llike-area").click(function(){
+                 		$(".pic").click(function(){
                  			if(100<= $(this).children("input").val() && 500>=$(this).children("input").val()){
                  				location.href="<%=contextPath%>/read.si?bno="+$(this).children("input").val();                 				
                  			}else if(1000<= $(this).children("input").val() && 1500>=$(this).children("input").val()){
-                 				location.href="<%=contextPath%>/detail.co?cno"+$(this).children("input").val()";
+                 				location.href="<%=contextPath%>/detail.co?cno="+$(this).children("input").val();
                  			}else if(2000<= $(this).children("input").val() && 2500>=$(this).children("input").val()){
-                 				location.href="<%=contextPath%>/detail.re?bno"+$(this).children("input").val()";
+                 				location.href="<%=contextPath%>/detail.re?bno="+$(this).children("input").val();
                  			}
                  			
                  		})
                  	})
+              			
 	 
 	             </script>
 	 
