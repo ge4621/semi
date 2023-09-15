@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.kh.common.MyFileRenamepolicy;
+import com.kh.common.MyFileRenamePolicy;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -49,7 +49,7 @@ public class MyPageUpdateController extends HttpServlet {
 			         
 			         
 			         //아래 코드에 들어가면 사진파일은 폴더에 자동 저장이 된다. 
-			        MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamepolicy());
+			        MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			         
 			        //쿼리에 필요한 값
 			        String memberId = multiRequest.getParameter("memberId");
@@ -70,11 +70,7 @@ public class MyPageUpdateController extends HttpServlet {
 							m.setProfileImg(profileImg); 							
 						}
 
-					System.out.println(m.getProfileImg());//파일 확인
-					System.out.println(m+"안녕하세요");
-
-					System.out.println(profileImg + "이름???");
-					System.out.println(multiRequest.getFilesystemName("pic"));
+					
 					
 			      Member updateMem = new MemberService().updateMember(m);
 			      

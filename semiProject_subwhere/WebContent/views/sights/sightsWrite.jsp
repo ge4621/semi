@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    <%
+    int userNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +13,12 @@
     
     <!-- w3schools 부트스트랩 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- 스마트에디터 -->
-<script type="text/javascript" src="resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-
+  
+	
     
     <!-- 부트스트랩 -->
     <link
@@ -51,6 +53,7 @@
 
 
         input.form-control {
+        	margin-left: 30px;
             border: none;
         }
 
@@ -88,10 +91,12 @@
 
         #content_b #writeTitle {
             width: 1127px;
-            height: 30px;
+            height: 40px;
             border: 1px solid lightgray;
         }
-
+		#content_b #ir1{
+			border: 1px solid lightgray;
+		}
         
         /* ---------------content_b----------------- */
         #content_f {
@@ -116,13 +121,13 @@
                 cursor: pointer;
                 }
 </style>
-    </style>
+   
 
 </head>
 <body>
-<%@ include file="/views/common/header.jsp" %>
+<%@ include file="../common/header.jsp" %>
     <div class="all">
-        <form action="">
+        <form action="<%=contextPath%>/insert.si" id="sight_enroll_form" method="post" enctype="multipart/form-data">
 
             <!------------------------------content_h------------------------------->
             <br><br>
@@ -132,48 +137,93 @@
     
             <!------------------------------content_b------------------------------->
             <div id="content_b">
-                
+                <input type="hidden" name = "userNo" value=<%=userNo %>>
+                <input type="hidden" name = "imgLength" value="0">
+   
     
-                    <input type="text" id="writeTitle" placeholder="제목을 입력해주세요." required>
-                    <!-- 스마트에디터 -->
-                    <div id="smarteditor">
-                   <textarea name="ir1" id="ir1" rows="20" cols="150" style="resize: none;"></textarea>
-                       <script type="text/javascript">
-						var oEditors = [];
-						nhn.husky.EZCreator.createInIFrame({
-						 oAppRef: oEditors,
-						 elPlaceHolder: "ir1",
-						 sSkinURI: "resources/smarteditor/SmartEditor2Skin.html",
-						 fCreator: "createSEditor2"
-						});
-						</script>
+                    <input type="text"  id = "writeTitle" name="writeTitle" placeholder="제목을 입력해주세요." required>
                    
+                   <select onclick="categoryChange();" style="height: 36px; width:560px;" id="stationLine">
+                   <option>호선 번호 선택</option>
+                   <option value="1">1호선</option>
+                   <option value="2">2호선</option>
+                   <option value="3">3호선</option>
+                   <option value="4">4호선</option>
+                   <option value="5">5호선</option>
+                   <option value="6">6호선</option>
+                   <option value="7">7호선</option>
+                   <option value="8">8호선</option>
+                   <option value="9">9호선</option>
+                   
+                   
+                   </select>
+                   <select id="stationNameSelect" style="height: 36px; width:562px;" name="stationName">
+                   	<option>역 명 선택</option>
+                   </select>
                    </div>
-                   <div>
-                    <label class="input-file-button" for="imageInput">사진 업로드</label>
-                   	<input type="file" id="imageInput" name="images[]" multiple accept="image/*" style="display: none;">
-                   </div>
-                   <div id="imagePreview"></div>
                    
                    <script>
-					    document.getElementById("imageInput").addEventListener("change", function(event) {
-					        const imagePreviewDiv = document.getElementById("imagePreview");
-					        imagePreviewDiv.innerHTML = ""; // Clear previous previews
-					        
-					        const files = event.target.files;
-					        
-					        for (let i = 0; i < files.length; i++) {
-					            const img = document.createElement("img");
-					            img.src = URL.createObjectURL(files[i]);
-					            img.className = "uploaded-image";
-					            imagePreviewDiv.appendChild(img);
-					        }
-					    });
-					</script>
+    
+    function categoryChange() {
+        $.ajax({
+            url: "selectbox.si",
+            data: { num: $("#stationLine option:selected").val() },
+            success: function (list) {
+                if (list == null) { 
+                    $("#stationNameSelect").html(""); 
+                    let val = "<option>역 명 선택</option>";
+                    $("#stationNameSelect").html(val);
+                } else {
+                    console.log(list);
+                    let val = "";
+
+                    for (let i = 0; i < list.length; i++) {
+                        val += "<option value='" + list[i].stationNo + "'>" + list[i].stationName + "</option>";
+                    }
+
+                    $("#stationNameSelect").html(val);
+                }
+            },
+            error: function () {
+                console.log("ajax실패");
+            }
+        });
+    }
+</script>
+
+                   
+                   
+                   
+                   
+                   
+                    
+                    <div id="txtarea" style="padding-left:50px">
+                   <textarea name="ir1" id="ir1" rows="20" cols="123" style="resize: none;" placeholder="내용을 입력해주세요." required></textarea>
+                     
+                   </div>
+                   <div id="imageInputContainer" style="padding-left:50px"></div>
+                  <div style="padding-left:50px"> <button type="button" id="addImageButton" class="input-file-button" >사진 추가하기</button></div>
+						<input type="file" id="imageInput" name="images[]" accept="image/*" style="display: none;">
+						
+						
+						<div id="imagePreview"></div>
+						
+						
+					
+                   
+                   
         
         <div   style="border: none;">
             <table class="table table-borderless"  style="border: none;">
                 <tbody>
+                    <tr>
+                        
+                        <td><input type="text" class="form-control" name="dtn" placeholder="여행지명" style="border: none;"></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><input type="text" class="form-control" name="tag" placeholder="태그(','로 구분해주세요)" style="border: none;"></td>
+                    </tr>
                     <tr>
                         
                         <td><input type="text" class="form-control" name="time" placeholder="시간" style="border: none;"></td>
@@ -193,24 +243,74 @@
                 </tbody>
             </table>
         </div>
-   
-</div>
-    
-            <!------------------------------content_f------------------------------->
-            <div id="content_f" align="right">
-                <button type="reset" id="writeBtn" class="btn btn-secondary">초기화</button>
-                <button type="button" id="writeBtn" class="btn btn-secondary">뒤로가기</button>
+        <!------------------------------content_f------------------------------->
+     <div id="content_f" align="right">
+                <button type="reset"  class="btn btn-secondary">초기화</button>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">뒤로가기</button>
                 <button type="submit" id="writeBtn" class="btn btn-secondary">작성하기</button>
             </div>
 
         </form>
+   
+</div>
+    
+             <!-- -------------위로가기 버튼------------ -->
+        <div style="position:fixed; bottom: 200px; right: 10%; width: 5px; height: 5px; z-index: 999;">
+           <a href="#"><img src="resources/images/upbutton.png" title="위로 가기" style="width: 50px;"></a>
+        </div>
+
+        <!-- -------------대한민구석구석 사이트 가기 버튼------------ -->
+        <div style="position:fixed; bottom: 140px; right: 10%; width: 5px; height: 5px; z-index: 999;">
+           <a href="https://1330chat.visitkorea.or.kr:3000/#/ttalk_main/CHAT1330_160635739001093018/_0300_0100_main.do"  target="_blank" ><img src="resources/images/movesite.png" title="대한민국구석구석" style="width: 50px;"></a>
+        </div>     
+          
+
+ <script>
+    let imgCount = 0;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const imageInputContainer = document.getElementById("imageInputContainer");
+        const imgLengthInput = document.querySelector("input[name='imgLength']");
+
+        document.getElementById("addImageButton").addEventListener("click", function() {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.name = "images["+imgCount+"]";
+            input.accept = "image/*";
+            input.style.display = "none";
+
+            input.addEventListener("change", function(event) {
+                const files = event.target.files;
+
+                imgLengthInput.value = imgCount + files.length;
+
+                for (let i = 0; i < files.length; i++) {
+                    const img = document.createElement("img");
+                    img.src = URL.createObjectURL(files[i]);
+                    img.className = "uploaded-image";
+                    
+                    img.name = "img["+imgCount+"]";
+                    
+                    img.addEventListener("click", function(){
+                    	imageInputContainer.removeChild(img);
+                    	imgCount--;
+                    	imgLengthInput.value = imgCount;
+                    });
+                    imageInputContainer.appendChild(img);
+                    imgCount +=1;
+                }
+               
+            });
+
+            imageInputContainer.appendChild(input);
+            input.click();
+        });
+    });
+</script>
 
 
-    </div>
 
-
-
-<%@ include file="/views/common/footer.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 
 </body>

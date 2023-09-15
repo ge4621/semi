@@ -17,19 +17,19 @@ public class Comments {
    
    
    public String getTitle() {
-   return title;
+	return title;
 }
 
 public void setTitle(String title) {
-   this.title = title;
+	this.title = title;
 }
 
 public String getComment() {
-   return comment;
+	return comment;
 }
 
 public void setComment(String comment) {
-   this.comment = comment;
+	this.comment = comment;
 }
 
 public Comments() {}
@@ -58,12 +58,12 @@ public Comments() {}
    
    
    public Comments(int commentNo, int memberNo, String commentContent, String modifyDate, String memberName) {
-   super();
-   this.commentNo = commentNo;
-   this.memberNo = memberNo;
-   this.commentContent = commentContent;
-   this.modifyDate = modifyDate;
-   this.memberName = memberName;
+	super();
+	this.commentNo = commentNo;
+	this.memberNo = memberNo;
+	this.commentContent = commentContent;
+	this.modifyDate = modifyDate;
+	this.memberName = memberName;
 }
 
 
@@ -90,43 +90,45 @@ public Comments() {}
 
 
 
- public Comments(int commentNo, int memberNo, String boardNo, String commentContent, String modifyDate, String status) {
-   super();
-   this.commentNo = commentNo;
-   this.memberNo = memberNo;
-   this.boardNo = boardNo;
-   this.commentContent = commentContent;
-   this.modifyDate = modifyDate;
-   this.status = status;
+ public Comments(int commentNo, int memberNo, String boardNo, String commentContent, String enrollDate,
+		String memberName) {
+	super();
+	this.commentNo = commentNo;
+	this.memberNo = memberNo;
+	this.boardNo = boardNo;
+	this.commentContent = commentContent;
+	this.enrollDate = enrollDate;
+	this.memberName = memberName;
 }
- 
+
+
  
 
 public Comments(String boardNo, String commentContent, String modifyDate, String title) {
-   super();
-   this.boardNo = boardNo;
-   this.commentContent = commentContent;
-   this.modifyDate = modifyDate;
-   this.title = title;
+	super();
+	this.boardNo = boardNo;
+	this.commentContent = commentContent;
+	this.modifyDate = modifyDate;
+	this.title = title;
 }
 
 
 
 
 public Comments(String commentContent, String modifyDate, String title) {
-   super();
-   this.commentContent = commentContent;
-   this.modifyDate = modifyDate;
-   this.title = title;
+	super();
+	this.commentContent = commentContent;
+	this.modifyDate = modifyDate;
+	this.title = title;
 }
 
 public Comments(int commentNo, int memberNo, String commentContent, String modifyDate) {
-      super();
-      this.commentNo = commentNo;
-      this.memberNo = memberNo;
-      this.commentContent = commentContent;
-      this.modifyDate = modifyDate;
-   }
+		super();
+		this.commentNo = commentNo;
+		this.memberNo = memberNo;
+		this.commentContent = commentContent;
+		this.modifyDate = modifyDate;
+	}
  
  
 
@@ -139,12 +141,12 @@ public Comments(int commentNo, int memberNo, String commentContent, String modif
 
 
 public Comments(int memberNo, String boardNo, String commentContent, String modifyDate, String status) {
-   super();
-   this.memberNo = memberNo;
-   this.boardNo = boardNo;
-   this.commentContent = commentContent;
-   this.modifyDate = modifyDate;
-   this.status = status;
+	super();
+	this.memberNo = memberNo;
+	this.boardNo = boardNo;
+	this.commentContent = commentContent;
+	this.modifyDate = modifyDate;
+	this.status = status;
 }
 
 public int getCommentNo() {

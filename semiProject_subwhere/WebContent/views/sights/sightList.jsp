@@ -1,6 +1,22 @@
+<%@page import="com.kh.board.model.vo.Sight"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.common.model.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    <%
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    ArrayList<Sight> list = (ArrayList<Sight>)request.getAttribute("list");
+    String search = (String)request.getAttribute("buttonText");
+    String headerStationName = (String)request.getAttribute("headerSearch"); 
+    String orderByCount = String.valueOf(request.getAttribute("orderByCount"));
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+    
+    
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +54,7 @@
             /* border: 1px solid blue; */
 
             width: 100%;
-            height: 75%;
+           
             box-sizing: border-box;
         }
 
@@ -164,6 +180,8 @@
             width: 100%;
             height: 100%;
             box-sizing: border-box;
+            table-layout:fixed;
+            border-collapse: collapse;
             /* border: 1px solid black; */
         }
 
@@ -237,6 +255,8 @@
         border-bottom: 10px solid white;
         margin-bottom: 10px;
         background-color: #f7f7f7;
+        height: 20%;
+        overflow: hidden;
         
      
     }
@@ -330,8 +350,7 @@
 </head>
 <body>
     
-   <%@ include file="/views/common/header.jsp" %>
-   
+   <%@ include file="../common/header.jsp" %>
 
     
     <div class="wrap">
@@ -383,13 +402,35 @@
     
         <div id="m-body">
             <div id="m1" style="color: gray;">
-             '<span><b>##</b></span>' 에 대한 검색 결과 
-
+             <%
+                if (search != null) {
+               %>
+               '<b><%= search %></b>'에 대한 검색 결과
+               <%
+                   } else if (headerStationName != null) {
+               %>
+               '<b><%= headerStationName %></b>'에 대한 검색 결과
+               <%
+                   } else {
+               %>
+               '전체'에 대한 검색 결과
+               <%
+                   }
+               %>
+			</span>
             </div>
             <div id="m2"></div>
 
             <div id="m3" >
-                <a href="#" style="color: gray;"><b>최신순</b></a> | <a href="#" style="color: gray;"><b>인기순</b></a>
+            <%if(search != null){ %>
+            <a href="<%=contextPath%>/search.si?cpage=1&buttonText=<%=search%>" style="color: gray;"><b>최신순</b></a>
+                 |
+            <a href="<%=contextPath%>/count.si?cpage=1&buttonText=<%=search %>" style="color: gray;"><b>인기순</b></a>
+            <% }else{%>
+            <a href="<%=contextPath %>/list.si?cpage=1" style="color: gray;"><b>최신순</b></a>
+            |
+            <a href="<%=contextPath%>/count.si?cpage=1&buttonText=전체" style="color: gray;"><b>인기순</b></a>
+            <%} %>
             </div>
         </div>
     
@@ -405,88 +446,63 @@
   
 
         <table>
+        
+         <%if(list.isEmpty()){ %>
+        <!-- 게시글이 없을 경우 -->
+        
+        
             <tr>
-                <th style="width: 30%; height: 20%;">
-                  <img src="resources/images/naksan.webp" class="img">
+            
+                <th style="width: 25%; height: 20%;">
                 </th>
                 
                 <td>
                     <div class="h3-class">
-                        <h3> <b> 낙산공원</b> </h3>
+                        <h3> <b> 게시글이 없습니다.</b> </h3>
                     </div>
                     
                     <div class="p-class">
-                        <p > 종로구에 위치한 낙산공원은 성곽을 따라 걸으며 산책도 하고 서울의 야경도 즐길 수 있는 일석이조의 야경 조망 명소. </p>
+                       
                     </div>
                 </td>
 
             </tr>
-
+		<%}else{ %>
+		<!-- 게시글이 있을 경우 -->
+		<%for(Sight s : list){ %>
+			<tbody class="tablebody">
+			
             <tr>
-                <th style="width: 30%; height:20%;">
-                    <img src="resources/images/namsan.webp" class="img">
+            	
+                <th style="width: 25%; height:20%">
+                <input type ="hidden" class="boardNoInput" value = "<%=s.getBoardNo()%>">
+                    <img src="<%=contextPath %>/<%=s.getFilePath()%>" class="img">
                 </th>
                 
-                <td>
-                    <div class="h3-class">
-                        <h3> <b> 남산서울타워</b> </h3>
-                    </div>
+                <td data-bno="<%=s.getBoardNo()%>">
                     
-                    <div class="p-class">
-                        <p > 서울의 상징이자 영원한 사랑을 꿈꾸는 전세계 연인들의 로맨스 성지인 남산서울타워 </p>
-                    </div>
-
-                </td>
-            </tr>
-
-            <tr>
-                <th style="width: 30%; height: 20%;">
-                    <img src="resources/images/gwangjang.webp" class="img">
-                </th>
-
-                <td>
-                    <div class="h3-class">
-                        <h3> <b> 광장시장</b> </h3>
-                    </div>
+                        <h3 style="padding-top: 10px"> <b style="color:gray; padding-left: 10px;"> <%=s.getTitle() %></b> </h3>
                     
-                    <div class="p-class">
-                        <p > 100년 동안 서울 중심에 자리한 광장시장은 서울에서 가장 활기있는 전통시장 중 하나입니다 </p>
-                    </div>
+                    
+                  
+                        <p style="color:gray; padding-left: 10px; padding-top: 15px;"> 
+                        <% String content = s.getContent(); %>
+                        <%= content.length() > 50 ? content.substring(0, 50) + "..." : content %>
+                        </p>
+</td>  
+                    
+                                 <td style="width: 160px; color:gray;">
+                        <span>조회수 :</span> <%=s.getCount() %><br>
+                        <span>수정일 :</span> <%=s.getModifyDate()%>
+                        </td>
+                    </tr> 
+                    
+                    </tbody>                  
+                           
 
-                </td>
-            </tr>
-
-            <tr>
-                <th style="width: 30%; height: 20%;">
-                    <img src="resources/images/banpo.webp" class="img">
-                </th>
                 
-                <td>
-                    <div class="h3-class">
-                        <h3> <b> 반포대교</b> </h3>
-                    </div>
-                    
-                    <div class="p-class">
-                        <p > 달빛 무지개 분수가 선사하는 낭만적인 야경 </p>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <th style="width: 30%; height: 20%;">
-                    <img src="resources/images/빛초록축제.png" class="img">
-                </th>
-
-                <td>
-                    <div class="h3-class">
-                        <h3> <b> 서울빛초롱축제</b> </h3>
-                    </div>
-                    
-                    <div class="p-class">
-                        <p>  빛 조형물 전시와 다양한 체험 프로그램 등 화려한 볼거리를 제공합니다  </p>
-                    </div>
-                </td>
-            </tr>
+            
+            <% }} %>
 
 
         </table>
@@ -499,34 +515,107 @@
         </div>
 
 
+
         
         <div id="down-body" >
             <br><br>
-            <a href="#" class="btn btn-sm btn-secondary" style="block-size: 40px; inline-size: 70px; line-height: 30px;">글작성</a>
+            <%if(request.getSession().getAttribute("loginMember") != null && ((Member)request.getSession().getAttribute("loginMember")).getMemberNo() == 1){  %>
+            <a href="<%=contextPath %>/write.si" class="btn btn-sm btn-secondary" style="block-size: 40px; inline-size: 70px; line-height: 30px;">글작성</a>
+            <%} %>
             <!-- 글 작성은 회원과 관리자일때만 보이게 하기! (자바에서)-->
 
         </div>
 
     </div>
 
+        <!-- -------------위로가기 버튼------------ -->
+        <div style="position:fixed; bottom: 200px; right: 10%; width: 5px; height: 5px; z-index: 999;">
+           <a href="#"><img src="resources/images/upbutton.png" title="위로 가기" style="width: 50px;"></a>
+        </div>
+
+        <!-- -------------대한민구석구석 사이트 가기 버튼------------ -->
+        <div style="position:fixed; bottom: 140px; right: 10%; width: 5px; height: 5px; z-index: 999;">
+           <a href="https://1330chat.visitkorea.or.kr:3000/#/ttalk_main/CHAT1330_160635739001093018/_0300_0100_main.do" target="_blank"><img src="resources/images/movesite.png" title="대한민국구석구석" style="width: 50px;"></a>
+        </div>    
+
     <div align="center" id="paging">
-        <button> &lt; </button>
-        <button class="active">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>10</button>
-        <button> &gt; </button>
+        <%if(currentPage != 1){ %>
+        
+        <button onclick="location.href='<%=contextPath%>/list.si?cpage=<%=currentPage-1%>'"> &lt; </button>
+        <%} %>
+        <%for(int p = startPage; p<=endPage; p++){ %>
+        
+        <%if(p == currentPage){ %>
+        	<button class="active" disabled><%=p %></button>
+        <%}else{ %>
+        <%if(search == null){ %>
+        <%if(orderByCount == "1"){ %>
+        <button class="page-button" onclick= "location.href='<%=contextPath%>/count.si?cpage=<%=p%>'"><%=p %></button>
+        <%}else{ %>
+         <button class="page-button" onclick= "location.href='<%=contextPath%>/list.si?cpage=<%=p%>'"><%=p %></button><%} %>
+         
+         <%}else{ %>
+         <button class="page-button" onclick= "location.href='<%=contextPath%>/search.si?cpage=<%=p%>&buttonText=<%=search%>'"><%=p %></button> <%} %>
+       
+        <%} %>
+        <%} %>
+        <%if(currentPage != maxPage){ %>
+        
+        <%if(search ==null){ %>
+        
+        
+		        <%if(orderByCount =="1"){ %>
+		         <button onclick="location.href='<%=contextPath%>/count.si?cpage=<%=currentPage+1%>'">&gt;</button>
+		        <%}else{ %>
+        <button onclick="location.href='<%=contextPath%>/list.si?cpage=<%=currentPage+1%>'">&gt;</button>
+        <%} %>
+         <%}else{ %>
+         <button onclick="location.href='<%=contextPath%>/search.si?cpage=<%=currentPage+1%>'&buttonText=<%=search%>">&gt;</button>
+         <%} %><%} %>
+        
     </div>
 
   <br><br>
+  
+   <form id="menu-form" action="" method="GET">
+    <input type="hidden" id="cpage" name="cpage" value="1">
+    <input type="hidden" id="button-text" name="buttonText" value="">
+</form>
+
+<script>
+    const menuButtons = document.querySelectorAll('#menu-body button');
+    menuButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const buttonText = this.textContent;
+            const form = document.getElementById('menu-form');
+            const cpageInput = form.querySelector('#cpage');
+            const buttonTextInput = form.querySelector('#button-text');
+
+            if (buttonText === '전체') {
+                form.action = 'list.si';
+            } else {
+                form.action = 'search.si';
+                buttonTextInput.value = buttonText;
+            
+            }
+			
+            form.submit();
+        });
+    });
+</script>
+  <script>
+  $(function(){
+	  $("table>tbody").click(function(){
+		  const boardNoInput = $(this).find(".boardNoInput");
+		  if (boardNoInput.length > 0) {
+		  location.href = "<%=contextPath%>/read.si?bno=" + $(this).find(".boardNoInput").val();
+		  }
+	  })
+  })
+  
+  </script>
     
-<%@ include file="/views/common/footer.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
 

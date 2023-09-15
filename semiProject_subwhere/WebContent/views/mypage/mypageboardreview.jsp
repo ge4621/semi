@@ -241,15 +241,15 @@
                             <!-- case2. 작성한 글이 있을 경우 -->
         					<%for(Review r : list){ %>
                             <tr class="blist-area">
-                            	<input type="hidden" value="<%=r.getBoardNo()%>">
+                               <input type="hidden" value="<%=r.getBoardNo()%>">
                                     <div class="jypic">
                                         <td width="100" id="jya"><img src="<%=r.getTitleImg() %>" alt="" id="jyimg"></td>
                                     </div>
         
                                     <td width="450" height="130" id="jya"> 
-                                        <h2 id="jyh2"><%=r.getTitle() %></h2>
-                                        <p id="jyp"><%=r.getContent() %></p>
-                                        <span>날짜:<%=r.getCreateDate() %>  조회수:<%=r.getCount() %></span>
+                                        <h2 id="jyh2"><%String Rreview =  r.getTitle(); %><%=Rreview.length()>10 ? Rreview.substring(0, 10)+"..":Rreview %></h2>
+                                        <p id="jyp"><%String Rcontent = r.getContent(); %><%=Rcontent.length()>15?Rcontent.substring(0, 15)+"..":Rcontent %></p>
+                                        <span>날짜:<%=r.getCreateDate() %> &nbsp;&nbsp; 조회수:<%=r.getCount() %></span>
                                     </td>
                                 
                             </tr>

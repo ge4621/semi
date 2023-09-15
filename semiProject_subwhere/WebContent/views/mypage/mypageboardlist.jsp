@@ -240,15 +240,15 @@
                             <!-- case2. 작성한 글이 있을 경우 -->
         					<%for(Course c : blist){ %>
                             <tr class="clist_area">
-                            	<input type="hidden" value="<%=c.getBoardNo()%>">
+                               <input type="hidden" value="<%=c.getBoardNo()%>">
                                     <div class="jypic">
                                         <td width="100" id="jya"><img src="<%=c.getTITLEIMG() %>" alt="" id="jyimg"></td>
                                     </div>
         
                                     <td width="450" height="130" id="jya"> 
-                                        <h2 id="jyh2"><%=c.getCourseTitle() %></h2>
-                                        <p id="jyp"><%=c.getCourseContent() %></p>
-                                        <span>날짜:<%=c.getCreateDate() %>  조회수:<%=c.getCount() %></span>
+                                        <h2 id="jyh2"><%String ktitle = c.getCourseTitle(); %><%=ktitle.length()>15? ktitle.substring(0, 15)+"..":ktitle %></h2>
+                                        <p id="jyp"><%String kComment = c.getCourseContent(); %><%=kComment.length()>15?kComment.substring(0, 15)+"..":kComment %></p>
+                                        <span>날짜:<%=c.getCreateDate() %> &nbsp;&nbsp; 조회수:<%=c.getCount() %></span>
                                     </td>
                                 
                             </tr>

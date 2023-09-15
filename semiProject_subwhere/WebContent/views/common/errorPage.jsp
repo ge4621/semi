@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-			
-		
-			<h1><%=request.getAttribute("errorMsg") %></h1>
-			
-			
+에러났어
 </body>
 </html>

@@ -1,17 +1,12 @@
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-   String contextPath = request.getContextPath(); // /jsp
+	String contextPath = request.getContextPath(); 
 
-   Member loginMember = (Member)session.getAttribute("loginMember");
-   // 로그인 시도 전 menubar.jsp 로딩시 : null인 상태
-   // 로그인 성공 후 menubar.jsp 로딩시 : 로그인 성공한 회원의 정보가 담겨있는 Member 객체
-   
-   String alertMsg = (String)session.getAttribute("alertMsg");
-   // 서비스 요청 전 menubar.jsp 로딩시 : null인 상태
-   // 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메시지 문구
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
     
 <!DOCTYPE html>
@@ -38,9 +33,9 @@
     
     <style>
         
+        
         #header{ /* 헤더 전체 영역 관련 */
             /* border: 2px solid blue; */
-            /* background-color: aliceblue; */
             width: 1400px;
             height: 168px;
             margin: auto;
@@ -54,7 +49,7 @@
             margin: auto;
             box-sizing: border-box;
             background-color: rgb(236, 236, 236);
-            font-family: 'KIMM_Bold';
+            border-radius: 5px;
         }
 
         #header>div{ /*네비바 제외한 헤더 부분 영역 나누기*/
@@ -164,7 +159,7 @@
 
         /*-----------로그인 후-----------*/
         
-        #user_info{
+        .user_info{
             /* border: 2px solid lightskyblue; */
             width: 200px;
             height: 80px;
@@ -177,15 +172,20 @@
             left:15px;
 
         }
-        #user_info image{ /*프사*/
-            width: 50px;
+        .user_info img{ /*프사*/
+            /* border: 1px solid; */
+            width: 65px;
             margin-top: 5px;
-            border-radius: 10px;
         }
-        #user_info b{ /*닉네임*/
+        .user_info b{ /*닉네임*/
             /* border: 1px solid; */
             font-size: 17px;
             vertical-align: sub;
+        }
+        .pro { /*프사 여부에 따라 다르게 변함, 테두리 동그랗게*/
+            margin-top: 50px;
+            width: 70px;
+            border-radius: 50px;
         }
 
         #usermenu{ /*햄버거버튼 속성*/
@@ -213,7 +213,15 @@
             right: 2px;
             top: 120px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-            
+        }
+        
+        #usermenu_page b,p{
+        	font-family: 'SUITE-Regular';
+        }
+        
+        .usermenu_page .btn{
+        	font-family: 'LINESeedKR-Bd';
+        	font-size:17px;
         }
 
         #closeUserMenu{ /*usermenu 닫기 x 버튼*/
@@ -263,10 +271,12 @@
             text-align: center;
             margin-top: 22%;
             font-weight: 700;
+            font-family: 'Giants-Bold';
         }
         .form-control{
             /* input 공통 부트스트랩 */
             font-size: 14px;
+            font-family: 'SUITE-Regular';
         }
 
         /* 로그인 usermenu_page_login */
@@ -275,14 +285,16 @@
             height: 200px;
         }
         #usermenu_page_login a{ /* 로그인 버튼 아래 ID찾기, 비번찾기, 회원가입*/
-            text-decoration: none;
+            /*text-decoration: none;*/
             color: rgb(96, 96, 96);
-            font-weight: 700;
+            font-weight: 400;
+            font-family: 'LINESeedKR-Bd';
+            font-size: 16px;
         }
         #usermenu_page_login a:hover{ /* 로그인 버튼 아래 ID찾기, 비번찾기, 회원가입*/
             text-decoration: none;
             color: #007fff;
-            font-weight: 700;
+            font-weight: 400;
         }
 
         /* 로그인 성공 후 usermenu_page_login_success */
@@ -384,33 +396,53 @@
             margin-left: 30px;
             margin-right: 30px;
             border-radius: 12px;
-        }        
+        }
+        
+        #navigator>ul>li>a{ /*네비바 버튼 안 글자*/
+        	font-style:oblique;
+        	font-weight: 400;
+            font-size: 17px;
+            font-family:'Giants-Bold';
+        }
 
         .btn-light{ /*홈, 공지사항 버튼*/
             background-color: #fffefe;
             border: 1px #ededed;
         }
-
-
-        .pro {
-            margin-top: 50px;
-            width: 70px;
-            border-radius: 50px;
-        }
         
+        /* 스위트 */
+		@font-face {
+		    font-family: 'SUITE-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+		    font-weight: 400;
+		    font-style: normal;
+		}
+		
+		* {
+			font-family: 'SUITE-Regular';
+		}
         
        
     </style>
 </head>
 <body>
 
-<% if(alertMsg != null){ %>
-		<script>
-			alert("<%= alertMsg%>");
-		</script>
-		<% session.removeAttribute("alertMsg"); %>
-	<% } %>
-
+		<%if(alertMsg != null){ %>
+		      <script>
+		         alert("<%=alertMsg%>");
+		      
+		      </script>   
+		      <%
+		      
+		      // 회원가입 성공 후 다른 메뉴를 누르면 계속 alert가 발생 
+		      // alert 막기 (하단 코드)
+		      
+		      %>
+		      
+		      <% session.removeAttribute("alertMsg"); %>
+		      
+		
+		   <%} %>
     
     <div id="header">
         
@@ -423,73 +455,86 @@
             <!-- 역 검색창 -->
 
             
-            <form id="search_form" >
+            <form action="<%=contextPath %>/searchStation.do?cpage=1" id="search_form" method="get">
+				
                 <div id="search_station">
                     
-                    <select onchange="categoryChange(this)" style="height: 36px; width: 170px;">
+                    <select id="station-line" name="station-line" onclick="categoryChange();" style="height: 36px; width: 170px; font-family: 'SUITE-Regular';">
+                      
                         <option>호선 번호 선택</option>
-                        <option value="line1">1호선</option>
-                        <option value="line2">2호선</option>
-                        <option value="line3">3호선</option>
-                        <option value="line4">4호선</option>
-                        <option value="line5">5호선</option>
-                        <option value="line6">6호선</option>
-                        <option value="line7">7호선</option>
-                        <option value="line8">8호선</option>
-                        <option value="line9">9호선</option>
+                        <option value="1">1호선</option>
+                        <option value="2">2호선</option>
+                        <option value="3">3호선</option>
+                        <option value="4">4호선</option>
+                        <option value="5">5호선</option>
+                        <option value="6">6호선</option>
+                        <option value="7">7호선</option>
+                        <option value="8">8호선</option>
+                        <option value="9">9호선</option>
     
                     </select>
                     
-                    <select id="station" style="height: 36px; width: 150px;">
-                    <option>역 명 선택</option>
+                    <select id="stationName" name="station-name" style="height: 36px; width: 150px; font-family: 'SUITE-Regular';">
+                       <option >역 명 선택</option>
                     </select>
+                    
+                    
 
                     <script>
-                    function categoryChange(e) {
-                        var station1 = ["서울역", "용산", "시청", "종로 3가", "동대문", "동묘앞", "청량리", "회기", "영등포", "구로", "인천", "부천"];
-                        var station2 = ["홍대입구", "합정", "신림", "서울대입구", "사당", "강남", "성수", "왕십리", "잠실"];
-                        var station3 = ["안국", "경복궁", "홍제", "종로3가", "을지로3가", "압구정", "신사", "수서"];
-                        var station4 = ["삼각지", "명동", "동대문역사공원", "총신대입구(이수)", "혜화", "미아"];
-                        var station5 = ["광화문", "여의도", "공덕", "청구", "군자", "천호", "굽은다리"];
-                        var station6 = ["응암", "불광", "망원", "이태원", "안암"];
-                        var station7 = ["노원", "건대입구", "청담", "논현", "고속터미널", "대림"];
-                        var station8 = ["잠실", "천호", "암사", "가락시장"];
-                        var station9 = ["등촌", ,"선유도", "흑석", "종합운동장", "석촌", "올림픽공원"];
-                        var target = document.getElementById("station");
-                    
-                        if(e.value == "line1") var d = station1;
-                        else if(e.value == "line2") var d = station2;
-                        else if(e.value == "line3") var d = station3;
-                        else if(e.value == "line4") var d = station4;
-                        else if(e.value == "line5") var d = station5;
-                        else if(e.value == "line6") var d = station6;
-                        else if(e.value == "line7") var d = station7;
-                        else if(e.value == "line8") var d = station8;
-                        else if(e.value == "line9") var d = station9;
-                    
-                        target.options.length = 0;
-                    
-                        for (x in d) {
-                            var opt = document.createElement("option");
-                            opt.value = d[x];
-                            opt.innerHTML = d[x];
-                            target.appendChild(opt);
+                    // selectbox를 클릭했을 때 ajax
+            
+                        function categoryChange(){
+                        
+                        $.ajax({
+                            url:"selectStation.do",
+                            data:{num:$("#station-line option:selected").val()},   // num값에 호선 번호를 가져오기! 
+
+
+                            success:function(list){
+                                if(list == null){  // '호선 선택'을 눌렀을 경우
+                                    $("station-name").html("");   // 먼저 역명 부분을 모두 비워주기
+                                    let val = "<option>역 명 선택</option>";  //역명 선택을 그려주기
+                                    $("station-name").html(val);  // 역명이 들어가는 부분에 val값 넣기 
+                                }else{
+                                    
+                                    // 만약 호선이 잘 넘어왔다면
+                                    console.log(list)
+                                    let val = "";
+                                    console.log($("station-name").html(val));
+
+                                for(let i=0; i<list.length; i++){
+                                    
+                                    val += "<option value='" + list[i].stationNo +"'>" + list[i].stationName + "</option>"
+                                    
+                                    $("#stationName").html(val);  // val에 옵션을 그려주고 selectbox에 넣어주기
+                                    
+                                	}
+                                    
+                                }
+                            },
+                            error:function(){}
+                            })
+
                         }
-                    }
+                    
+                    
+
                     </script>
 
                     <!-- 검색버튼 -->
-                    <div id="search_btn">
-                        <input type="submit" value="검색" class="btn btn-primary" style="border: 1px;">
+                    <div id="search_btn" style="font-family: 'SUITE-Regular';">
+                    	<button type="submit" class="btn btn-primary">검색</button>
                     </div>
                    
             
                 </div>
             
+            	<input type="hidden" name="cpage" value="1">
+            
             </form>
             
-            
         </div>
+
         <div id="header_3">
             <div id="weather">
                 <!-- Weather widget by https://meteodays.com -->
@@ -501,43 +546,53 @@
 
         <div id="header_4">
         
-          <% if(loginMember == null){ %>
         
-               <!-- case1. 로그인 전 : 로그인 -->
-               <div id="before_login">
-                   <a href="#" onclick="openUserMenu()">Login</a>
-               </div>
-   
-               <div id="overlay"></div>
-               
-         <%}else { %>
-
-               <!-- case2. 로그인 후 : 프사+닉네임 -->
-               <div id="after_login" >
-   
-                    <%if(loginMember.getProfileImg()== null){ %>
-                 	  <div id="user_info">
-                          <img class="pro" src="resources/images/profile_img_nocamera.png" alt="profile">
-                          <b><%= loginMember.getNickname()%></b>
-                      </div>
-	               <%}else{ %>
-	               		<div id="user_info">
-	                      <img class="pro" src="<%= loginMember.getProfileImg() %>">
-	                       <b><%= loginMember.getNickname()%></b>
-	                    </div>
-	               <%} %>
-
-                   
-                   <button id="usermenu" onclick="openUserMenu()">
-                       <img src="resources/images/hamburger_btn.png">
-                   </button>
-               
-               </div>
-               
-         <%} %>
-               
-               
+        	<% if(loginMember == null){ %>
         
+	            <!-- case1. 로그인 전 : 로그인 -->
+	            <div id="before_login">
+	                <a  href="#" onclick="openUserMenu()">Login</a>
+	            </div>
+	
+	            <div id="overlay"></div>
+	            
+	            
+			<%}else { %>
+
+            	<!-- case2. 로그인 후 : 프사+닉네임 -->
+	            <div id="after_login">
+
+				  <%if(loginMember.getProfileImg().equals("resources/profile_upfiles/null")){ %>
+					<div class="user_info">
+						<img class="pro" src="resources/images/profile_img_nocamera.png" alt="profile">
+						<b><%= loginMember.getNickname()%></b>
+					</div>
+				  <%}else{ %>
+                    <div class="user_info">
+                        <img class="pro" src="<%= loginMember.getProfileImg() %>">
+                        <b style="margin-top: 100px;"><%= loginMember.getNickname()%></b>
+                    </div>
+				  <%} %>
+				  
+				  <!-- 
+				  <%if(loginMember.getProfileImg().equals("resources/profile_upfiles/null")){ %>
+						  <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+							  <img src="resources/images/profile_img_nocamera.png" alt="profile" style="width: 100px; height: 100px;">
+							  <b><%= loginMember.getNickname()%></b>
+						  </div>
+					  	<%}else{ %>
+					  		<div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+					  			<img class="pro" src="<%= loginMember.getProfileImg() %>" > <br>
+							 	<b><%= loginMember.getNickname()%></b>
+					  		</div>
+					  	<%} %> -->
+
+				   <button id="usermenu" onclick="openUserMenu()">
+					   <img src="resources/images/hamburger_btn.png">
+				   </button>
+			    </div>
+	            
+			<%} %>
 
 
             <div id="overlay"></div>
@@ -549,63 +604,127 @@
                 <button id="closeUserMenu">×</button>
 
 
-            <% if(loginMember == null){ %>
-                   <!-- 로그인 -->
-                   <div id="usermenu_page_login">
-   
-                       <form action="<%= contextPath %>/login.me" method="post">
-   
-                           <h3>로그인</h3>
-   
-                           <table>
-                           
-                               <tr>
-                                   <td><input type="text" name="memberId" class="form-control" placeholder="아이디" required></td>
-                               </tr>
-                               <tr>
-                                   <td><input type="password" name="memberPwd" class="form-control" placeholder="비밀번호" required></td>
-                               </tr>
-                               <tr>
-                                   <td><button class="btn btn-primary btn-block" type="submit">로그인</button></td>
-                               </tr>
-                               <tr>
-                                   <td>
-                                       <a href="views/common/findIdPage.jsp">ID 찾기 </a> |
-                                       <a href="#">비밀번호 찾기 </a> |
-                                       <a href="<%= contextPath%>/terms.me">회원가입</a>
-                                   </td>
-                               </tr>
-                               
-                           </table>               
-       
-                       </form>
-                   </div>
+				<% if(loginMember == null){ %>
+	                <!-- 로그인 -->
+	                <div id="usermenu_page_login">
+	
+	                    <form action="<%= contextPath %>/login.me" method="post">
+	
+	                        <h3>로그인</h3>
+	
+	                        <table style="background-color: #f1f2f3;">
+	                        
+	                            <tr>
+	                                <td><input type="text" name="memberId" class="form-control" placeholder="아이디" required></td>
+	                            </tr>
+	                            <tr>
+	                                <td><input type="password" name="memberPwd" class="form-control" placeholder="비밀번호" required></td>
+	                            </tr>
+	                            <tr>
+	                                <td><button class="btn btn-primary btn-block" type="submit">로그인</button></td>
+	                            </tr>
+	                            <tr>
+	                                <td align="center">
+	                                    <a href="views/common/findIdPwdPage.jsp">ID / 비밀번호 찾기</a> |
+	                                    <a href="<%=contextPath%>/terms.me">회원가입</a>
+	                                </td>
+	                            </tr>
+	                            
+	                        </table>
+	                        
+	                        <script>
+								function gotoFindIdPwdPage(){
+									location.href = "<%=contextPath%>/findIdPwdPage.me";
+								}	                        	
+	                        </script>               
+	    
+	                    </form>
+	                </div>
+	                
                 
-            <%}else { %>
-            
-                   <!-- 로그인 성공-->
-                   <div id="usermenu_page_login_success" class="usermenu_page_content">
-                       
-                       <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
-                           <img src="<%=loginMember.getProfileImg() %>" alt="profile" style="width: 100px; height: 100px;">
-                           <p><b align="center"><%=loginMember.getMemberName() %>님</b></p>
-                       </div>
-                       
-                       <table>
-                       
-                           <tr>
-                               <td><input type="button" class="btn btn-primary btn-block" value="마이페이지" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
-                           </tr>
-                           <tr>
-                               <td><input type="button" class="btn btn-secondary btn-block" value="회원정보 변경" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
-                           </tr>
-                           <tr>
-                               <td><input type="button" class="btn btn-secondary btn-block" value="로그아웃" onclick = "location.href = '<%=contextPath%>/logout.me' "></td>
-                           </tr>
-                           
-                       </table>
-   
-                   </div>
+				<%}else if(loginMember.getMemberName().equals("관리자")){ %>
+				
+	                <!-- 로그인 성공-->
+	                <div id="usermenu_page_login_success" class="usermenu_page_content">
+	                    
+	                     <!-- 
+	                    <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+	                        <img src="resources/images/profile_img.png" alt="profile" style="width: 100px; height: 100px;">
+	                        <p><b><%=loginMember.getMemberName() %>님</b></p>
+	                    </div> -->
+	                    
+	                    
+	                    <%if(loginMember.getProfileImg().equals("resources/profile_upfiles/null")){ %>
+						  <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+							  <img src="resources/images/profile_img_nocamera.png" alt="profile" style="width: 100px; height: 100px;">
+							  <b><%= loginMember.getNickname()%></b>
+						  </div>
+					  	<%}else{ %>
+					  		<div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px; margin-top:30px">
+					  			<img class="pro" src="<%= loginMember.getProfileImg() %>" style="width: 100px; height: 100px;"> <br>
+							 	<b><%= loginMember.getNickname()%></b>
+					  		</div>
+					  	<%} %>
+	                    
+	                    
+	                    <table style="margin-top:230px; height:200px;">
+	                    
+	                        <tr>
+	                            <td><input type="button" class="btn btn-primary btn-block" value="마이페이지" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
+	                        </tr>
+	                        <tr>
+	                            <td><input type="button" class="btn btn-secondary btn-block" value="회원정보 변경" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
+	                        </tr>
+	                        <tr>
+	                        	<td><input type="button" class="btn btn-secondary btn-block" value="관리자 페이지" onclick = "location.href = '<%=contextPath%>/manage.ad?cpage=1'"></td>
+	                        </tr>
+	                        <tr>
+	                            <td><input type="button" class="btn btn-secondary btn-block" value="로그아웃" onclick = "location.href = '<%=contextPath%>/logout.me' "></td>
+	                        </tr>
+	                        
+	                    </table>
+	
+	                </div>
+	                
+                <%}else{ %>
+                
+                	<!-- 로그인 성공-->
+	                <div id="usermenu_page_login_success" class="usermenu_page_content">
+	                    <!-- 
+	                    <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+	                        <img src="resources/images/profile_img.png" alt="profile" style="width: 100px; height: 100px;">
+	                        <p><b><%=loginMember.getMemberName() %>님</b></p>
+	                    </div> -->
+	                    
+	                    <%if(loginMember.getProfileImg().equals("resources/profile_upfiles/null")){ %>
+						  <div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px;">
+							  <img src="resources/images/profile_img_nocamera.png" alt="profile" style="width: 100px; height: 100px;">
+							  <b><%= loginMember.getNickname()%></b>
+						  </div>
+					  	<%}else{ %>
+					  		<div id="usermenu_page_login_success_userinfo" style="width: 100px; height: 100px; margin-top:50px">
+					  			<img class="pro" src="<%= loginMember.getProfileImg() %>" style="width: 100px; height: 100px;"> <br>
+							 	<b><%= loginMember.getNickname()%></b>
+					  		</div>
+					  	<%} %>
+	                    
+	                    <table>
+	                    
+	                        <tr>
+	                            <td><input type="button" class="btn btn-primary btn-block" value="마이페이지" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
+	                        </tr>
+	                        <tr>
+	                            <td><input type="button" class="btn btn-secondary btn-block" value="회원정보 변경" onclick = "location.href = '<%=contextPath%>/mypageform.me'"></td>
+	                        </tr>
+	                        <tr>
+	                            <td><input type="button" class="btn btn-secondary btn-block" value="로그아웃" onclick = "location.href = '<%=contextPath%>/logout.me' "></td>
+	                        </tr>
+	                        
+	                    </table>
+	
+	                </div>
+                
+                
                 <%} %> 
 
                 
@@ -642,7 +761,6 @@
                     });
                     
                 }
-
                 
                 
             </script>
@@ -651,30 +769,27 @@
 
 
     </div>
+    
     <div id="navigator">
         <!-- navi -->
-        <ul class="nav nav-pills justify-content-center ">
+        <ul class="nav nav-pills justify-content-center">
             <li class="nav-item">
-                <a class="btn btn-light" href="<%=contextPath%>">홈</a>
+                <a class="btn btn-light nav_tab_font" href="<%=contextPath%>" style="box-shadow: 0px 0px 4px #585858">HOME</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-primary" href="#">여행지 추천</a>
+                <a class="btn btn-primary nav_tab_font" href="<%=contextPath%>/list.si?cpage=1" style="box-shadow: 0px 0px 4px #585858">여행지 추천</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-primary" href="#">여행 코스 추천</a>
+                <a class="btn btn-primary nav_tab_font" href="<%=contextPath %>/list.co?cpage=1" style="box-shadow: 0px 0px 4px #585858">여행 코스 추천</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-primary" href="<%=contextPath%>/list.re?cpage=1">여행 후기</a>
+                <a class="btn btn-primary nav_tab_font" href="<%=contextPath %>/list.re?cpage=1" style="box-shadow: 0px 0px 4px #585858">여행 후기</a>
             </li>
             <li class="nav-item">
-                  <a class="btn btn-light" href="#">공지사항</a>
+                <a class="btn btn-light nav_tab_font" href="<%=contextPath %>/list.no?cpage=1" style="box-shadow: 0px 0px 4px #585858">공지사항</a>
             </li>
         </ul>
     </div>
     
-    
-    
-    
 </body>
-
 </html>

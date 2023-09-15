@@ -109,7 +109,7 @@
         .page_btn{
             /* border: 1px solid blueviolet; */
             /* margin-top: 7%; */
-            margin-left: 28%;
+            margin-left: 43%;
         }
 
         .btn_box>button{
@@ -251,24 +251,21 @@
                             <%}else{ %>
                             
 							<!-- case2. 게시글이 있을 경우 -->
-                            <%for(Comments a : clist){ %>
+                           <%for(Comments a : clist){ %>
                                 <tr >
-                                	<input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110" class="review-carea"> 
-                                            <h3>&nbsp;<%=a.getTitle() %></h3>
-                                            <p id="date"><%=a.getModifyDate() %><br>
-
-                                                        <%=a.getCommentConent() %></p>
+                                         <input type="hidden" value="<%=a.getBoardNo()%>">
+                                            <h3>&nbsp;<%String Ctitle = a.getTitle(); %>
+                                                     <%=Ctitle.length()>10 ? Ctitle.substring(0, 10)+"..":Ctitle %></h3>
+                                            <p id="date">&nbsp;<%=a.getModifyDate() %><br>
+                                          &nbsp;<%String cComments = a.getCommentContent(); %>
+                                                        <%=cComments.length()>15?cComments.substring(0, 15)+"..":cComments %></p>
                                         </td>
-<<<<<<< HEAD
-                                        <td><input type="checkbox" name="deletebox" id="check_box" value="<%=a.getBoardNo()%>"></td>
                                         
-=======
-                                        <!-- <td><input type="checkbox" name="deletebox" id="check_box"></td> -->
->>>>>>> 3fedd32a6d19502b25f4e0fa4840e3a320ad546e
                                 </tr>
-            			<%} %>
-            		<%} %>
+                     <%} %>
+                  <%} %>
+               
             	
 
                         </table>
@@ -296,15 +293,6 @@
 		                    		
 		                    	})
 		                    	
-		                    	$(function(){
-		                    		
-		                    		$("input[type=checkbox]").each(function(){
-		                    			
-		                    				$(this).prop("checked",false);
-		                    				
-		                    		})
-		                    		
-		                    	})
 		                    	
 			                
 			              </script>
@@ -315,30 +303,11 @@
      		 </div>
 
                 <div class="btnall">
-     				<!-- 
-                    <div class="btnjy">
-<<<<<<< HEAD
-                        <button id="d-btn" onclikc="deletebtn();" >삭제하기</button>
-                    </div>
-=======
-                        <button id="d_btn" onclikc="deletebtn();" >삭제하기</button>
-                    </div> -->
->>>>>>> 3fedd32a6d19502b25f4e0fa4840e3a320ad546e
-                    
-                    <!--  
-                    <script>
-                    	function deletebtn(){
-                    		location.href = "<%=contextPath%>/cdelete.my";
-                    	}
-
-                    	
-                    </script>
-    -->
-    
+     				
                     <div class="page_btn" id="page">
                     
                     	<%if(currentPage != 1){ %>
-                        <button onclick="location.href='<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage -1%>' ">&lt;</button>
+                        <button onclick="location.href='<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage -1%>'">&lt;</button>
 						<%} %>
 						
 						<%for(int p = startPage; p<=endPage ; p++){ %>
@@ -353,7 +322,7 @@
                       <%} %>
                       
                       <%if(currentPage != maxPage){ %>
-                        <button onclick="location.href='<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage + 1%>' ">&gt;</button>
+                        <button onclick="location.href='<%= contextPath%>/mycosreview?Cno=<%=loginMember.getMemberNo()%>&cpage=<%=currentPage + 1%>'">&gt;</button>
     				<%} %>
                     </div>
     

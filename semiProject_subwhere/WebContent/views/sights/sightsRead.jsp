@@ -1,6 +1,25 @@
+<%@page import="com.kh.board.model.vo.Uploadfile"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.board.model.vo.Sight"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    <%
+    	Sight s = (Sight)request.getAttribute("s");
+    	ArrayList<Uploadfile> list = (ArrayList<Uploadfile>)request.getAttribute("list");
+    	String userNo = String.valueOf(request.getAttribute("userNo"));
+    	int likeResult = -1;
+    	int reportResult = -1;
+    	int userNumber = -1;
+    	if(request.getSession().getAttribute("loginMember") != null){
+    	likeResult = (int)request.getAttribute("likeResult");
+    	reportResult = (int)request.getAttribute("reportResult");
+    	userNumber = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+    	}
+    	
+    	 
+    	
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +29,7 @@
 
     <!-- w3schools 부트스트랩 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -37,6 +56,8 @@
             color: gray;
             font-weight: bolder;
         }
+        
+        
 
         /* ---------------content_b----------------- */
         #con1>#con1_head>#contentTitle {
@@ -89,6 +110,7 @@
             color: #222;
             font-weight: 700;
             font-size: 18px;
+            width:20%;
             
         }
 
@@ -100,13 +122,21 @@
         }
 
         /* ---------------content_f----------------- */
-        #content_f_left {
-            width: 50%;
+         #content_f_right {
+            width: 100%;
             float: left;
         }
-        #content_f_right {
-            width: 50%;
-            float: left;
+
+        #manyphoto {
+            color: lightgray;
+            font-size: 12px;
+        }
+
+        #bottom_btn>a {
+            height: 40px;
+            width: 60px;
+            line-height: 30px;
+            font-size: 15px;
         }
         
 
@@ -135,24 +165,30 @@
         }
         
         .swiper-button-prev {
-            left: 400px;
+            left: 100px;
         }
         
         .swiper-button-next {
-            right: 400px;
+            right: 100px;
         }
 
         .swiper-slide img { /* 슬라이드 이미지 크기 자유롭게 변경하시면 됩니다 */
             width: 850px; 
             height: 500px; 
         }
+        
+        .disabled-button {
+			pointer-events: none; 
+			opacity: 1; 
+			cursor: not-allowed;
+		}
     </style>
 
-    </style>
+    
 </head>
 
 <body>
-<%@ include file="/views/common/header.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
     <div class="all">
         <form action="">
@@ -167,24 +203,89 @@
                 <div id="con1">
                     <div id="con1_head">
                         <div id="contentTitle" align="center">
-                            <p>' 광장시장 '</p>
+                            <p><%=s.getTitle() %></p>
                         </div>
                         
                         <div id="contentIcon">
-                            <img src="resources/images/heart1.png" id="like" onclick="likeToggle()">
+                        <%if(request.getSession().getAttribute("loginMember") != null) {%>
+                        	<%if(likeResult ==1){ %>
+                         <img src="resources/images/heart2.png" id="like" onclick="sendLikeRequest()">
+                           <%}else{ %>
+                            <img src="resources/images/heart1.png" id="like" onclick="sendLikeRequest()">
+                            <%} %>
+                            <%} %>
                             <script>
-                                var h = 1;
-                                function likeToggle() {
-                                    var like = document.getElementById("like");
-                                    if(h % 2 == 1) {
-                                        like.src="resources/images/heart2.png";
-                                    }else {
-                                        like.src="resources/images/heart1.png";
-                                    }
-                                    h++;
-                                }
+                               function sendLikeRequest(){
+                                	//하트 클릭시
+                                	$.ajax({
+                                		url: "like.si",
+                                		type: "GET",
+                                		data: {
+                                		    bno:<%=s.getBoardNo()%>,
+                                	
+                                	
+                                		},
+                                		success: function(result){
+                                			console.log(result);
+                                			var heartImage = document.getElementById("like");
+
+                                			 if (heartImage.src.endsWith("heart1.png")) {
+                                                 heartImage.src = "resources/images/heart2.png";
+                                             } else {
+                                                 heartImage.src = "resources/images/heart1.png";
+                                             }
+                                            
+                                		},error:function(){
+                  						  console.log("찜하기ajax실패");
+                  					  }
+                                	})
+                               }	
+                                
                             </script>
-                            <img src="resources/images/report.png" id="report">
+                            
+                            
+                            
+                            <!-- 신고기능 -->
+                            <%if(request.getSession().getAttribute("loginMember") != null) {%>
+                            <%if(reportResult ==1){ %>
+                         <img src="resources/images/report2.png" id="report" onclick="sendReportRequest()">
+                           <%}else{ %>
+                            <img src="resources/images/report1.png" id="report" onclick="sendReportRequest()">
+                            <%} %>
+                            <%} %>
+                            <script>
+                               function sendReportRequest(){
+                                	//하트 클릭시
+                                	$.ajax({
+                                		url: "report.si",
+                                		type: "GET",
+                                		data: {
+                                		    bno:<%=s.getBoardNo()%>,
+                                	
+                                	
+                                		},
+                                		success: function(result){
+                                			console.log(result);
+                                			var reportImage = document.getElementById("report");
+
+                                			 if (reportImage.src.endsWith("report1.png")) {
+                                                 reportImage.src = "resources/images/report2.png";
+                                             } else {
+                                                 reportImage.src = "resources/images/report1.png";
+                                             }
+                                            
+                                		},error:function(){
+                  						  console.log("신고하기ajax실패");
+                  					  }
+                                	})
+                               }	
+                                
+                            </script>
+                        
+                        
+                       
+                       
+                       
                         </div>
                     </div>
                     <br><br>
@@ -193,9 +294,12 @@
                         
                         <div class="swiper-container">
                             <div class="swiper-wrapper"> <!--슬라이드 이미지 원하는만큼 추가-->
-                                <div class="swiper-slide"><img src="resources/images/gwangjang.webp"></div>
-                                <div class="swiper-slide"><img src="resources/images/gwangjang2.webp"></div>
-                                <div class="swiper-slide"><img src="resources/images/gwangjang3.webp"></div>
+                            
+                            	<%
+                            	
+                            	for(int i=0; i<list.size();i++){ %>
+                                <div class="swiper-slide"><img src="<%=contextPath%>/<%=list.get(i).getFilePath()%>/<%=list.get(i).getChangeName()%>"></div>
+                                <%} %>
                                 
                             </div>
                            
@@ -205,7 +309,7 @@
                     </div>
                     <!--슬라이드 끝-->
                     <div id="con1_content">
-                        <p>사장님이 친절하고 음식이 맛있고 인심이 느껴져요 정말이에요</p>
+                        <p><%=s.getContent() %></p>
                         
                         
                     </div>
@@ -215,8 +319,14 @@
                 </div>
                 <!--태그-->
                 <div id="tag">
-                    <button class="btn btn-sm btn-primary">#여행</button>
-                    <button class="btn btn-sm btn-primary">#핫플</button>
+                	<%
+                	String[] hashtags = s.getHashtag().split(",");
+                	for(String hashtag : hashtags){
+                	%>
+                    <button class="btn btn-sm btn-primary disabled-button">#<%=hashtag.trim()%></button>
+                    <%
+                	}
+                    %>
                 </div>
                 <br>
                 <!--여행지 정보-->
@@ -228,23 +338,19 @@
                 <table width="1000">
                     <tr>
                         <th id="info1">이용시간</th>
-                        <td id="info2"> 09:00~21:00</td>
+                        <td id="info2"><%=s.getRuntime() %></td>
                     </tr>
                     <tr>
                         <th id="info1">휴무일</th>
-                        <td id="info2">없음</td>
-                    </tr>
-                    <tr>
-                        <th id="info1">운영 요일</th>
-                        <td id="info2">매일</td>
+                        <td id="info2"><%=s.getHoliday() %></td>
                     </tr>
                     <tr>
                         <th id="info1">주소</th>
-                        <td id="info2">02800 서울 성북구</td>
+                        <td id="info2"><%=s.getAddress() %></td>
                     </tr>
                     <tr>
                         <th id="info1">교통 정보</th>
-                        <td id="info2">4호선 한성대입구역 5번출구에서 44m</td>
+                        <td id="info2"><%=s.getTransport() %></td>
                     </tr>
                 </table>
                         
@@ -276,60 +382,158 @@
 
             <!------------------------------content_f------------------------------->
             
-            <div id="content_f_left" align="left">
-                <button type="reset" id="writeBtn" class="btn btn-secondary">수정</button>
-                <button type="button" id="writeBtn" class="btn btn-secondary">삭제</button>
-            </div>
-            <div id="content_f_right" align="right">
-                <button type="button" id="writeBtn" class="btn btn-secondary">목록</button>
-                <button type="submit" id="writeBtn" class="btn btn-secondary">글쓰기</button>
+           <div id="bottom_btn" align="right">   
+           <%if(userNumber == 1) {%>
+            	<button type="button" id="updateBtn" class="btn btn-secondary" onclick="submitUpdateForm()">수정</button>
+                <button type="button" id="deleteBtn" class="btn btn-secondary" onclick="goToDelete()">삭제</button>
+                <%} %>
+                <button type="button" id="listBtn" class="btn btn-secondary" onclick="goToList()">목록</button>
+                <%if(userNumber == 1){ %>
+                <button type="button" id="writeBtn" class="btn btn-secondary" onclick="goToWrite()">글쓰기</button>
+                <%} %>
             </div>
             <br><br><br><br>
             <hr>
             <br>
+			<script>
+			function submitUpdateForm() {
+			    const form = document.createElement('form');
+			    form.method = 'GET';
+			    form.action = 'updateForm.si';
 
+			    const input = document.createElement('input');
+			    input.type = 'hidden';
+			    input.name = 'bno';
+			    input.value = <%=s.getBoardNo()%>;
+
+			    form.appendChild(input);
+			    document.body.appendChild(form);
+
+			    form.submit();
+			}
+			    function goToList() {
+			        window.location.href = "list.si?cpage=1"; 
+			    }
+			    function goToWrite(){
+			    	window.location.href = "write.si";
+			    }
+			    function goToDelete(){
+			    	window.location.href = "delete.si?bno="+<%=s.getBoardNo()%>;
+			    }
+			</script>
         </form>
 
         <!------------------------------댓글------------------------------->
         <div class="card-footer">
-            <form onsubmit="addComment(event)">
+            <%if(request.getSession().getAttribute("loginMember") != null) { %>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="댓글을 입력하세요" required>
+                <input type="text" class="form-control" id="replyContent" placeholder="댓글을 입력하세요"  maxlength="49"  required>
               </div>
-              <button type="submit" class="btn btn-primary">작성</button>
-            </form>
-            <div class="comments mt-3">
+              <button type="button" class="btn btn-primary" onclick="insertReply();">작성</button>
+            <%} %>
+            <div class="comments mt-3" id="replyList">
             </div>
         </div>
-    
-        <script>
-            function addComment(event) {
-                event.preventDefault();
-                var commentInput = event.target.querySelector("input");
-                var commentText = commentInput.value;
-                var date = new Date().toLocaleString();
-            
-                var commentDiv = document.createElement("div");
-                commentDiv.className = "card my-3";
-                commentDiv.innerHTML = `
-                <div class="card-body">
-                    <p class="card-text">${commentText}</p>
-                    <p class="card-text"><small class="text-muted">${date}</small></p>
-                </div>
-                `;
-            
-                var commentsDiv = event.target.parentNode.querySelector(".comments");
-                commentsDiv.insertBefore(commentDiv, commentsDiv.firstChild);
-            
-                commentInput.value = "";
-            }
+    	<script>
+    		$(function(){
+    			selectReplyList();
+    			
+    		})
+    		function insertReply(){
+    			$.ajax({
+    				url:"rinsert.si",
+    				data:{content:$("#replyContent").val(),
+    					  bno:<%=s.getBoardNo()%>,
+    					  },
+    					  type: "post",
+    					  success:function(result){
+    						  if(result>0){
+    							  selectReplyList();
+    							  $("#replyContent").val("");
+    						  }
+    					  },error:function(){
+    						  console.log("ajax실패");
+    					  }
+    			})
+    		}
+    		
+    		
+    		function selectReplyList(){
+    			$.ajax({
+    				url:"rlist.si",
+    				data:{bno:<%=s.getBoardNo()%>},
+    				success: function(list){
+    					console.log(list);
+    					let result = "";
+    					let result2= "";
+    					for(let i=0; i<list.length;i++){
+    						 
+    						 result2 += "<br><br>";
+    						 const truncatedContent = list[i].commentContent.length > 49
+    		                    ? list[i].commentContent.substring(0, 49)
+    		                    : list[i].commentContent;
+    		                    
+    		                    
+    						result += "<tr>"
+    							+ "<td>" + list[i].memberName+ "</td>"
+    							+ "<td style='padding: 20px;'>"
+    							+ "<td>" +  truncatedContent + "</td>"
+    							+ "<td style='padding: 20px;'>"
+    							+ "<td>" + list[i].modifyDate + "</td>"
+    							+ "<td style='padding: 20px;'>";
+    							
+    							
+    							if (<%=userNumber%> == 1 || <%=userNumber%> == list[i].memberNo) {
+    						        result += "<td><button class='btn btn-sm btn-info' onclick='deleteComment(" + list[i].commentNo + ");'>삭제</button></td>";
+    						    }
+    							
+    							
+    							result += "</tr>";
+    							
+    					}
+    					$("#replyList").html(result);
+    					$("#replybr").html(result2);
+        				
+        			},
+        			error:function(){
+        				console.log("댓글 조회용 ajax 통신 실패!");
+        			}
+        		})
+        	}
+    		
+    		function deleteComment(commentNo) {
+    		    $.ajax({
+    		        url: "cdelete.si",
+    		        data: { commentNo: commentNo },
+    		        type: "POST",
+    		        success: function (result) {
+    		            if (result > 0) {
+    		                selectReplyList();
+    		            }
+    		        },
+    		        error: function () {
+    		            console.log("댓글 삭제용 ajax 통신 실패!");
+    		        }
+    		    });
+    		}
         </script>
+        
 
 
     </div>
 
+        <!-- -------------위로가기 버튼------------ -->
+        <div style="position:fixed; bottom: 200px; right: 10%; width: 5px; height: 5px; z-index: 999;">
+           <a href="#"><img src="resources/images/upbutton.png" title="위로 가기" style="width: 50px;"></a>
+        </div>
+
+        <!-- -------------대한민구석구석 사이트 가기 버튼------------ -->
+        <div style="position:fixed; bottom: 140px; right: 10%; width: 5px; height: 5px; z-index: 999;">
+           <a href="https://1330chat.visitkorea.or.kr:3000/#/ttalk_main/CHAT1330_160635739001093018/_0300_0100_main.do" target="_blank"><img src="resources/images/movesite.png" title="대한민국구석구석" style="width: 50px;"></a>
+        </div>
+	<div id="replybr"></div>
     <br><br>
-    <%@ include file="/views/common/footer.jsp" %>
+    <%@ include file="../common/footer.jsp"%>
 
 
 </body>

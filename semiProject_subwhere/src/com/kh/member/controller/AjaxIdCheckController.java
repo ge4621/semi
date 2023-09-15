@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,21 +26,20 @@ public class AjaxIdCheckController extends HttpServlet {
     }
 
 	/**
-	 * 
-	 * 회원가입시 아이디 중복 체크
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String checkId = request.getParameter("checkId");
-	      
-	      int count = new MemberService().idCheck(checkId);
-	      
-	      if(count > 0) { // 사용 불가능.. 중복 아이디 있음 => "NNNNN"
-	         response.getWriter().print("NNNNN");
-	      }else { // 사용 가능!! 중복 아이디 없음 => "NNNNY"
-	         response.getWriter().print("NNNNY");         
-	      }
 
+		String checkId = request.getParameter("checkId");
+		
+		int count = new MemberService().idCheck(checkId);
+		
+		if(count > 0) { // 사용 불가능.. 중복 아이디 있음 => "NNNNN"
+			response.getWriter().print("NNNNN");
+		}else { // 사용 가능!! 중복 아이디 없음 => "NNNNY"
+			response.getWriter().print("NNNNY");			
+		}
+	
 	}
 
 	/**

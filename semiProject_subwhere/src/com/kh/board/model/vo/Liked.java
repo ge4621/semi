@@ -4,7 +4,9 @@ public class Liked {
    private int memberNo;
    private String boardNo;
    
-   private String titleImg;//대표이미지
+   private String titleImg; //사진
+   private String title; //제목
+   
    
    public Liked() {}
    
@@ -14,12 +16,22 @@ public class Liked {
       this.boardNo = boardNo;
    }
    
-   public Liked(String boardNo, String titleImg) {
-		super();
-		this.boardNo = boardNo;
-		this.titleImg = titleImg;
-	}
    
+   
+   
+   public Liked(String boardNo, String titleImg, String title) {
+      super();
+      this.boardNo = boardNo;
+      this.titleImg = titleImg;
+      this.title = title;
+   }
+
+   public Liked(String boardNo, String titleImg) {
+      super();
+      this.boardNo = boardNo;
+      this.titleImg = titleImg;
+   }
+
    public int getMemberNo() {
       return memberNo;
    }
@@ -33,14 +45,25 @@ public class Liked {
       this.boardNo = boardNo;
    }
    
-   public String getTitleImg() {
-		return titleImg;
-	}
-
-	public void setTitleImg(String titleImg) {
-		this.titleImg = titleImg;
-	}
    
+   public String getTitleImg() {
+      return titleImg;
+   }
+
+   public void setTitleImg(String titleImg) {
+      this.titleImg = titleImg;
+   }
+   
+   
+
+   public String getTitle() {
+      return title;
+   }
+
+   public void setTitle(String title) {
+      this.title = title;
+   }
+
    @Override
    public String toString() {
       return "Liked [memberNo=" + memberNo + ", boardNo=" + boardNo + "]";

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.model.service.BoardService;
+
 import com.kh.board.model.service.SightService;
-import com.kh.board.model.vo.Board;
+
 import com.kh.board.model.vo.Sight;
 import com.kh.common.model.vo.PageInfo;
 
@@ -53,88 +53,21 @@ public class SightListController extends HttpServlet {
 				//*currentPage : 현재 페이지 (즉, 사용자가 요청한 페이지)
 				currentPage = Integer.parseInt(request.getParameter("cpage"));
 				
-				//*pageLimit : 페이징바의 페이지 최대 개수
-				pageLimit = 10;
 				
-				//*boardLimit : 게시글 최대 개수
-				boardLimit = 10;
+				pageLimit = 5;
 				
-				/*
-				 * *maxPage : 제일 마지막 페이지 수 (총 페이지 수)
-				 * 
-				 * listCount, boardLimit 에 영향을 받음
-				 * 
-				 * ex) 게시글이 10개 단위씩 보여진다는 가정하에
-				 * 
-				 * listCount boardLimit				maxPage
-				 *  100.0       10 =>10.0             10
-				 *  101.0       10 =>10.1             11
-				 *  105.0       10 =>10.5             11
-				 *  110.0       10 =>11.0             11
-				 *  
-				 *  
-				 *  ex) 게시글이 5개 단위씩 보여진다는 가정하에
-				 *  listCount boardLimit           maxPage
-				 *   10.0   /     5    =>2.0         2
-				 *   11.0   /     5    =>2.1         3
-				 *   14.0   /     5    =>2.4         3
-				 *   
-				 *   총게시글개수(실수형) / boardLimit = > 올림처리
-				 *   
-				 *   
-				 */
+			
+				boardLimit = 5;
+				
+				
 				
 				maxPage = (int)Math.ceil((double)listCount / boardLimit);
 				
-				/*
-				 * *startPage : 페이징바의 시작수
-				 * 
-				 * pageLimit, currentPage에 영향을 받음
-				 * 
-				 * ex) 페이징바의 목록이 10개 단위씩(pageLimit) 이라는 가정하에...
-				 *     startPage : 1, 11, 21, 31 ...
-				 *     				=>n* pageLimit + 1
-				 *     
-				 *   currentPage    startPage
-				 *      1               1          => 0* pageLimit +1 => n = 0
-				 *      5               1          => 0* pageLimit +1 => n = 0
-				 *      10              1          => 0* pageLimit +1 => n = 0
-				 *      
-				 *      11              11         => 1* pageLimit +1 => n = 1
-				 *      15              11         => 1* pageLimit +1 => n = 1
-				 *      20              11         => 1* pageLimit +1 => n = 1
-				 *      
-				 *      1~10 => n = 0
-				 *      11~20 => n= 1
-				 *      21~30 => n= 2
-				 *      
-				 *      currentPage -1/ pageLimit =>n
-				 *      0~9   / pageLimit  
-				 *      10~19 / pageLimit
-				 *      20~29 / pageLimit
-				 *      
-				 *       startPage = n*pageLimit +1
-				 *       n = (currentPage-1) /pageLimit
-				 *       
-				 *       
-				 */
+				
 				
 				startPage = ((currentPage -1) /pageLimit) *pageLimit +1;
 				
-				/*
-				 * *endPage : 페이징바의 끝 수
-				 * 
-				 * startPage, pageLimit에 영향을 받음(단, maxPage에도 영향을 받긴 함)
-				 * 
-				 * ex)pageLimit : 10 가정하에
-				 * 
-				 * startPage : 1	=> endPage : 10
-				 * startPage : 11   => endPage : 20
-				 * startPage : 21   => endPage : 30
-				 * 
-				 * endPage =  startPage + pageLimit -1
-				 * 
-				 */
+				
 				
 				endPage =  startPage + pageLimit -1;
 				
@@ -154,7 +87,7 @@ public class SightListController extends HttpServlet {
 				request.setAttribute("pi", pi);
 				request.setAttribute("list", list);
 				
-				request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+				request.getRequestDispatcher("views/sights/sightList.jsp").forward(request, response);
 		
 		
 	}

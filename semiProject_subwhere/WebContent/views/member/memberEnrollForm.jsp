@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<style>
+    
+
+ <style>
         div * {box-sizing: border-box;}
 
         .all {
@@ -96,13 +98,12 @@
 
     </style>
 
-
 </head>
 <body>
 
-<%@ include file = "../common/header.jsp" %>
+	<%@ include file = "../common/header.jsp" %>
 
-   <div class="all">
+	<div class="all">
         <form action="<%= contextPath%>/insert.me" onsubmit="return insert();" method="post" id="enroll-form" enctype="multipart/form-data">
             <!------------------------profile----------------------------->
             
@@ -146,40 +147,40 @@
     <br><br>
     
     <%@ include file = "../common/footer.jsp" %>
-   
+	
 </body>
-   
+	
 
-   <script>
-   
-      // 아이디 중복 확인
-      function idCheck() {
-         
-         const $idInput = $("#memberId"); 
-         
-         $.ajax({
-            url:"idCheck.me",
-            data:{checkId:$idInput.val()}, 
-            success:function(result){ // /idCheck.me 에서의 결과를 result로 받아줌
-               if(result == 'NNNNN'){ // 사용 불가능
-                  alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
-                  $idInput.focus(); 
-               }else { // 사용 가능 ('NNNNY')
-                  if(confirm("사용가능한 아이디 입니다. 사용하시겠습니까?")) { // (확인)true
-                     $("#enroll-form :submit").removeAttr("disabled"); 
-                     // enroll-form (후손중) 타입이 :submit인것의 속성()을 제거
-                     $idInput.attr("readonly", true);
-                  }else { // (취소)false
-                     $idInput.focus();
-                  }
-               }
-            },
-            error:function(){
-               console.log("아이디 중복체크용 ajax 통신 실패!!")
-            }
-         })
-      
-      }
+	<script>
+	
+		// 아이디 중복 확인
+		function idCheck() {
+			
+			const $idInput = $("#memberId"); 
+			
+			$.ajax({
+				url:"idCheck.me",
+				data:{checkId:$idInput.val()}, 
+				success:function(result){ // /idCheck.me 에서의 결과를 result로 받아줌
+					if(result == 'NNNNN'){ // 사용 불가능
+						alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+						$idInput.focus(); 
+					}else { // 사용 가능 ('NNNNY')
+						if(confirm("사용가능한 아이디 입니다. 사용하시겠습니까?")) { // (확인)true
+							$("#enroll-form :submit").removeAttr("disabled"); 
+							// enroll-form (후손중) 타입이 :submit인것의 속성()을 제거
+							$idInput.attr("readonly", true);
+						}else { // (취소)false
+							$idInput.focus();
+						}
+					}
+				},
+				error:function(){
+					console.log("아이디 중복체크용 ajax 통신 실패!!")
+				}
+			})
+		
+		}
 
         // 비번일치확인 (불일치하면 아예 안넘어가도록)
         function checkPwd() {
@@ -239,8 +240,5 @@
 
 
 
-   </script>
-
-
-</body>
+	</script>
 </html>

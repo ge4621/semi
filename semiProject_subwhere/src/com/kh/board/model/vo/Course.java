@@ -2,299 +2,301 @@ package com.kh.board.model.vo;
 
 import java.sql.Date;
 
+
+
 public class Course {
-   private String boardNo;
-   
-   // 사용자에게 보여줄 때는 사용자 닉네임을 보여줘야 하니 string으로 선언하기 
-   private String memberNo;
+	private String boardNo;
+	
+	// 사용자에게 보여줄 때는 사용자 닉네임을 보여줘야 하니 string으로 선언하기 
+	private String memberNo;
 
-   private String courseTitle;
-   private String courseContent;
-   private String courseTip;
-   
-   // db에 넘길때는 int로 가져올 때는 String형으로...
-   private String stationNo;
+	private String courseTitle;
+	private String courseContent;
+	private String courseTip;
+	
+	// db에 넘길때는 int로 가져올 때는 String형으로...
+	private String stationNo;
 
-   private String dtn1;
-   private String dtn2;
-   private String dtn3;
-   private String dtn4;
-   private int count;
-   private String createDate;
-   private Date modifyDate;
-   private String status;
-   private String TITLEIMG;
-   private String stationName;
-   private int line;
+	private String dtn1;
+	private String dtn2;
+	private String dtn3;
+	private String dtn4;
+	private int count;
+	private String createDate;
+	private Date modifyDate;
+	private String status;
+	private String TITLEIMG;
+	private String stationName;
+	private int line;
 
-   
-   public String getStationName() {
-      return stationName;
-   }
+	
+	
+	
+	//마이페이지
+	public Course(String boardNo, String courseTitle, String courseContent, int count, String createDate,
+			String tITLEIMG) {
+		super();
+		this.boardNo = boardNo;
+		this.courseTitle = courseTitle;
+		this.courseContent = courseContent;
+		this.count = count;
+		this.createDate = createDate;
+		TITLEIMG = tITLEIMG;
+	}
 
-   public void setStationName(String stationName) {
-      this.stationName = stationName;
-   }
+	public String getStationName() {
+		return stationName;
+	}
 
-   public int getLine() {
-      return line;
-   }
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
+	}
 
-   public void setLine(int line) {
-      this.line = line;
-   }
+	public int getLine() {
+		return line;
+	}
 
-   public Course() {}
+	public void setLine(int line) {
+		this.line = line;
+	}
 
-   public Course(String boardNo, String memberNo, String courseTitle, String courseContent,String courseTip, String stationNo, String dtnName,
-         String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate, Date modifyDate,
-         String status) {
-      super();
-      this.boardNo = boardNo;
-      this.memberNo = memberNo;
-      this.courseTitle = courseTitle;
-      this.courseContent = courseContent;
-      this.courseTip = courseTip;
-      this.stationNo = stationNo;
-   
-      this.dtn1 = dtn1;
-      this.dtn2 = dtn2;
-      this.dtn3 = dtn3;
-      this.dtn4 = dtn4;
-      this.count = count;
-      this.createDate = createDate;
-      this.modifyDate = modifyDate;
-      this.status = status;
-   
-      
-      
-   }
+	public Course() {}
 
-   public Course(String boardNo, String memberNo, String courseTitle, String courseContent, String courseTip,
-         String stationNo, String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate,
-         String stationName, int line, String TITLEIMG) {
-      super();
-      this.boardNo = boardNo;
-      this.memberNo = memberNo;
-      this.courseTitle = courseTitle;
-      this.courseContent = courseContent;
-      this.courseTip = courseTip;
-      this.stationNo = stationNo;
-      this.dtn1 = dtn1;
-      this.dtn2 = dtn2;
-      this.dtn3 = dtn3;
-      this.dtn4 = dtn4;
-      this.count = count;
-      this.createDate = createDate;
-      this.stationName = stationName;
-      this.line = line;
-      this.TITLEIMG = TITLEIMG;
-   }
+	public Course(String boardNo, String memberNo, String courseTitle, String courseContent,String courseTip, String stationNo, String dtnName,
+			String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate, Date modifyDate,
+			String status) {
+		super();
+		this.boardNo = boardNo;
+		this.memberNo = memberNo;
+		this.courseTitle = courseTitle;
+		this.courseContent = courseContent;
+		this.courseTip = courseTip;
+		this.stationNo = stationNo;
+	
+		this.dtn1 = dtn1;
+		this.dtn2 = dtn2;
+		this.dtn3 = dtn3;
+		this.dtn4 = dtn4;
+		this.count = count;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.status = status;
+	
+		
+		
+	}
 
-   public Course(String boardNo, String memberNo, String courseTitle, String courseContent, String courseTip,
-         String stationNo, String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate,
-         Date modifyDate,String TITLEIMG) {
-      super();
-      this.boardNo = boardNo;
-      this.memberNo = memberNo;
-      this.courseTitle = courseTitle;
-      this.courseContent = courseContent;
-      this.courseTip = courseTip;
-      this.stationNo = stationNo;
-      this.dtn1 = dtn1;
-      this.dtn2 = dtn2;
-      this.dtn3 = dtn3;
-      this.dtn4 = dtn4;
-      this.count = count;
-      this.createDate = createDate;
-      this.modifyDate = modifyDate;
-      this.TITLEIMG = TITLEIMG;
-   }
-   
-   
+	public Course(String boardNo, String memberNo, String courseTitle, String courseContent, String courseTip,
+			String stationNo, String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate,
+			String stationName, int line, String TITLEIMG) {
+		super();
+		this.boardNo = boardNo;
+		this.memberNo = memberNo;
+		this.courseTitle = courseTitle;
+		this.courseContent = courseContent;
+		this.courseTip = courseTip;
+		this.stationNo = stationNo;
+		this.dtn1 = dtn1;
+		this.dtn2 = dtn2;
+		this.dtn3 = dtn3;
+		this.dtn4 = dtn4;
+		this.count = count;
+		this.createDate = createDate;
+		this.stationName = stationName;
+		this.line = line;
+		this.TITLEIMG = TITLEIMG;
+	}
 
-   public Course(String boardNo, String courseTitle, String courseContent, String courseTip,
-         String stationNo, String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate,
-         String tITLEIMG, String stationName, int line) {
-      super();
-      this.boardNo = boardNo;
-      
-      this.courseTitle = courseTitle;
-      this.courseContent = courseContent;
-      this.courseTip = courseTip;
-      this.stationNo = stationNo;
-      this.dtn1 = dtn1;
-      this.dtn2 = dtn2;
-      this.dtn3 = dtn3;
-      this.dtn4 = dtn4;
-      this.count = count;
-      this.createDate = createDate;
-      TITLEIMG = tITLEIMG;
-      this.stationName = stationName;
-      this.line = line;
-   }
+	public Course(String boardNo, String memberNo, String courseTitle, String courseContent, String courseTip,
+			String stationNo, String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate,
+			Date modifyDate,String TITLEIMG) {
+		super();
+		this.boardNo = boardNo;
+		this.memberNo = memberNo;
+		this.courseTitle = courseTitle;
+		this.courseContent = courseContent;
+		this.courseTip = courseTip;
+		this.stationNo = stationNo;
+		this.dtn1 = dtn1;
+		this.dtn2 = dtn2;
+		this.dtn3 = dtn3;
+		this.dtn4 = dtn4;
+		this.count = count;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.TITLEIMG = TITLEIMG;
+	}
+	
+	
 
-   public String getCourseTip() {
-      return courseTip;
-   }
+	public Course(String boardNo, String courseTitle, String courseContent, String courseTip,
+			String stationNo, String dtn1, String dtn2, String dtn3, String dtn4, int count, String createDate,
+			String tITLEIMG, String stationName, int line) {
+		super();
+		this.boardNo = boardNo;
+		
+		this.courseTitle = courseTitle;
+		this.courseContent = courseContent;
+		this.courseTip = courseTip;
+		this.stationNo = stationNo;
+		this.dtn1 = dtn1;
+		this.dtn2 = dtn2;
+		this.dtn3 = dtn3;
+		this.dtn4 = dtn4;
+		this.count = count;
+		this.createDate = createDate;
+		TITLEIMG = tITLEIMG;
+		this.stationName = stationName;
+		this.line = line;
+	}
 
-   public void setCourseTip(String courseTip) {
-      this.courseTip = courseTip;
-   }
+	public String getCourseTip() {
+		return courseTip;
+	}
+
+	public void setCourseTip(String courseTip) {
+		this.courseTip = courseTip;
+	}
 
 
 
-   public String getTITLEIMG() {
-      return TITLEIMG;
-   }
+	public String getTITLEIMG() {
+		return TITLEIMG;
+	}
 
-   public void setTITLEIMG(String tITLEIMG) {
-      TITLEIMG = tITLEIMG;
-   }
+	public void setTITLEIMG(String tITLEIMG) {
+		TITLEIMG = tITLEIMG;
+	}
 
-   public String getBoardNo() {
-      return boardNo;
-   }
+	public String getBoardNo() {
+		return boardNo;
+	}
 
-   
+	
 
-   public Course(String boardNo, String courseTitle, String courseContent, int count) {
-      super();
-      this.boardNo = boardNo;
-      this.courseTitle = courseTitle;
-      this.courseContent = courseContent;
-      this.count = count;
-   }
-   
-   
-   //마이페이지 내가 쓴 여행코스 조회용
- 
-   public Course(String boardNo, String courseTitle, String courseContent, int count, String createDate, String tITLEIMG) {
-	super();
-	this.boardNo = boardNo;
-	this.courseTitle = courseTitle;
-	this.courseContent = courseContent;
-	this.count = count;
-	this.createDate = createDate;
-	TITLEIMG = tITLEIMG;
-}
-   
-   
-   
-   
-   public void setBoardNo(String boardNo) {
-	   this.boardNo = boardNo;
-   }
+	public Course(String boardNo, String courseTitle, String courseContent, int count) {
+		super();
+		this.boardNo = boardNo;
+		this.courseTitle = courseTitle;
+		this.courseContent = courseContent;
+		this.count = count;
+	}
 
-public String getMemberNo() {
-      return memberNo;
-   }
+	
 
-   public void setMemberNo(String memberNo) {
-      this.memberNo = memberNo;
-   }
+	public void setBoardNo(String boardNo) {
+		this.boardNo = boardNo;
+	}
 
-   public String getCourseTitle() {
-      return courseTitle;
-   }
+	public String getMemberNo() {
+		return memberNo;
+	}
 
-   public void setCourseTitle(String courseTitle) {
-      this.courseTitle = courseTitle;
-   }
+	public void setMemberNo(String memberNo) {
+		this.memberNo = memberNo;
+	}
 
-   public String getCourseContent() {
-      return courseContent;
-   }
+	public String getCourseTitle() {
+		return courseTitle;
+	}
 
-   public void setCourseContent(String courseContent) {
-      this.courseContent = courseContent;
-   }
+	public void setCourseTitle(String courseTitle) {
+		this.courseTitle = courseTitle;
+	}
 
-   public String getStationNo() {
-      return stationNo;
-   }
+	public String getCourseContent() {
+		return courseContent;
+	}
 
-   public void setStationNo(String stationNo) {
-      this.stationNo = stationNo;
-   }
+	public void setCourseContent(String courseContent) {
+		this.courseContent = courseContent;
+	}
 
-   
-   public String getDtn1() {
-      return dtn1;
-   }
+	public String getStationNo() {
+		return stationNo;
+	}
 
-   public void setDtn1(String dtn1) {
-      this.dtn1 = dtn1;
-   }
+	public void setStationNo(String stationNo) {
+		this.stationNo = stationNo;
+	}
 
-   public String getDtn2() {
-      return dtn2;
-   }
+	
+	public String getDtn1() {
+		return dtn1;
+	}
 
-   public void setDtn2(String dtn2) {
-      this.dtn2 = dtn2;
-   }
+	public void setDtn1(String dtn1) {
+		this.dtn1 = dtn1;
+	}
 
-   public String getDtn3() {
-      return dtn3;
-   }
+	public String getDtn2() {
+		return dtn2;
+	}
 
-   public void setDtn3(String dtn3) {
-      this.dtn3 = dtn3;
-   }
+	public void setDtn2(String dtn2) {
+		this.dtn2 = dtn2;
+	}
 
-   public String getDtn4() {
-      return dtn4;
-   }
+	public String getDtn3() {
+		return dtn3;
+	}
 
-   public void setDtn4(String dtn4) {
-      this.dtn4 = dtn4;
-   }
+	public void setDtn3(String dtn3) {
+		this.dtn3 = dtn3;
+	}
 
-   public int getCount() {
-      return count;
-   }
+	public String getDtn4() {
+		return dtn4;
+	}
 
-   public void setCount(int count) {
-      this.count = count;
-   }
+	public void setDtn4(String dtn4) {
+		this.dtn4 = dtn4;
+	}
 
-   public String getCreateDate() {
-      return createDate;
-   }
+	public int getCount() {
+		return count;
+	}
 
-   public void setCreateDate(String createDate) {
-      this.createDate = createDate;
-   }
+	public void setCount(int count) {
+		this.count = count;
+	}
 
-   public Date getModifyDate() {
-      return modifyDate;
-   }
+	public String getCreateDate() {
+		return createDate;
+	}
 
-   public void setModifyDate(Date modifyDate) {
-      this.modifyDate = modifyDate;
-   }
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 
-   public String getStatus() {
-      return status;
-   }
+	public Date getModifyDate() {
+		return modifyDate;
+	}
 
-   public void setStatus(String status) {
-      this.status = status;
-   }
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 
-   @Override
-   public String toString() {
-      return "Course [boardNo=" + boardNo + ", memberNo=" + memberNo + ", courseTitle=" + courseTitle
-            + ", courseContent=" + courseContent + ", courseTip=" + courseTip + ", stationNo=" + stationNo
-            + ", dtn1=" + dtn1 + ", dtn2=" + dtn2 + ", dtn3=" + dtn3 + ", dtn4=" + dtn4 + ", count=" + count
-            + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", status=" + status + ", TITLEIMG="
-            + TITLEIMG + ", stationName=" + stationName + ", line=" + line + "]";
-   }
+	public String getStatus() {
+		return status;
+	}
 
-   
-   
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-   
-   
+	@Override
+	public String toString() {
+		return "Course [boardNo=" + boardNo + ", memberNo=" + memberNo + ", courseTitle=" + courseTitle
+				+ ", courseContent=" + courseContent + ", courseTip=" + courseTip + ", stationNo=" + stationNo
+				+ ", dtn1=" + dtn1 + ", dtn2=" + dtn2 + ", dtn3=" + dtn3 + ", dtn4=" + dtn4 + ", count=" + count
+				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", status=" + status + ", TITLEIMG="
+				+ TITLEIMG + ", stationName=" + stationName + ", line=" + line + "]";
+	}
+
+	
+	
+
+	
+	
 }

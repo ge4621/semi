@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style>
         *{margin: 0;padding: 0;box-sizing: border-box; font-size: 15px;}
         body{background-color: #f0f0f0;}
@@ -50,13 +50,12 @@
 
 </style>
 
-
 </head>
 <body>
-
-<%@ include file = "../common/header.jsp" %>
-   
-   <div>
+	
+	<%@ include file = "../common/header.jsp" %>
+	
+	<div>
         <br><br>
    
             <ul class="join_box">
@@ -122,7 +121,7 @@
             if (check1 && check2 && check3) {
                 window.location.href = "<%= contextPath%>/enrollForm.me";
             } else {
-               alert("모든 약관 동의(체크)시 회원가입 가능합니다!");
+            	alert("모든 약관 동의(체크)시 회원가입 가능합니다!");
             }
         }
     </script>
@@ -130,7 +129,6 @@
     <br><br><br><br>
     
     <%@ include file = "../common/footer.jsp" %>
-
-
+	
 </body>
 </html>

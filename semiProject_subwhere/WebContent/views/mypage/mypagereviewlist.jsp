@@ -109,7 +109,7 @@
         .page_btn{
             /* border: 1px solid blueviolet; */
             /* margin-top: 7%; */
-            margin-left: 28%;
+            margin-left: 43%;
         }
 
         .btn_box>button{
@@ -278,15 +278,18 @@
 
                             <%for(Comments a : list){ %>
                                 <tr class="rreview-area">
-                                	<input type="hidden" value="<%=a.getBoardNo()%>">
+                                   <input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="" id="check_box">&nbsp;<%=a.getTitle() %></h3>
-                                            <p id="date"><%=a.getModifyDate() %><br>
-                                                        <%=a.getCommentContent() %></p>
+                                            <h3>&nbsp;
+                                            <%String Rtitle = a.getTitle(); %>
+                                            <%=Rtitle.length() > 10 ? Rtitle.substring(0, 10)+".." : Rtitle %></h3>
+                                            <p id="date">&nbsp;<%=a.getModifyDate() %><br>
+                                                        &nbsp;<%String Ccomment = a.getCommentContent(); %>
+                                                        <%=Ccomment.length()>15 ? Ccomment.substring(0, 15)+"..":Ccomment %></p>
                                         </td>
                                 </tr>
-            			<%} %>
-            		<%} %>
+                     <%} %>
+                  <%} %>
    
                         </table>
          

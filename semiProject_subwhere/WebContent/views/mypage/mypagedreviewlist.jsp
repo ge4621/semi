@@ -108,7 +108,7 @@
         .page_btn{
             /* border: 1px solid blueviolet; */
             /* margin-top: 7%; */
-            margin-left: 28%;
+            margin-left: 43%;
         }
 
         .btn_box>button{
@@ -251,15 +251,19 @@
 							<!-- case2. 게시글이 있을 경우 -->
                             <%for(Comments a : dlist){ %>
                                 <tr class="dlist-darea">
-                                	<input type="hidden" value="<%=a.getBoardNo()%>">
+                                   <input type="hidden" value="<%=a.getBoardNo()%>">
                                         <td width="600" height="110"> 
-                                            <h3><input type="checkbox" name="commentNo" value="<%=a.getCommentNo() %>" id="check_box">&nbsp;<%=a.getTitle() %></h3>
-                                            <p id="date"><%=a.getModifyDate() %><br>
-                                                      <%=a.getCommentContent()%>  </p>
+                                            <h3>&nbsp;<%String Dtitle = a.getTitle(); %>
+                                                  <%=Dtitle.length()>10 ? Dtitle.substring(0, 10)+"..":Dtitle %>
+                                            </h3>
+                                            <p id="date">&nbsp;<%=a.getModifyDate() %><br>
+                                                      &nbsp;<%String Dcomment = a.getCommentContent(); %>
+                                                      <%=Dcomment.length()>15?Dcomment.substring(0, 15)+"..":Dcomment %></p>
                                         </td>
                                 </tr>
-            					<%} %>
-            				<%} %>
+                           <%} %>
+                        <%} %>
+                        
             				
                         </table>
                         

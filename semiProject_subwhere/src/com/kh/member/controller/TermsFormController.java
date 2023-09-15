@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 약관페이지 
  * Servlet implementation class TermsFormController
  */
 @WebServlet("/terms.me")
@@ -27,8 +26,9 @@ public class TermsFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/member/termsPage.jsp").forward(request, response);
 
+		request.getRequestDispatcher("views/member/termsPage.jsp").forward(request, response);
+	
 	}
 
 	/**

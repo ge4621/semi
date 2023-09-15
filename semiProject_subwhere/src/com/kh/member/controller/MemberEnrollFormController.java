@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 회원 가입 폼
  * Servlet implementation class MemberEnrollFormController
  */
 @WebServlet("/enrollForm.me")
@@ -27,8 +26,9 @@ public class MemberEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/member/memberEnrollForm.jsp").forward(request, response);
 
+		request.getRequestDispatcher("views/member/memberEnrollForm.jsp").forward(request, response);
+		
 	}
 
 	/**

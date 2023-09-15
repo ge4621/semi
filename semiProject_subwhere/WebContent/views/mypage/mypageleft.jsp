@@ -85,15 +85,15 @@
 
             <div id="picture" class="top" align="center">
 
-                <%if(loginMember1.getProfileImg()== null){ %>
-                 	  <div class="propicturejy" id="pro">
+                <%if(loginMember1.getProfileImg().equals("resources/profile_upfiles/null")){ %>
+                      <div class="propicturejy" id="pro">
                           <img src="resources/images/profile_img_nocamera.png" width="280" height="280" alt="파일에서 업로한 사진으로">
                       </div>
-	               <%}else{ %>
-	               		<div class="propicturejy" id="pro">
-	                      <img src="<%=loginMember1.getProfileImg() %>" width="280" height="280" alt="파일에서 업로한 사진으로">
-	                    </div>
-	               <%} %>
+                  <%}else{ %>
+                        <div class="propicturejy" id="pro">
+                         <img src="<%=loginMember1.getProfileImg() %>" width="280" height="280" alt="파일에서 업로한 사진으로">
+                       </div>
+                  <%} %>
 
             </div>
 
