@@ -13,12 +13,16 @@
 
 <br>
 
+## 🌈Technology Stack
+JAVA , JSP&Servlet, HTML5/CSS3 , Oracle, Apache-Tomcat
+
 ## ERD
 <img width="1007" alt="ERD" src="https://github.com/ge4621/semi/assets/134485729/6ffb3f6a-1edc-421f-96bf-bc27b537d2b2">
 
 ## UML
+![SUB-WHERE UML 최종](https://github.com/ge4621/semi/assets/134485729/992dc084-907d-4b98-8c8a-7a2916b1b5ce)
 
-## Team Members
+## 👨‍👩‍👧‍👦Team Members
 <div style="display:flex; flex-direction:row;">
 최연우
 이수진
